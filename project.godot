@@ -101,6 +101,7 @@ locale/translations=PackedStringArray("res://i18n/translation.de.translation", "
 2d_physics/layer_1="Player"
 2d_physics/layer_2="PlayerProjectile"
 2d_physics/layer_3="EnemyProjectiles"
+2d_physics/layer_4="Wall"
 
 [rendering]
 

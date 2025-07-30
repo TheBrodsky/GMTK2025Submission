@@ -5,11 +5,10 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2dulq"]
 
-[node name="Projectile" type="CharacterBody2D" node_paths=PackedStringArray("collision_shape")]
+[node name="Projectile" type="CharacterBody2D"]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 8
 script = ExtResource("1_2dulq")
-collision_shape = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.282353, 0.384314, 1)
@@ -19,3 +18,5 @@ texture = ExtResource("1_t8015")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_2dulq")
+
+[connection signal="_mode_changed" from="." to="." method="mode_changed"]
