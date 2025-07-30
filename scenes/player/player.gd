@@ -39,6 +39,9 @@ func handle_player(_delta: float) -> void:
 	if Input.is_action_pressed("shoot"): # todo: add cooldown
 		gun.shoot();
 		has_shot = true;
+		
+	if Input.is_action_just_pressed("suicide"): # todo: Remove again
+		should_die.emit(self);
 	
 	var input := InputSnapshot.new();
 	input.frame = frame_count;
@@ -55,7 +58,11 @@ func _on_health_component_got_damaged(attack: Attack) -> void:
 	health.health -= attack.attack_damage;
 	
 	if health.health <= 0:
-		should_die.emit(self);
+		match mode:
+			Global.PlayerMode.Player:
+				should_die.emit(self); # tell the clone manager that the "real" player died. # todo: check why we died. if clone killed us, run is over.
+			Global.PlayerMode.Clone:
+				queue_free();
 
 func _on__mode_changed() -> void:
 	collision_layer = 0;
