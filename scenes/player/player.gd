@@ -3,6 +3,8 @@ class_name Player;
 
 @export var speed: int = 200;
 @export var gun: Gun;
+@export var hitbox: HitBoxComponent;
+@export var health: HealthComponent;
 
 signal _mode_changed;
 
@@ -29,25 +31,33 @@ func _on__mode_changed() -> void:
 	collision_layer = 0;
 	collision_mask = 0;
 	
+	hitbox.collision_layer = 0;
+	hitbox.collision_mask = 0;
+	
 	set_collision_mask_value(Global.CollisionLayer.WALL, true);
-	set_collision_mask_value(Global.CollisionLayer.ENEMY_PROJECTILE, true);
+	hitbox.set_collision_mask_value(Global.CollisionLayer.ENEMY_PROJECTILE, true);
 	
 	# set collision layer (change what we "are")
 	match mode:
 		Global.PlayerMode.Player:
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.PLAYER, true);
+			hitbox.set_collision_layer_value(Global.CollisionLayer.PLAYER, true);
 			
 			# Mask
 			set_collision_mask_value(Global.CollisionLayer.ENEMY, true);
 		Global.PlayerMode.Clone:
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.ENEMY, true);
+			hitbox.set_collision_layer_value(Global.CollisionLayer.ENEMY, true);
 			
 			# Mask
-			set_collision_mask_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);
+			set_collision_mask_value(Global.CollisionLayer.PLAYER, true);
+			hitbox.set_collision_mask_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);
 
-
-func _on_health_component_on_hit(source: Variant) -> void:
-	print("I HAVE BEEN HIT!!!!!!")
-	pass # Replace with function body.
+func _on_health_component_got_damaged(attack: Attack) -> void:
+	health.health -= attack.attack_damage;
+	
+	if health.health <= 0:
+		# die
+		queue_free();

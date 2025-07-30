@@ -1,7 +1,13 @@
-extends Component;
+extends Node;
 class_name HealthComponent;
 
-signal on_hit(source);
+@export var max_health: float;
+var health: float;
 
-@export var max_health_pointsM: int;
-var current_health: int;
+signal got_damaged(attack: Attack);
+
+func _ready() -> void:
+	health = max_health;
+
+func damage(attack: Attack) -> void: 
+	got_damaged.emit(attack);

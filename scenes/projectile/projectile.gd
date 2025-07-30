@@ -58,5 +58,16 @@ func _on_body_entered(body: Node2D) -> void:
 			print("helloooo")
 			emit_signal("on_hit", self);
 		return;
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is not HitBoxComponent:
+		return;
+	var hitbox : HitBoxComponent = area;
+	if hitbox.get_parent() == my_owner.my_owner:
+		return;
 	
+	var attack = Attack.new();
+	attack.attack_damage = damage;
 	
+	hitbox.damage(attack);
+	queue_free();

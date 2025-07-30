@@ -20,4 +20,4 @@ scale = Vector2(0.075, 0.075)
 texture = ExtResource("1_t8015")
 
 [connection signal="_mode_changed" from="." to="." method="mode_changed"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
