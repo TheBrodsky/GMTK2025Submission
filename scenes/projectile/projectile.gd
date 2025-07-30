@@ -3,8 +3,9 @@ class_name Projectile;
 
 signal _mode_changed;
 
-@export var speed : int = 400;
-@export var despawn_time : int = 1; # in seconds
+@export var speed: int = 400;
+@export var despawn_time: int = 1; # in seconds
+@export var damage: int = 10;
 
 var my_owner: Gun;
 
@@ -53,7 +54,9 @@ func mode_changed() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body == my_owner.my_owner:
-		print("THIS IS ME")
-	else:
-		print("HELLO")
-	pass # Replace with function body.
+		if body.has_signal("on_hit"):
+			print("helloooo")
+			emit_signal("on_hit", self);
+		return;
+	
+	

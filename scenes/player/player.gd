@@ -46,3 +46,8 @@ func _on__mode_changed() -> void:
 			
 			# Mask
 			set_collision_mask_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);
+
+
+func _on_health_component_on_hit(source: Variant) -> void:
+	print("I HAVE BEEN HIT!!!!!!")
+	pass # Replace with function body.
