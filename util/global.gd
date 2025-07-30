@@ -8,9 +8,9 @@ enum PlayerMode {
 };
 
 enum CollisionLayer {
-	PLAYER = 1 << 0,
-	PLAYER_PROJECTILE = 1 << 1, # All Projectiles spawned by the currently active player
-	ENEMY_PROJECTILES = 1 << 2, # All Projectiles spawned by the clone and/or enemy
-	WALL = 1 << 3,
-	ENEMY = 1 << 4,
+	PLAYER = 1,
+	PLAYER_PROJECTILE = 2, # All Projectiles spawned by the currently active player
+	ENEMY_PROJECTILE = 3, # All Projectiles spawned by the clone and/or enemy
+	WALL = 4,
+	ENEMY = 5,
 }

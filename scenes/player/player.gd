@@ -30,7 +30,7 @@ func _on__mode_changed() -> void:
 	collision_mask = 0;
 	
 	set_collision_mask_value(Global.CollisionLayer.WALL, true);
-	set_collision_mask_value(Global.CollisionLayer.ENEMY_PROJECTILES, true);
+	set_collision_mask_value(Global.CollisionLayer.ENEMY_PROJECTILE, true);
 	
 	# set collision layer (change what we "are")
 	match mode:
@@ -45,5 +45,4 @@ func _on__mode_changed() -> void:
 			set_collision_layer_value(Global.CollisionLayer.ENEMY, true);
 			
 			# Mask
-			set_collision_mask_value(Global.CollisionLayer.PLAYER, true);
 			set_collision_mask_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);
