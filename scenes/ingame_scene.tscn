@@ -9,6 +9,11 @@
 script = ExtResource("1_objyc")
 
 [node name="Player" parent="." instance=ExtResource("2_7v5ay")]
+position = Vector2(111, 81)
+
+[node name="Player2" parent="." instance=ExtResource("2_7v5ay")]
+position = Vector2(399, 174)
+mode = 1
 
 [node name="UI" type="CanvasLayer" parent="."]
 

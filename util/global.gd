@@ -12,4 +12,5 @@ enum CollisionLayer {
 	PLAYER_PROJECTILE = 1 << 1, # All Projectiles spawned by the currently active player
 	ENEMY_PROJECTILES = 1 << 2, # All Projectiles spawned by the clone and/or enemy
 	WALL = 1 << 3,
+	ENEMY = 1 << 4,
 }

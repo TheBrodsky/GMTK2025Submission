@@ -3,13 +3,14 @@ class_name Gun;
 
 @onready var projectile_spawn_point: Marker2D = $ProjectileSpawnPoint;
 const PROJECTILE = preload("res://scenes/projectile/projectile.tscn")
+@export var my_owner: Player;
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	look_at(get_global_mouse_position());
 
 func shoot() -> void:
 	var new_projectile := PROJECTILE.instantiate() as Projectile;
-	new_projectile.mode = Global.PlayerMode.Player;
+	new_projectile.mode = my_owner.mode;
 	new_projectile.position = projectile_spawn_point.global_position;
 	new_projectile.target_position = (get_global_mouse_position() - projectile_spawn_point.global_position).normalized();
 	get_tree().root.add_child(new_projectile);
