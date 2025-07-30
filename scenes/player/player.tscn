@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://csx3k2jd8acqe"]
+[gd_scene load_steps=5 format=3 uid="uid://csx3k2jd8acqe"]
 
 [ext_resource type="Script" uid="uid://drm1qvc7cq3ga" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://dmelj2qgr8w7k" path="res://icon.svg" id="2_dovo2"]
+[ext_resource type="PackedScene" uid="uid://cspugrwhg2ahi" path="res://scenes/player/gun.tscn" id="3_gmlin"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x7p2l"]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gun")]
 script = ExtResource("1_8afob")
+gun = NodePath("Gun")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.15, 0.15)
@@ -14,3 +16,5 @@ texture = ExtResource("2_dovo2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_x7p2l")
+
+[node name="Gun" parent="." instance=ExtResource("3_gmlin")]

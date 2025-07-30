@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cspugrwhg2ahi"]
+
+[ext_resource type="Texture2D" uid="uid://dmelj2qgr8w7k" path="res://icon.svg" id="1_ae5e1"]
+[ext_resource type="Script" uid="uid://ch6hfv6qj4wuw" path="res://scenes/player/gun.gd" id="2_j0ebl"]
+
+[node name="Gun" type="Sprite2D"]
+modulate = Color(0.427451, 0.494118, 0.776471, 1)
+scale = Vector2(0.075, 0.027)
+texture = ExtResource("1_ae5e1")
+offset = Vector2(64, -24)
+script = ExtResource("2_j0ebl")
+
+[node name="ProjectileSpawnPoint" type="Marker2D" parent="."]
+position = Vector2(133.333, -37.037)
