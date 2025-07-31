@@ -1,72 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://testlevel123"]
+[gd_scene load_steps=2 format=3 uid="uid://testlevel123"]
 
-[ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/test_boss.gd" id="1_boss"]
-[ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/ScarySquare.png" id="2_sprite"]
-[ext_resource type="Script" uid="uid://c4yeb24boo5pd" path="res://scenes/bosses/sequencing/base/boss_sequence.gd" id="3_sequence"]
-[ext_resource type="Script" uid="uid://68bxw3r838x7" path="res://scenes/bosses/sequencing/actions/atomic/radial_fire_action.gd" id="4_radial"]
-[ext_resource type="Script" uid="uid://clov08um3bc4k" path="res://scenes/bosses/sequencing/actions/atomic/move_linear_action.gd" id="5_move"]
-[ext_resource type="PackedScene" uid="uid://6m24dn6m3kcf" path="res://scenes/projectile/projectile.tscn" id="6_projectile"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
-size = Vector2(100, 100)
+[ext_resource type="PackedScene" uid="uid://dlr844ca6bx31" path="res://scenes/bosses/bosses/test_boss.tscn" id="1_o7f2i"]
 
 [node name="TestLevel" type="Node2D"]
 
-[node name="TestBoss" type="CharacterBody2D" parent="."]
+[node name="TestBoss" parent="." instance=ExtResource("1_o7f2i")]
 position = Vector2(131, 93)
-script = ExtResource("1_boss")
-
-[node name="Sprite2D" type="Sprite2D" parent="TestBoss"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_sprite")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestBoss"]
-scale = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_1")
-
-[node name="BossSequence" type="Node" parent="TestBoss"]
-script = ExtResource("3_sequence")
-loops = true
-
-[node name="RadialFire1" type="Node" parent="TestBoss/BossSequence"]
-script = ExtResource("4_radial")
-fire_rate = 10.0
-projectile_scene = ExtResource("6_projectile")
-duration = 0.1
-
-[node name="MoveRight" type="Node" parent="TestBoss/BossSequence"]
-script = ExtResource("5_move")
-speed = 300.0
-
-[node name="RadialFire2" type="Node" parent="TestBoss/BossSequence"]
-script = ExtResource("4_radial")
-fire_rate = 10.0
-projectile_scene = ExtResource("6_projectile")
-duration = 0.1
-
-[node name="MoveDown" type="Node" parent="TestBoss/BossSequence"]
-script = ExtResource("5_move")
-direction = Vector2(0, 1)
-speed = 150.0
-
-[node name="RadialFire3" type="Node" parent="TestBoss/BossSequence"]
-script = ExtResource("4_radial")
-fire_rate = 10.0
-projectile_scene = ExtResource("6_projectile")
-duration = 0.1
-
-[node name="MoveLeft" type="Node" parent="TestBoss/BossSequence"]
-script = ExtResource("5_move")
-direction = Vector2(-1, 0)
-speed = 300.0
-
-[node name="RadialFire4" type="Node" parent="TestBoss/BossSequence"]
-script = ExtResource("4_radial")
-fire_rate = 10.0
-projectile_scene = ExtResource("6_projectile")
-duration = 0.1
-
-[node name="MoveUp" type="Node" parent="TestBoss/BossSequence"]
-script = ExtResource("5_move")
-direction = Vector2(0, -1)
-speed = 150.0

@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=3 uid="uid://dlr844ca6bx31"]
+
+[ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/test_boss.gd" id="1_kpecr"]
+[ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/ScarySquare.png" id="2_14plf"]
+[ext_resource type="Script" uid="uid://c4yeb24boo5pd" path="res://scenes/bosses/sequencing/base/boss_sequence.gd" id="3_32fwk"]
+[ext_resource type="Script" uid="uid://68bxw3r838x7" path="res://scenes/bosses/sequencing/actions/atomic/radial_fire_action.gd" id="4_8dxic"]
+[ext_resource type="PackedScene" uid="uid://6m24dn6m3kcf" path="res://scenes/projectile/projectile.tscn" id="5_w6dp6"]
+[ext_resource type="Script" uid="uid://clov08um3bc4k" path="res://scenes/bosses/sequencing/actions/atomic/move_linear_action.gd" id="6_eyed6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(100, 100)
+
+[node name="TestBoss" type="CharacterBody2D"]
+script = ExtResource("1_kpecr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_14plf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_1")
+
+[node name="BossSequence" type="Node" parent="." node_paths=PackedStringArray("my_owner")]
+script = ExtResource("3_32fwk")
+loops = true
+my_owner = NodePath("..")
+
+[node name="RadialFire1" type="Node" parent="BossSequence"]
+script = ExtResource("4_8dxic")
+fire_rate = 10.0
+projectile_scene = ExtResource("5_w6dp6")
+duration = 0.1
+
+[node name="MoveRight" type="Node" parent="BossSequence"]
+script = ExtResource("6_eyed6")
+speed = 300.0
+
+[node name="RadialFire2" type="Node" parent="BossSequence"]
+script = ExtResource("4_8dxic")
+fire_rate = 10.0
+projectile_scene = ExtResource("5_w6dp6")
+duration = 0.1
+
+[node name="MoveDown" type="Node" parent="BossSequence"]
+script = ExtResource("6_eyed6")
+direction = Vector2(0, 1)
+speed = 150.0
+
+[node name="RadialFire3" type="Node" parent="BossSequence"]
+script = ExtResource("4_8dxic")
+fire_rate = 10.0
+projectile_scene = ExtResource("5_w6dp6")
+duration = 0.1
+
+[node name="MoveLeft" type="Node" parent="BossSequence"]
+script = ExtResource("6_eyed6")
+direction = Vector2(-1, 0)
+speed = 300.0
+
+[node name="RadialFire4" type="Node" parent="BossSequence"]
+script = ExtResource("4_8dxic")
+fire_rate = 10.0
+projectile_scene = ExtResource("5_w6dp6")
+duration = 0.1
+
+[node name="MoveUp" type="Node" parent="BossSequence"]
+script = ExtResource("6_eyed6")
+direction = Vector2(0, -1)
+speed = 150.0

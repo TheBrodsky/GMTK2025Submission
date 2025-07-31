@@ -7,7 +7,8 @@ signal _mode_changed;
 @export var despawn_time: int = 1; # in seconds
 @export var damage: int = 10;
 
-var my_owner: Gun;
+var ignored; # ignore this instance in collision checks (usually the one that shot the projectile)
+var damage_source; # the instance that should be considered the "source" for the damage
 
 var target_position: Vector2 :
 	get:
@@ -54,12 +55,12 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is not HitBoxComponent:
 		return;
 	var hitbox : HitBoxComponent = area;
-	if my_owner && my_owner.my_owner && hitbox.get_parent() == my_owner.my_owner:
+	if ignored && hitbox.get_parent() == ignored:
 		return;
 	
 	var attack = Attack.new();
 	attack.attack_damage = damage;
-	attack.damage_source = my_owner.my_owner; # my_owner is gun, guns my_owner is the player.
+	attack.damage_source = damage_source;
 	
 	hitbox.damage(attack);
 	queue_free();

@@ -8,6 +8,13 @@ enum PlayerMode {
 	Clone,
 };
 
+# Defining the Mode of the Projectile
+enum ProjectileMode {
+	Player,
+	Clone,
+	Enemy
+}
+
 enum CollisionLayer {
 	PLAYER = 1,
 	PLAYER_PROJECTILE = 2, # All Projectiles spawned by the currently active player
