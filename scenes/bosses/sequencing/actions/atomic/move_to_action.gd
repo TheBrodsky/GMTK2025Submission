@@ -1,5 +1,5 @@
 ## Moves the boss to a specific coordinate over the duration
-## Grid positions divide the screen into a 3x3 grid with 9 intersection points:
+## Grid positions divide the screen into a 4x4 grid with 9 intersection points:
 ## TOP_LEFT     TOP_CENTER     TOP_RIGHT
 ## CENTER_LEFT  CENTER_CENTER  CENTER_RIGHT  
 ## BOTTOM_LEFT  BOTTOM_CENTER  BOTTOM_RIGHT
@@ -28,6 +28,7 @@ func execute(boss: Node):
 	super.execute(boss)
 	start_position = boss.global_position
 	target_position = _calculate_target_position()
+	print(target_position)
 
 func _perform_action(delta: float):
 	var progress = 1.0 - (timer.time_left / duration)
@@ -39,10 +40,10 @@ func _calculate_target_position() -> Vector2:
 	if target_type == TargetType.COORDS:
 		return coords
 	
-	# Calculate grid positions - divides screen into 3x3 grid
+	# Calculate grid positions - divides screen into 4x4 grid with 9 intersection points
 	var viewport_size = get_viewport().get_visible_rect().size
-	var grid_x = viewport_size.x / 3.0
-	var grid_y = viewport_size.y / 3.0
+	var grid_x = viewport_size.x / 4.0
+	var grid_y = viewport_size.y / 4.0
 	
 	match target_type:
 		TargetType.TOP_LEFT:
