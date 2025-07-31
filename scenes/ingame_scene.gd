@@ -5,6 +5,9 @@ extends Node2D
 @onready var player_hud = %PlayerHUD
 
 @export var clone_manager: CloneManager;
+@export var game_over_screen: PackedScene;
+
+var next_scene: PackedScene;
 
 func _ready() -> void:
 	fade_overlay.visible = true
@@ -26,3 +29,10 @@ func _input(event) -> void:
 		
 func _save_game() -> void:
 	SaveGame.save_game(get_tree())
+
+func _on_game_loop_manager_cause_hard_reset() -> void:
+	fade_overlay.fade_out();
+	next_scene = game_over_screen;
+
+func _on_fade_overlay_on_complete_fade_out() -> void:
+	get_tree().change_scene_to_packed(next_scene)
