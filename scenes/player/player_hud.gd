@@ -4,6 +4,8 @@ class_name PlayerHud;
 @export var health_label: Label;
 @export var soft_reset_timer_label: Label;
 
+@export var game_loop_manager: GameLoopManager;
+
 var health: float:
 	set(value):
 		health = value;
@@ -16,6 +18,12 @@ var my_player: Player:
 	set(value):
 		player_changed(value);
 		my_player = value;
+
+func _process(_delta: float) -> void:
+	update_soft_reset_timer();
+
+func update_soft_reset_timer() -> void:
+	soft_reset_timer_label.text = str(int(game_loop_manager.soft_reset_timer.time_left));
 
 func _on_clone_manager_new_player_spawned(player: Player) -> void:
 	my_player = player;

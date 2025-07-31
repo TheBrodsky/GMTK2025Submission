@@ -12,7 +12,6 @@ script = ExtResource("1_objyc")
 clone_manager = NodePath("CloneManager")
 
 [node name="GameLoopManager" parent="." instance=ExtResource("3_gadrd")]
-soft_reset_time = 1.0
 
 [node name="CloneManager" parent="." instance=ExtResource("2_2577t")]
 
@@ -29,7 +28,8 @@ unique_name_in_owner = true
 process_mode = 2
 visible = false
 
-[node name="PlayerHUD" parent="UI" instance=ExtResource("5_2577t")]
+[node name="PlayerHUD" parent="UI" node_paths=PackedStringArray("game_loop_manager") instance=ExtResource("5_2577t")]
+game_loop_manager = NodePath("../../GameLoopManager")
 
 [connection signal="cause_soft_reset" from="GameLoopManager" to="CloneManager" method="_on_game_loop_manager_cause_soft_reset"]
 [connection signal="new_player_spawned" from="CloneManager" to="UI/PlayerHUD" method="_on_clone_manager_new_player_spawned"]
