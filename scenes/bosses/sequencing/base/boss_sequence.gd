@@ -24,7 +24,17 @@ func _get_actions():
 	actions.clear()
 	for child in get_children():
 		if child is BossAction:
-			actions.append(child)
+			# If child is a subpool, "clone" it to get one of its child actions and replace it.
+			if child is BossActionPool and child.is_subpool:
+				var cloned_action = child.clone()
+				if cloned_action:
+					var child_index = child.get_index()
+					child.queue_free()
+					add_child(cloned_action)
+					move_child(cloned_action, child_index)
+					actions.append(cloned_action)
+			else:
+				actions.append(child)
 
 func _calculate_duration():
 	var total_duration = 0.0

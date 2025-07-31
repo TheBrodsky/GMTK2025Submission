@@ -18,6 +18,10 @@ func _ready() -> void:
 func execute(boss: Node):
 	boss_node = boss
 
+## Creates a copy of this action - override for custom cloning behavior
+func clone() -> BossAction:
+	return duplicate()
+
 ## In case there's any cleanup an action needs to do before it expires
-func _on_complete(boss_node: Node):
+func _on_complete(boss: Node):
 	pass

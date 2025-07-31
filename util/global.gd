@@ -15,3 +15,5 @@ enum CollisionLayer {
 	WALL = 4,
 	ENEMY = 5,
 }
+
+static var global_seed: int = 0
