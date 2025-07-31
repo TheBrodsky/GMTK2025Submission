@@ -64,8 +64,6 @@ func handle_clone(_delta: float) -> void:
 	velocity = latest_input.move_direction;
 	move_and_slide();
 
-	pass
-
 # Returns the current look direction, based on if we're player or clone
 func get_current_look_direction() -> Vector2:
 	match mode:
@@ -82,7 +80,7 @@ func _on_health_component_got_damaged(attack: Attack) -> void:
 	if health.health <= 0:
 		match mode:
 			Global.PlayerMode.Player:
-				should_die.emit(self); # tell the clone manager that the "real" player died. # todo: check why we died. if clone killed us, run is over.
+				should_die.emit(self); # tell the clone manager that the "real" player died. # todo: check why we died. if clone killed us, run is over (hard reset).
 			Global.PlayerMode.Clone:
 				queue_free();
 

@@ -38,8 +38,6 @@ func mode_changed() -> void:
 	collision_layer = 0;
 	collision_mask = 0;
 	
-	set_collision_mask_value(Global.CollisionLayer.ENEMY, true);
-	
 	# set collision layer (change what we "are")
 	match mode:
 		Global.PlayerMode.Player:
