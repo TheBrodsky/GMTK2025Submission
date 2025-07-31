@@ -17,7 +17,8 @@ func spawn_normal_player() -> void:
 
 func _on_game_loop_manager_cause_soft_reset() -> void:
 	# Append new recording
-	input_recordings.append(active_player.input_recording);
+	if active_player:
+		input_recordings.append(active_player.input_recording);
 	
 	# loop through all recordings and spawn a new player with that recording as a clone
 	for recording in input_recordings:

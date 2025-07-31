@@ -11,6 +11,8 @@
 size = Vector2(100, 100)
 
 [node name="TestBoss" type="CharacterBody2D" groups=["HardReset", "SoftReset"]]
+collision_layer = 16
+collision_mask = 8
 script = ExtResource("1_kpecr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
