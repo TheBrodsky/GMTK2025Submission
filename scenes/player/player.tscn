@@ -29,6 +29,10 @@ my_owner = NodePath("..")
 [node name="HealthComponent" parent="." instance=ExtResource("4_lvxji")]
 max_health = 100.0
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_p47bc")]
 collision_mask = 4
 health_component = NodePath("../HealthComponent")
