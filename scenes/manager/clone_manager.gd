@@ -7,16 +7,21 @@ signal new_player_spawned(player: Player); # gets emitted whenever a new player 
 
 # we need to individually keep track of all recordings.
 var input_recordings: Array[InputRecording] = [];
+var active_player: Player;
 
 func _on_player_should_die(player: Player) -> void:
+	pass
+
+func spawn_normal_player() -> void:
+	var new_player = PLAYER.instantiate();
+	new_player.should_die.connect(_on_player_should_die);
+	get_tree().root.call_deferred("add_child", new_player);
+	active_player = new_player;
+	new_player_spawned.emit(new_player);
+
+func _on_game_loop_manager_cause_soft_reset() -> void:
 	# Append new recording
-	input_recordings.append(player.input_recording);
-	# despawn dead player
-	player.queue_free();
-	
-	# despawn everything in group "SoftReset"
-	for soft_reset in get_tree().get_nodes_in_group("SoftReset"):
-		soft_reset.queue_free();
+	input_recordings.append(active_player.input_recording);
 	
 	# loop through all recordings and spawn a new player with that recording as a clone
 	for recording in input_recordings:
@@ -27,9 +32,3 @@ func _on_player_should_die(player: Player) -> void:
 	
 	# spawn new normal player
 	spawn_normal_player();
-
-func spawn_normal_player() -> void:
-	var new_player = PLAYER.instantiate();
-	new_player.should_die.connect(_on_player_should_die);
-	get_tree().root.call_deferred("add_child", new_player);
-	new_player_spawned.emit(new_player);

@@ -25,5 +25,3 @@ text = "TIMER"
 [node name="HealthLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "HP"
-
-[connection signal="player_changed" from="." to="." method="_on_player_changed"]
