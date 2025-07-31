@@ -5,7 +5,7 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2dulq"]
 
-[node name="Projectile" type="Area2D" groups=["SoftReset"]]
+[node name="Projectile" type="Area2D" groups=["HardReset", "SoftReset"]]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_2dulq")

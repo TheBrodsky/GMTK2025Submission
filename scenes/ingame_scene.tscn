@@ -29,7 +29,9 @@ process_mode = 2
 visible = false
 
 [node name="PlayerHUD" parent="UI" node_paths=PackedStringArray("game_loop_manager") instance=ExtResource("5_2577t")]
+unique_name_in_owner = true
 game_loop_manager = NodePath("../../GameLoopManager")
 
 [connection signal="cause_soft_reset" from="GameLoopManager" to="CloneManager" method="_on_game_loop_manager_cause_soft_reset"]
+[connection signal="new_player_spawned" from="CloneManager" to="GameLoopManager" method="_on_clone_manager_new_player_spawned"]
 [connection signal="new_player_spawned" from="CloneManager" to="UI/PlayerHUD" method="_on_clone_manager_new_player_spawned"]

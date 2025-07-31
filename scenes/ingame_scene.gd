@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var fade_overlay = %FadeOverlay
 @onready var pause_overlay = %PauseOverlay
+@onready var player_hud = %PlayerHUD
 
 @export var clone_manager: CloneManager;
 
@@ -21,6 +22,7 @@ func _input(event) -> void:
 		get_tree().paused = true
 		pause_overlay.grab_button_focus()
 		pause_overlay.visible = true
+		player_hud.visible = false;
 		
 func _save_game() -> void:
 	SaveGame.save_game(get_tree())

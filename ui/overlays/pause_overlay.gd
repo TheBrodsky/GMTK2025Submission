@@ -9,6 +9,8 @@ signal game_exited
 @onready var menu_container := %MenuContainer
 @onready var back_button := %BackButton
 
+@onready var player_hud: PlayerHud = %PlayerHUD
+
 func _ready() -> void:
 	resume_button.pressed.connect(_resume)
 	settings_button.pressed.connect(_settings)
@@ -21,7 +23,7 @@ func grab_button_focus() -> void:
 func _resume() -> void:
 	get_tree().paused = false
 	visible = false
-	
+	player_hud.visible = true;
 	
 func _settings() -> void:
 	menu_container.visible = false

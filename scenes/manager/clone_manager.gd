@@ -9,12 +9,8 @@ signal new_player_spawned(player: Player); # gets emitted whenever a new player 
 var input_recordings: Array[InputRecording] = [];
 var active_player: Player;
 
-func _on_player_should_die(player: Player) -> void:
-	pass
-
 func spawn_normal_player() -> void:
 	var new_player = PLAYER.instantiate();
-	new_player.should_die.connect(_on_player_should_die);
 	get_tree().root.call_deferred("add_child", new_player);
 	active_player = new_player;
 	new_player_spawned.emit(new_player);

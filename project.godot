@@ -31,6 +31,7 @@ window/stretch/aspect="keep_height"
 [global_group]
 
 SoftReset="Everything that should be deleted whenever a soft reset happens"
+HardReset="Everything that should be deleted when a hard reset happens"
 
 [gui]
 

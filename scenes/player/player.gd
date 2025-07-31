@@ -24,7 +24,7 @@ var input_recording: InputRecording = InputRecording.new();
 var latest_input: InputSnapshot; # stores the latest input snapshot, if we're clone.
 
 signal _mode_changed;
-signal should_die(player: Player);
+signal should_die(player: Player); # gets emitted on a HARD RESET (when killed by its own clone)
 
 func _ready() -> void:
 	shoot_cooldown_timer = Timer.new();
@@ -54,9 +54,6 @@ func handle_player(_delta: float) -> void:
 		has_shot = true;
 		can_shoot = false;
 		shoot_cooldown_timer.start();
-		
-	if Input.is_action_just_pressed("suicide"): # todo: Remove again
-		should_die.emit(self);
 	
 	var input := InputSnapshot.new();
 	input.look_direction = get_global_mouse_position();
