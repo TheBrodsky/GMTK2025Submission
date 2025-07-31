@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8x3k5nan2p1q"]
+
+[ext_resource type="Script" uid="uid://1g5wyjxvrcjr" path="res://scenes/bosses/sequencing/base/boss_action_pool.gd" id="1_abc123"]
+[ext_resource type="Script" uid="uid://cew8e757hdwwg" path="res://scenes/bosses/debug_print_action.gd" id="2_def456"]
+
+[node name="DebugActionPool" type="Node"]
+script = ExtResource("1_abc123")
+
+[node name="ShortAction" type="Node" parent="."]
+script = ExtResource("2_def456")
+
+[node name="MediumAction" type="Node" parent="."]
+script = ExtResource("2_def456")
+duration = 3.0
+
+[node name="LongAction" type="Node" parent="."]
+script = ExtResource("2_def456")
+duration = 5.0
