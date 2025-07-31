@@ -5,6 +5,7 @@ var sub_actions: Array[BossAction] = []
 var completed_actions: int = 0
 
 func _ready():
+	super._ready()
 	_get_sub_actions()
 	_calculate_duration()
 	

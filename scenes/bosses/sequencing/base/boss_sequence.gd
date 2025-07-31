@@ -2,9 +2,12 @@
 ## A boss' actions are defined by a sequence, which itself can include sequences.
 class_name BossSequence extends BossAction
 
+@export var loops: bool = false
+
 var actions: Array[BossAction] = []
 
 func _ready():
+	super._ready()
 	_get_actions()
 	_calculate_duration()
 	_chain_actions()
@@ -37,4 +40,7 @@ func _chain_actions():
 		actions[-1].completed.connect(_on_sequence_complete)
 
 func _on_sequence_complete(boss: Node):
-	completed.emit(boss)
+	if not loops:
+		completed.emit(boss)
+	else:
+		execute(boss)

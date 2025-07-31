@@ -11,6 +11,13 @@ signal completed(boss_node: Node)
 
 var boss_node: Node
 
+func _ready() -> void:
+	completed.connect(_on_complete)
+
 ## Entry point for action; kicks it off
 func execute(boss: Node):
 	boss_node = boss
+
+## In case there's any cleanup an action needs to do before it expires
+func _on_complete(boss_node: Node):
+	pass

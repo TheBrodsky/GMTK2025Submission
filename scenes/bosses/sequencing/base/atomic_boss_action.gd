@@ -4,6 +4,7 @@ class_name AtomicBossAction extends BossAction
 var timer: Timer
 
 func _ready():
+	super._ready()
 	_set_timer()
 
 func _process(delta):
