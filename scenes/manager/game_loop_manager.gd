@@ -3,6 +3,8 @@ class_name GameLoopManager;
 
 @export var soft_reset_time: float = 60; # soft reset time in seconds
 
+@export var bosses: Dictionary[Global.BossDifficulty, BossCollection];
+
 signal cause_soft_reset;
 signal cause_hard_reset;
 

@@ -23,3 +23,10 @@ enum CollisionLayer {
 	CLONE = 6,
 	ENEMY_PROJECTILE = 7,
 }
+
+enum BossDifficulty {
+	TEST = 0,
+	EASY = 1,
+	MEDIUM = 2,
+	HARD = 3,
+}
