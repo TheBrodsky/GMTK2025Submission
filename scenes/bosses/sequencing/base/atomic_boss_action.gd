@@ -17,7 +17,7 @@ func execute(boss: Node):
 	timer.start()
 
 ## Defines what the action actually does to/with the boss
-func _perform_action(delta: float):
+func _perform_action(_delta: float):
 	pass
 
 func _set_timer():

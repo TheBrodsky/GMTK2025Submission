@@ -23,12 +23,12 @@ func _ready() -> void:
 		push_error("Boss Action with undefined owner. Unable to get from parent.")
 		return;
 	var parent_action: BossAction = parent;
-	my_owner = parent.my_owner;
+	my_owner = parent_action.my_owner;
 
 ## Entry point for action; kicks it off
 func execute(boss: Node):
 	boss_node = boss
 
 ## In case there's any cleanup an action needs to do before it expires
-func _on_complete(boss_node: Node):
+func _on_complete(_boss_node: Node):
 	pass
