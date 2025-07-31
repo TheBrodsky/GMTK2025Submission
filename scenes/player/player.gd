@@ -17,6 +17,8 @@ class_name Player;
 @export var hitbox: HitBoxComponent;
 @export var health: HealthComponent;
 
+@onready var timer = $ImmunityTimer
+
 var shoot_cooldown_timer: Timer;
 var can_shoot: bool = true;
 var frame_count = 0;
@@ -33,6 +35,7 @@ func _ready() -> void:
 	shoot_cooldown_timer.wait_time = shoot_cooldown;
 	shoot_cooldown_timer.timeout.connect(_on_shoot_cooldown_timeout);
 	add_child(shoot_cooldown_timer);
+	timer.start()
 
 func get_input():
 	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized();
@@ -88,18 +91,19 @@ func get_current_look_direction() -> Vector2:
 	return Vector2.ZERO;
 
 func _on_health_component_got_damaged(attack: Attack) -> void:
-	health.health -= attack.attack_damage;
+	if timer.time_left == 0:
+		health.health -= attack.attack_damage;
 	
-	if health.health <= 0:
-		match mode:
-			Global.PlayerMode.Player:
-				var attack_source = attack.damage_source;
-				if attack_source is Player:
-					should_die.emit(self); # tell the clone manager that the "real" player died. we died by a player (must be a clone) and thus we trigger a hard reset
-					return;
-				game_loop_manager.handle_soft_reset(); # we died through something else (e.g. boss), trigger a soft reset
-			Global.PlayerMode.Clone:
-				queue_free();
+		if health.health <= 0:
+			match mode:
+				Global.PlayerMode.Player:
+					var attack_source = attack.damage_source;
+					if attack_source is Player:
+						should_die.emit(self); # tell the clone manager that the "real" player died. we died by a player (must be a clone) and thus we trigger a hard reset
+						return;
+					game_loop_manager.handle_soft_reset(); # we died through something else (e.g. boss), trigger a soft reset
+				Global.PlayerMode.Clone:
+					queue_free();
 
 func _on__mode_changed() -> void:
 	collision_layer = 0;
