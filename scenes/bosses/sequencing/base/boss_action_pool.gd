@@ -43,8 +43,7 @@ func clone() -> BossAction:
 
 func _select_random_action(items: Array[BossAction], rng: RandomNumberGenerator = null) -> BossAction:
 	if not rng:
-		rng = RandomNumberGenerator.new()
-		rng.seed = Global.global_seed
+		rng = Global.SequenceRNG
 	
 	if items.is_empty():
 		return null

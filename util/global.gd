@@ -17,3 +17,8 @@ enum CollisionLayer {
 }
 
 static var global_seed: int = 0
+static var SequenceRNG: RandomNumberGenerator
+
+static func _static_init():
+	SequenceRNG = RandomNumberGenerator.new()
+	SequenceRNG.seed = global_seed
