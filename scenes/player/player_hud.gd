@@ -19,7 +19,7 @@ var my_player: Player:
 		player_changed(value);
 		my_player = value;
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	update_soft_reset_timer();
 
 func update_soft_reset_timer() -> void:

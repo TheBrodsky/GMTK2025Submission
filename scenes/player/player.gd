@@ -23,6 +23,8 @@ var frame_count = 0;
 var input_recording: InputRecording = InputRecording.new();
 var latest_input: InputSnapshot; # stores the latest input snapshot, if we're clone.
 
+var game_loop_manager: GameLoopManager;
+
 signal _mode_changed;
 signal should_die(player: Player); # gets emitted on a HARD RESET (when killed by its own clone)
 
@@ -91,7 +93,11 @@ func _on_health_component_got_damaged(attack: Attack) -> void:
 	if health.health <= 0:
 		match mode:
 			Global.PlayerMode.Player:
-				should_die.emit(self); # tell the clone manager that the "real" player died. # todo: check why we died. if clone killed us, run is over (hard reset).
+				var attack_source = attack.damage_source;
+				if attack_source is Player:
+					should_die.emit(self); # tell the clone manager that the "real" player died. we died by a player (must be a clone) and thus we trigger a hard reset
+					return;
+				game_loop_manager.handle_soft_reset(); # we died through something else (e.g. boss), trigger a soft reset
 			Global.PlayerMode.Clone:
 				queue_free();
 

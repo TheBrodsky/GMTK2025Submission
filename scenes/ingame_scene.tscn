@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cik30de5gaaah"]
+[gd_scene load_steps=8 format=3 uid="uid://cik30de5gaaah"]
 
 [ext_resource type="Script" uid="uid://ovjegpk30m4h" path="res://scenes/ingame_scene.gd" id="1_objyc"]
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/fade_overlay.tscn" id="1_y6ebv"]
+[ext_resource type="PackedScene" uid="uid://cllrhwb6tq3gh" path="res://scenes/game_over_scene.tscn" id="2_5jhce"]
 [ext_resource type="PackedScene" uid="uid://b5dxpaf6jg8xc" path="res://scenes/manager/clone_manager.tscn" id="2_2577t"]
 [ext_resource type="PackedScene" uid="uid://jyv4g54adkmo" path="res://ui/overlays/pause_overlay.tscn" id="3_8o178"]
 [ext_resource type="PackedScene" uid="uid://ck8hbq0vjt55x" path="res://scenes/manager/GameLoopManager.tscn" id="3_gadrd"]
@@ -10,6 +11,7 @@
 [node name="IngameScene" type="Node2D" node_paths=PackedStringArray("clone_manager")]
 script = ExtResource("1_objyc")
 clone_manager = NodePath("CloneManager")
+game_over_screen = ExtResource("2_5jhce")
 
 [node name="GameLoopManager" parent="." instance=ExtResource("3_gadrd")]
 
@@ -32,6 +34,8 @@ visible = false
 unique_name_in_owner = true
 game_loop_manager = NodePath("../../GameLoopManager")
 
+[connection signal="cause_hard_reset" from="GameLoopManager" to="." method="_on_game_loop_manager_cause_hard_reset"]
 [connection signal="cause_soft_reset" from="GameLoopManager" to="CloneManager" method="_on_game_loop_manager_cause_soft_reset"]
 [connection signal="new_player_spawned" from="CloneManager" to="GameLoopManager" method="_on_clone_manager_new_player_spawned"]
 [connection signal="new_player_spawned" from="CloneManager" to="UI/PlayerHUD" method="_on_clone_manager_new_player_spawned"]
+[connection signal="on_complete_fade_out" from="UI/FadeOverlay" to="." method="_on_fade_overlay_on_complete_fade_out"]

@@ -17,7 +17,7 @@ func _ready() -> void:
 	
 	soft_reset_timer.start(); # TODO: start the game in a different way?
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("suicide"): # todo: Remove again
 		handle_soft_reset();
 
@@ -41,7 +41,8 @@ func _on_clone_manager_new_player_spawned(new_player: Player) -> void:
 	if player:
 		player.should_die.disconnect(_on_player_should_die)
 	new_player.should_die.connect(_on_player_should_die);
+	new_player.game_loop_manager = self;
 	player = new_player;
 
-func _on_player_should_die(player: Player) -> void:
+func _on_player_should_die(_player: Player) -> void:
 	handle_hard_reset();
