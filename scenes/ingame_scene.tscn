@@ -15,6 +15,8 @@ clone_manager = NodePath("CloneManager")
 game_over_screen = ExtResource("2_5jhce")
 
 [node name="TestBoss" parent="." instance=ExtResource("3_vus8m")]
+collision_layer = 16
+collision_mask = 8
 
 [node name="GameLoopManager" parent="." instance=ExtResource("3_gadrd")]
 

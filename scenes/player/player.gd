@@ -6,7 +6,7 @@ class_name Player;
 		return mode;
 	set(value):
 		mode = value;
-		_mode_changed.emit();
+		mode_changed();
 
 @export_group("Stats")
 @export var speed: int = 200;
@@ -27,7 +27,6 @@ var latest_input: InputSnapshot; # stores the latest input snapshot, if we're cl
 
 var game_loop_manager: GameLoopManager;
 
-signal _mode_changed;
 signal should_die(player: Player); # gets emitted on a HARD RESET (when killed by its own clone)
 
 func _ready() -> void:
@@ -44,9 +43,9 @@ func get_input():
 func _physics_process(delta: float) -> void:
 	frame_count += 1;
 	match mode:
-		Global.PlayerMode.Player:
+		Global.PlayerMode.PLAYER:
 			handle_player(delta);
-		Global.PlayerMode.Clone:
+		Global.PlayerMode.CLONE:
 			handle_clone(delta);
 
 func handle_player(_delta: float) -> void:
@@ -83,9 +82,9 @@ func handle_clone(_delta: float) -> void:
 # Returns the current look direction, based on if we're player or clone
 func get_current_look_direction() -> Vector2:
 	match mode:
-		Global.PlayerMode.Player:
+		Global.PlayerMode.PLAYER:
 			return get_global_mouse_position();
-		Global.PlayerMode.Clone:
+		Global.PlayerMode.CLONE:
 			if latest_input:
 				return latest_input.look_direction;
 	return Vector2.ZERO;
@@ -96,16 +95,16 @@ func _on_health_component_got_damaged(attack: Attack) -> void:
 	
 		if health.health <= 0:
 			match mode:
-				Global.PlayerMode.Player:
+				Global.PlayerMode.PLAYER:
 					var attack_source = attack.damage_source;
 					if attack_source is Player:
 						should_die.emit(self); # tell the clone manager that the "real" player died. we died by a player (must be a clone) and thus we trigger a hard reset
 						return;
 					game_loop_manager.handle_soft_reset(); # we died through something else (e.g. boss), trigger a soft reset
-				Global.PlayerMode.Clone:
+				Global.PlayerMode.CLONE:
 					queue_free();
 
-func _on__mode_changed() -> void:
+func mode_changed() -> void:
 	collision_layer = 0;
 	collision_mask = 0;
 	
@@ -117,17 +116,17 @@ func _on__mode_changed() -> void:
 	
 	# set collision layer (change what we "are")
 	match mode:
-		Global.PlayerMode.Player:
+		Global.PlayerMode.PLAYER:
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.PLAYER, true);
 			hitbox.set_collision_layer_value(Global.CollisionLayer.PLAYER, true);
-		Global.PlayerMode.Clone:
-			# Layer
-			set_collision_layer_value(Global.CollisionLayer.ENEMY, true);
-			hitbox.set_collision_layer_value(Global.CollisionLayer.ENEMY, true);
 			
-			hitbox.set_collision_mask_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);
-
+			# Mask
+			hitbox.set_collision_mask_value(Global.CollisionLayer.CLONE_PROJECTILE, true);
+		Global.PlayerMode.CLONE:
+			# Layer
+			set_collision_layer_value(Global.CollisionLayer.CLONE, true);
+			hitbox.set_collision_layer_value(Global.CollisionLayer.CLONE, true);
 
 func _on_shoot_cooldown_timeout() -> void:
 	can_shoot = true;

@@ -23,7 +23,7 @@ func _on_game_loop_manager_cause_soft_reset() -> void:
 	for recording in input_recordings:
 		var new_player = PLAYER.instantiate();
 		new_player.input_recording = recording;
-		new_player.mode = Global.PlayerMode.Clone;
+		new_player.mode = Global.PlayerMode.CLONE;
 		get_tree().root.call_deferred("add_child", new_player);
 	
 	# spawn new normal player

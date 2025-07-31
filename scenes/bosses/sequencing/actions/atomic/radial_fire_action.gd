@@ -21,7 +21,7 @@ func _fire_radial_burst():
 	
 	for angle in angles:
 		var projectile = projectile_scene.instantiate() as Projectile
-		projectile.mode = Global.PlayerMode.Clone # TODO See Global.PlayerMode
+		projectile.mode = Global.ProjectileMode.ENEMY;
 		projectile.position = boss_node.global_position
 		projectile.target_position = Vector2(cos(angle), sin(angle)) # normalized direction
 		projectile.damage_source = self;
