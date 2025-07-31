@@ -17,7 +17,7 @@ class_name Player;
 @export var hitbox: HitBoxComponent;
 @export var health: HealthComponent;
 
-@onready var timer = $Timer
+@onready var timer = $ImmunityTimer
 
 var shoot_cooldown_timer: Timer;
 var can_shoot: bool = true;
