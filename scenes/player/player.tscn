@@ -29,7 +29,7 @@ my_owner = NodePath("..")
 [node name="HealthComponent" parent="." instance=ExtResource("4_lvxji")]
 max_health = 100.0
 
-[node name="Immunity_Timer" type="Timer" parent="."]
+[node name="ImmunityTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
