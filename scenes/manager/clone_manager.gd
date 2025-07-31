@@ -16,7 +16,7 @@ func _on_player_should_die(player: Player) -> void:
 	for soft_reset in get_tree().get_nodes_in_group("SoftReset"):
 		soft_reset.queue_free();
 	
-	# loop through all recordings and spawn a new player with that recording
+	# loop through all recordings and spawn a new player with that recording as a clone
 	for recording in input_recordings:
 		var new_player = PLAYER.instantiate();
 		new_player.input_recording = recording;
