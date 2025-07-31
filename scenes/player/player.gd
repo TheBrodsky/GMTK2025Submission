@@ -73,9 +73,7 @@ func get_current_look_direction() -> Vector2:
 			return get_global_mouse_position();
 		Global.PlayerMode.Clone:
 			if latest_input:
-				print("we have latest input");
 				return latest_input.look_direction;
-	print("we do not have latest input");
 	return Vector2.ZERO;
 
 func _on_health_component_got_damaged(attack: Attack) -> void:

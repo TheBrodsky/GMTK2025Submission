@@ -52,13 +52,6 @@ func mode_changed() -> void:
 			# Mask
 			set_collision_mask_value(Global.CollisionLayer.PLAYER, true);
 
-func _on_body_entered(body: Node2D) -> void:
-	if body == my_owner.my_owner:
-		if body.has_signal("on_hit"):
-			print("helloooo")
-			emit_signal("on_hit", self);
-		return;
-
 func _on_area_entered(area: Area2D) -> void:
 	if area is not HitBoxComponent:
 		return;

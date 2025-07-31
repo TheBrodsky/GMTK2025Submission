@@ -25,7 +25,7 @@ func _on_player_should_die(player: Player) -> void:
 		var new_player = PLAYER.instantiate();
 		new_player.input_recording = recording;
 		new_player.mode = Global.PlayerMode.Clone;
-		get_tree().root.add_child(new_player);
+		get_tree().root.call_deferred("add_child", new_player);
 		currently_active_clones.append(new_player);
 	
 	# spawn new normal player
@@ -34,5 +34,5 @@ func _on_player_should_die(player: Player) -> void:
 func spawn_normal_player() -> void:
 	var new_player = PLAYER.instantiate();
 	new_player.should_die.connect(_on_player_should_die);
-	get_tree().root.add_child(new_player);
+	get_tree().root.call_deferred("add_child", new_player);
 	
