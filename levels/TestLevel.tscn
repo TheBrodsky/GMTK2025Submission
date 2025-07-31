@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://testlevel123"]
 
-[ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/test_boss.gd" id="1_boss"]
-[ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/ScarySquare.png" id="2_sprite"]
+[ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/sequencing/testing/test_boss.gd" id="1_boss"]
+[ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/sequencing/testing/ScarySquare.png" id="2_sprite"]
 [ext_resource type="Script" uid="uid://c4yeb24boo5pd" path="res://scenes/bosses/sequencing/base/boss_sequence.gd" id="3_sequence"]
 [ext_resource type="Script" uid="uid://68bxw3r838x7" path="res://scenes/bosses/sequencing/actions/atomic/radial_fire_action.gd" id="4_radial"]
 [ext_resource type="Script" uid="uid://clov08um3bc4k" path="res://scenes/bosses/sequencing/actions/atomic/move_linear_action.gd" id="5_move"]
