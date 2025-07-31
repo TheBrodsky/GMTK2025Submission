@@ -45,7 +45,7 @@ func handle_player(_delta: float) -> void:
 		should_die.emit(self);
 	
 	var input := InputSnapshot.new();
-	input.look_direction = (get_global_mouse_position() - global_position).normalized(); # todo: is that correct?
+	input.look_direction = get_global_mouse_position();
 	input.move_direction = velocity;
 	input.shooting_pressed = has_shot;
 	
@@ -53,7 +53,6 @@ func handle_player(_delta: float) -> void:
 
 func handle_clone(_delta: float) -> void:
 	var current_input = input_recording.recording.get(frame_count);
-	# todo: remember last input
 	if current_input:
 		var input: InputSnapshot = current_input;
 		latest_input = input;
@@ -74,7 +73,9 @@ func get_current_look_direction() -> Vector2:
 			return get_global_mouse_position();
 		Global.PlayerMode.Clone:
 			if latest_input:
+				print("we have latest input");
 				return latest_input.look_direction;
+	print("we do not have latest input");
 	return Vector2.ZERO;
 
 func _on_health_component_got_damaged(attack: Attack) -> void:

@@ -10,7 +10,7 @@
 radius = 10.0499
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gun", "hitbox", "health")]
-collision_mask = 24
+collision_mask = 8
 script = ExtResource("1_8afob")
 gun = NodePath("Gun")
 hitbox = NodePath("HitBoxComponent")
