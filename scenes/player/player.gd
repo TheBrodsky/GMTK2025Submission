@@ -1,11 +1,24 @@
 extends CharacterBody2D;
 class_name Player;
 
+@export var mode : Global.PlayerMode :
+	get:
+		return mode;
+	set(value):
+		mode = value;
+		_mode_changed.emit();
+
+@export_group("Stats")
 @export var speed: int = 200;
+@export var shoot_cooldown: float = 0.2; # in seconds
+
+@export_group("Components")
 @export var gun: Gun;
 @export var hitbox: HitBoxComponent;
 @export var health: HealthComponent;
 
+var shoot_cooldown_timer: Timer;
+var can_shoot: bool = true;
 var frame_count = 0;
 var input_recording: InputRecording = InputRecording.new();
 var latest_input: InputSnapshot; # stores the latest input snapshot, if we're clone.
@@ -13,12 +26,11 @@ var latest_input: InputSnapshot; # stores the latest input snapshot, if we're cl
 signal _mode_changed;
 signal should_die(player: Player);
 
-@export var mode : Global.PlayerMode :
-	get:
-		return mode;
-	set(value):
-		mode = value;
-		_mode_changed.emit();
+func _ready() -> void:
+	shoot_cooldown_timer = Timer.new();
+	shoot_cooldown_timer.wait_time = shoot_cooldown;
+	shoot_cooldown_timer.timeout.connect(_on_shoot_cooldown_timeout);
+	add_child(shoot_cooldown_timer);
 
 func get_input():
 	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized();
@@ -37,9 +49,11 @@ func handle_player(_delta: float) -> void:
 	move_and_slide();
 	
 	var has_shot = false;
-	if Input.is_action_pressed("shoot"): # todo: add cooldown
+	if can_shoot && Input.is_action_pressed("shoot"): # todo: add cooldown
 		gun.shoot();
 		has_shot = true;
+		can_shoot = false;
+		shoot_cooldown_timer.start();
 		
 	if Input.is_action_just_pressed("suicide"): # todo: Remove again
 		should_die.emit(self);
@@ -106,3 +120,7 @@ func _on__mode_changed() -> void:
 			hitbox.set_collision_layer_value(Global.CollisionLayer.ENEMY, true);
 			
 			hitbox.set_collision_mask_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);
+
+
+func _on_shoot_cooldown_timeout() -> void:
+	can_shoot = true;
