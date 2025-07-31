@@ -41,6 +41,8 @@ func mode_changed() -> void:
 		Global.ProjectileMode.PLAYER:
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);
+			
+			# Mask
 			set_collision_mask_value(Global.CollisionLayer.ENEMY, true);
 		Global.ProjectileMode.CLONE:
 			# Layer
