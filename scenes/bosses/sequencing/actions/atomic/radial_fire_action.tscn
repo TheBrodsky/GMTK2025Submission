@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b85r4onhnwmel"]
+
+[ext_resource type="Script" uid="uid://68bxw3r838x7" path="res://scenes/bosses/sequencing/actions/atomic/radial_fire_action.gd" id="1_radial"]
+[ext_resource type="PackedScene" uid="uid://6m24dn6m3kcf" path="res://scenes/projectile/projectile.tscn" id="2_projectile"]
+
+[node name="RadialFireAction" type="Node"]
+script = ExtResource("1_radial")
+projectile_scene = ExtResource("2_projectile")
+duration = 3.0
