@@ -28,6 +28,10 @@ window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 
+[global_group]
+
+SoftReset="Everything that should be deleted whenever a soft reset happens"
+
 [gui]
 
 theme/custom="res://ui/theme.tres"
