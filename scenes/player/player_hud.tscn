@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxikw1ik77wii"]
+
+[ext_resource type="Script" uid="uid://5y18uq56nndu" path="res://scenes/player/player_hud.gd" id="1_v4fpl"]
+
+[node name="PlayerHUD" type="Control" node_paths=PackedStringArray("health_label", "soft_reset_timer_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v4fpl")
+health_label = NodePath("HBoxContainer/HealthLabel")
+soft_reset_timer_label = NodePath("HBoxContainer/SoftResetTimerLabel")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SoftResetTimerLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "TIMER"
+
+[node name="HealthLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "HP"
+
+[connection signal="player_changed" from="." to="." method="_on_player_changed"]

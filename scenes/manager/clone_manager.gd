@@ -3,6 +3,8 @@ class_name CloneManager;
 
 const PLAYER = preload("res://scenes/player/player.tscn");
 
+signal new_player_spawned(player: Player); # gets emitted whenever a new player gets spawned
+
 # we need to individually keep track of all recordings.
 var input_recordings: Array[InputRecording] = [];
 
@@ -30,4 +32,4 @@ func spawn_normal_player() -> void:
 	var new_player = PLAYER.instantiate();
 	new_player.should_die.connect(_on_player_should_die);
 	get_tree().root.call_deferred("add_child", new_player);
-	
+	new_player_spawned.emit(new_player);

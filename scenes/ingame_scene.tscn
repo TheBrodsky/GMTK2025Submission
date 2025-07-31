@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cik30de5gaaah"]
+[gd_scene load_steps=6 format=3 uid="uid://cik30de5gaaah"]
 
 [ext_resource type="Script" uid="uid://ovjegpk30m4h" path="res://scenes/ingame_scene.gd" id="1_objyc"]
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/fade_overlay.tscn" id="1_y6ebv"]
 [ext_resource type="PackedScene" uid="uid://b5dxpaf6jg8xc" path="res://scenes/manager/clone_manager.tscn" id="2_2577t"]
 [ext_resource type="PackedScene" uid="uid://jyv4g54adkmo" path="res://ui/overlays/pause_overlay.tscn" id="3_8o178"]
+[ext_resource type="PackedScene" uid="uid://cxikw1ik77wii" path="res://scenes/player/player_hud.tscn" id="5_2577t"]
 
 [node name="IngameScene" type="Node2D" node_paths=PackedStringArray("clone_manager")]
 script = ExtResource("1_objyc")
@@ -23,3 +24,7 @@ visible = false
 unique_name_in_owner = true
 process_mode = 2
 visible = false
+
+[node name="PlayerHUD" parent="UI" instance=ExtResource("5_2577t")]
+
+[connection signal="new_player_spawned" from="CloneManager" to="UI/PlayerHUD" method="_on_clone_manager_new_player_spawned"]
