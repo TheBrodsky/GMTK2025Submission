@@ -6,7 +6,7 @@ const PROJECTILE = preload("res://scenes/projectile/projectile.tscn")
 @export var my_owner: Player;
 
 func _process(_delta: float) -> void:
-	look_at(get_global_mouse_position());
+	my_owner.get_current_look_direction();
 
 func shoot() -> void:
 	var new_projectile := PROJECTILE.instantiate() as Projectile;

@@ -1,6 +1,7 @@
 class_name InputRecording;
 
-var recording: Array[InputSnapshot] = [];
+var recording: Dictionary[int, InputSnapshot]= {}; # key=framecount
 
-func append(value: InputSnapshot) -> void:
-	recording.append(value); # todo: Do not append duplicates.
+func append(frame: int, value: InputSnapshot) -> void:
+	# todo: Do not insert duplicate values
+	recording.set(frame, value);

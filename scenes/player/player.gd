@@ -8,6 +8,7 @@ class_name Player;
 
 var frame_count = 0;
 var input_recording: InputRecording = InputRecording.new();
+var latest_input: InputSnapshot; # stores the latest input snapshot, if we're clone.
 
 signal _mode_changed;
 signal should_die(player: Player);
@@ -44,15 +45,37 @@ func handle_player(_delta: float) -> void:
 		should_die.emit(self);
 	
 	var input := InputSnapshot.new();
-	input.frame = frame_count;
 	input.look_direction = (get_global_mouse_position() - global_position).normalized(); # todo: is that correct?
 	input.move_direction = velocity;
 	input.shooting_pressed = has_shot;
 	
-	input_recording.append(input);
+	input_recording.append(frame_count, input);
 
 func handle_clone(_delta: float) -> void:
+	var current_input = input_recording.recording.get(frame_count);
+	# todo: remember last input
+	if current_input:
+		var input: InputSnapshot = current_input;
+		latest_input = input;
+	
+	if !latest_input:
+		return;
+	if latest_input.shooting_pressed:
+		gun.shoot();
+	velocity = latest_input.move_direction;
+	move_and_slide();
+
 	pass
+
+# Returns the current look direction, based on if we're player or clone
+func get_current_look_direction() -> Vector2:
+	match mode:
+		Global.PlayerMode.Player:
+			return get_global_mouse_position();
+		Global.PlayerMode.Clone:
+			if latest_input:
+				return latest_input.look_direction;
+	return Vector2.ZERO;
 
 func _on_health_component_got_damaged(attack: Attack) -> void:
 	health.health -= attack.attack_damage;
@@ -80,14 +103,9 @@ func _on__mode_changed() -> void:
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.PLAYER, true);
 			hitbox.set_collision_layer_value(Global.CollisionLayer.PLAYER, true);
-			
-			# Mask
-			set_collision_mask_value(Global.CollisionLayer.ENEMY, true);
 		Global.PlayerMode.Clone:
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.ENEMY, true);
 			hitbox.set_collision_layer_value(Global.CollisionLayer.ENEMY, true);
 			
-			# Mask
-			set_collision_mask_value(Global.CollisionLayer.PLAYER, true);
 			hitbox.set_collision_mask_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);

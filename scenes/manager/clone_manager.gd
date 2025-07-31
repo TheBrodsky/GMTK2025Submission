@@ -6,11 +6,19 @@ const PLAYER = preload("res://scenes/player/player.tscn");
 # we need to individually keep track of all recordings.
 var input_recordings: Array[InputRecording] = [];
 
+var currently_active_clones: Array[Player] = [];
+
 func _on_player_should_die(player: Player) -> void:
 	# Append new recording
 	input_recordings.append(player.input_recording);
 	# despawn dead player
 	player.queue_free();
+	
+	# despawn all clones
+	for clone in currently_active_clones:
+		if clone != null:
+			clone.queue_free();
+	currently_active_clones = [];
 	
 	# loop through all recordings and spawn a new player with that recording
 	for recording in input_recordings:
@@ -18,6 +26,7 @@ func _on_player_should_die(player: Player) -> void:
 		new_player.input_recording = recording;
 		new_player.mode = Global.PlayerMode.Clone;
 		get_tree().root.add_child(new_player);
+		currently_active_clones.append(new_player);
 	
 	# spawn new normal player
 	spawn_normal_player();

@@ -63,7 +63,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area is not HitBoxComponent:
 		return;
 	var hitbox : HitBoxComponent = area;
-	if hitbox.get_parent() == my_owner.my_owner:
+	if my_owner && my_owner.my_owner && hitbox.get_parent() == my_owner.my_owner:
 		return;
 	
 	var attack = Attack.new();

@@ -11,6 +11,8 @@ clone_manager = NodePath("CloneManager")
 
 [node name="CloneManager" parent="." instance=ExtResource("2_2577t")]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="FadeOverlay" parent="UI" instance=ExtResource("1_y6ebv")]
