@@ -36,12 +36,12 @@ func handle_hard_reset() -> void:
 	# despawn everything in group "HardReset"
 	for hard_reset in get_tree().get_nodes_in_group("HardReset"):
 		hard_reset.queue_free();
-	
 
 func _on_clone_manager_new_player_spawned(new_player: Player) -> void:
 	if player:
 		player.should_die.disconnect(_on_player_should_die)
 	new_player.should_die.connect(_on_player_should_die);
+	new_player.game_loop_manager = self;
 	player = new_player;
 
 func _on_player_should_die(_player: Player) -> void:

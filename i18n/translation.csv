@@ -16,3 +16,4 @@ settings_language,Game Language,Spielsprache
 game_paused,Game paused,Spiel pausiert
 resume_game,Resume game,Weiterspielen
 restart,Restart,Neustart
+game_over,Game over,Spiel vorbei

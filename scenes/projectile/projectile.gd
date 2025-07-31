@@ -59,6 +59,7 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	var attack = Attack.new();
 	attack.attack_damage = damage;
+	attack.damage_source = my_owner.my_owner; # my_owner is gun, guns my_owner is the player.
 	
 	hitbox.damage(attack);
 	queue_free();
