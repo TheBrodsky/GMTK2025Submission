@@ -96,8 +96,8 @@ func _on_health_component_got_damaged(attack: Attack) -> void:
 		if health.health <= 0:
 			match mode:
 				Global.PlayerMode.PLAYER:
-					var attack_source = attack.damage_source;
-					if attack_source is Player:
+					var attack_source := attack.damage_source;
+					if attack_source == Global.ProjectileMode.CLONE:
 						should_die.emit(self); # tell the clone manager that the "real" player died. we died by a player (must be a clone) and thus we trigger a hard reset
 						return;
 					game_loop_manager.handle_soft_reset(); # we died through something else (e.g. boss), trigger a soft reset

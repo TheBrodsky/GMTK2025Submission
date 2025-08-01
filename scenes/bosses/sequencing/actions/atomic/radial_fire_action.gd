@@ -24,7 +24,6 @@ func _fire_radial_burst():
 		projectile.mode = Global.ProjectileMode.ENEMY;
 		projectile.position = boss_node.global_position
 		projectile.target_position = Vector2(cos(angle), sin(angle)) # normalized direction
-		projectile.damage_source = self;
 		get_tree().root.add_child(projectile)
 
 func _calculate_angles() -> Array[float]:

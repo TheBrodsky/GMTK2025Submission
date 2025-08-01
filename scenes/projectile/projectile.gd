@@ -5,8 +5,6 @@ class_name Projectile;
 @export var despawn_time: int = 1; # in seconds
 @export var damage: int = 10;
 
-var damage_source; # the instance that should be considered the "source" for the damage
-
 var target_position: Vector2 :
 	get:
 		return target_position;
@@ -66,7 +64,7 @@ func _on_area_entered(area: Area2D) -> void:
 	
 	var attack = Attack.new();
 	attack.attack_damage = damage;
-	attack.damage_source = damage_source;
+	attack.damage_source = mode;
 	
 	hitbox.damage(attack);
 	queue_free();
