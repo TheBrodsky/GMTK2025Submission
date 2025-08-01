@@ -9,6 +9,8 @@ size = Vector2(100, 100)
 
 [node name="TestBoss" type="CharacterBody2D" groups=["HardReset", "SoftReset"]]
 script = ExtResource("1_kpecr")
+metadata/_edit_horizontal_guides_ = [-162.0, 162.0]
+metadata/_edit_vertical_guides_ = [288.0, -288.0]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

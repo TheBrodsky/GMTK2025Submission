@@ -45,39 +45,39 @@ func _calculate_target_position() -> Vector2:
 	# Top/bottom rows: 2/3rds from center to edges
 	# Left/right columns: 3/4ths from center to edges
 	var viewport_size = get_viewport().get_visible_rect().size
-	var center_x = viewport_size.x / 2.0
-	var center_y = viewport_size.y / 2.0
+	var half_width = viewport_size.x / 2.0
+	var half_height = viewport_size.y / 2.0
 	
-	# Calculate distances from center
-	var horizontal_offset = center_x * 0.75  # 3/4ths to edges
-	var vertical_offset = center_y * (2.0/3.0)  # 2/3rds to edges
+	# Calculate distances from center (0,0)
+	var horizontal_offset = half_width * 0.75  # 3/4ths to edges
+	var vertical_offset = half_height * (2.0/3.0)  # 2/3rds to edges
 	
 	match target_type:
 		TargetType.TOP_LEFT:
-			return Vector2(center_x - horizontal_offset, center_y - vertical_offset)
+			return Vector2(-horizontal_offset, -vertical_offset)
 		TargetType.TOP_CENTER:
-			return Vector2(center_x, center_y - vertical_offset)
+			return Vector2(0, -vertical_offset)
 		TargetType.TOP_RIGHT:
-			return Vector2(center_x + horizontal_offset, center_y - vertical_offset)
+			return Vector2(horizontal_offset, -vertical_offset)
 		TargetType.CENTER_LEFT:
-			return Vector2(center_x - horizontal_offset, center_y)
+			return Vector2(-horizontal_offset, 0)
 		TargetType.CENTER_CENTER:
-			return Vector2(center_x, center_y)
+			return Vector2(0, 0)
 		TargetType.CENTER_RIGHT:
-			return Vector2(center_x + horizontal_offset, center_y)
+			return Vector2(horizontal_offset, 0)
 		TargetType.BOTTOM_LEFT:
-			return Vector2(center_x - horizontal_offset, center_y + vertical_offset)
+			return Vector2(-horizontal_offset, vertical_offset)
 		TargetType.BOTTOM_CENTER:
-			return Vector2(center_x, center_y + vertical_offset)
+			return Vector2(0, vertical_offset)
 		TargetType.BOTTOM_RIGHT:
-			return Vector2(center_x + horizontal_offset, center_y + vertical_offset)
+			return Vector2(horizontal_offset, vertical_offset)
 		TargetType.RANDOM:
 			# Boss is 50px wide/tall, add padding to keep it fully visible
 			var padding = 25.0  # Half of boss size
-			var min_x = padding
-			var max_x = viewport_size.x - padding
-			var min_y = padding  
-			var max_y = viewport_size.y - padding
+			var min_x = -half_width + padding
+			var max_x = half_width - padding
+			var min_y = -half_height + padding  
+			var max_y = half_height - padding
 			return Vector2(
 				Global.SequenceRNG.randf_range(min_x, max_x),
 				Global.SequenceRNG.randf_range(min_y, max_y)
