@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://blxypafv58cdy" path="res://scenes/bosses/sequencing/base/boss_sequence_builder.gd" id="2_build456"]
 [ext_resource type="PackedScene" uid="uid://b8x3k5nan2p1q" path="res://scenes/bosses/sequencing/testing/debug_action_pool.tscn" id="3_pool789"]
 
-
 [node name="SequenceTest" type="Node"]
 script = ExtResource("1_test123")
 

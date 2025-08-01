@@ -1,26 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://testlevel123"]
+[gd_scene load_steps=2 format=3 uid="uid://testlevel123"]
 
-[ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/sequencing/testing/test_boss.gd" id="1_boss"]
-[ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/sequencing/testing/ScarySquare.png" id="2_sprite"]
-[ext_resource type="PackedScene" uid="uid://exvy8r2qxf5h" path="res://scenes/bosses/sequencing/actions/pools/BossAttackPool.tscn" id="3_pool"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
-size = Vector2(100, 100)
+[ext_resource type="PackedScene" uid="uid://jur5bey4kc4w" path="res://scenes/bosses/bosses/test/test_boss.tscn" id="1_o7f2i"]
 
 [node name="TestLevel" type="Node2D"]
 metadata/_edit_vertical_guides_ = [144.0, 288.0, 432.0]
 metadata/_edit_horizontal_guides_ = [81.0, 162.0, 243.0]
 
-[node name="TestBoss" type="CharacterBody2D" parent="."]
+[node name="TestBoss" parent="." instance=ExtResource("1_o7f2i")]
 position = Vector2(144, 81)
-script = ExtResource("1_boss")
-
-[node name="Sprite2D" type="Sprite2D" parent="TestBoss"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_sprite")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestBoss"]
-scale = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_1")
-
-[node name="BossAttackPool" parent="TestBoss" instance=ExtResource("3_pool")]

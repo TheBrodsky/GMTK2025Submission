@@ -32,7 +32,7 @@ func _fire_bullet():
 		angle_radians += base_angle_offset
 	
 	var projectile = projectile_scene.instantiate() as Projectile
-	projectile.mode = Global.PlayerMode.Clone # TODO See Global.PlayerMode
+	projectile.mode = Global.PlayerMode.CLONE
 	projectile.position = boss_node.global_position
 	projectile.target_position = Vector2(cos(angle_radians), sin(angle_radians))
 	get_tree().root.add_child(projectile)

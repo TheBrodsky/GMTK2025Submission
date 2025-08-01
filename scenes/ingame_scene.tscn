@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b5dxpaf6jg8xc" path="res://scenes/manager/clone_manager.tscn" id="2_2577t"]
 [ext_resource type="PackedScene" uid="uid://jyv4g54adkmo" path="res://ui/overlays/pause_overlay.tscn" id="3_8o178"]
 [ext_resource type="PackedScene" uid="uid://ck8hbq0vjt55x" path="res://scenes/manager/GameLoopManager.tscn" id="3_gadrd"]
-[ext_resource type="Script" uid="uid://txsqicltv303" path="res://scripts/boss_collection.gd" id="4_1sh3m"]
+[ext_resource type="Script" path="res://scripts/boss_collection.gd" id="4_1sh3m"]
 [ext_resource type="PackedScene" uid="uid://cxikw1ik77wii" path="res://scenes/player/player_hud.tscn" id="5_2577t"]
 [ext_resource type="Resource" uid="uid://deh1n51cdlkwd" path="res://scenes/bosses/bosses/test/test_bosses.tres" id="5_etwux"]
 
