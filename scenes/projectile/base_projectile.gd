@@ -44,3 +44,6 @@ func _on_area_entered(area: Area2D) -> void:
 func get_damage_source() -> Global.ProjectileMode:
 	# Override in child classes to return appropriate damage source
 	return Global.ProjectileMode.ENEMY
+
+func _on_screen_exited() -> void:
+	queue_free()
