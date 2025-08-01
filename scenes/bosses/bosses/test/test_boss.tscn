@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://jur5bey4kc4w"]
+
+[ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/sequencing/testing/test_boss.gd" id="1_kpecr"]
+[ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/sequencing/testing/ScarySquare.png" id="2_14plf"]
+[ext_resource type="PackedScene" uid="uid://exvy8r2qxf5h" path="res://scenes/bosses/sequencing/actions/pools/BossAttackPool.tscn" id="3_fyi2p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(100, 100)
+
+[node name="TestBoss" type="CharacterBody2D" groups=["HardReset", "SoftReset"]]
+script = ExtResource("1_kpecr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_14plf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_1")
+
+[node name="BossAttackPool" parent="." instance=ExtResource("3_fyi2p")]

@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvxqy8r2qxf5h"]
+
+[ext_resource type="Script" uid="uid://1g5wyjxvrcjr" path="res://scenes/bosses/sequencing/base/boss_action_pool.gd" id="1_pool"]
+[ext_resource type="Script" uid="uid://cwgd1jyc8xd5i" path="res://scenes/bosses/sequencing/actions/atomic/move_to_action.gd" id="2_move"]
+
+[node name="MoveToPool" type="Node"]
+script = ExtResource("1_pool")
+is_subpool = true
+
+[node name="TopLeft" type="Node" parent="."]
+script = ExtResource("2_move")
+target_type = 1
+
+[node name="TopCenter" type="Node" parent="."]
+script = ExtResource("2_move")
+target_type = 2
+
+[node name="TopRight" type="Node" parent="."]
+script = ExtResource("2_move")
+target_type = 3
+
+[node name="CenterLeft" type="Node" parent="."]
+script = ExtResource("2_move")
+target_type = 4
+
+[node name="CenterCenter" type="Node" parent="."]
+script = ExtResource("2_move")
+
+[node name="CenterRight" type="Node" parent="."]
+script = ExtResource("2_move")
+target_type = 6
+
+[node name="BottomLeft" type="Node" parent="."]
+script = ExtResource("2_move")
+target_type = 7
+
+[node name="BottomCenter" type="Node" parent="."]
+script = ExtResource("2_move")
+target_type = 8
+
+[node name="BottomRight" type="Node" parent="."]
+script = ExtResource("2_move")
+target_type = 9

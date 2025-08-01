@@ -6,7 +6,7 @@ class_name Player;
 		return mode;
 	set(value):
 		mode = value;
-		_mode_changed.emit();
+		mode_changed();
 
 @export_group("Stats")
 @export var speed: int = 200;
@@ -17,6 +17,9 @@ class_name Player;
 @export var hitbox: HitBoxComponent;
 @export var health: HealthComponent;
 
+@onready var timer = $ImmunityTimer
+@export var i_frame_effect_lenght = 0.25
+
 var shoot_cooldown_timer: Timer;
 var can_shoot: bool = true;
 var frame_count = 0;
@@ -25,7 +28,8 @@ var latest_input: InputSnapshot; # stores the latest input snapshot, if we're cl
 
 var game_loop_manager: GameLoopManager;
 
-signal _mode_changed;
+@onready var animated_sprite = $AnimatedSprite2D
+
 signal should_die(player: Player); # gets emitted on a HARD RESET (when killed by its own clone)
 
 func _ready() -> void:
@@ -33,18 +37,32 @@ func _ready() -> void:
 	shoot_cooldown_timer.wait_time = shoot_cooldown;
 	shoot_cooldown_timer.timeout.connect(_on_shoot_cooldown_timeout);
 	add_child(shoot_cooldown_timer);
+	timer.start()
+	i_frame_effect()
 
 func get_input():
 	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized();
+	handle_movement_animation(input_direction)
 	velocity = input_direction * speed;
 
 func _physics_process(delta: float) -> void:
 	frame_count += 1;
 	match mode:
-		Global.PlayerMode.Player:
+		Global.PlayerMode.PLAYER:
 			handle_player(delta);
-		Global.PlayerMode.Clone:
+		Global.PlayerMode.CLONE:
 			handle_clone(delta);
+			
+func i_frame_effect() -> void:
+	var elapsed := 0.0
+	var duration: float = timer.time_left
+	while elapsed < duration:
+		modulate.a = 0.5
+		await get_tree().create_timer(i_frame_effect_lenght).timeout
+		modulate.a = 1.0
+		await get_tree().create_timer(i_frame_effect_lenght).timeout
+		elapsed += i_frame_effect_lenght * 2
+	modulate.a = 1.0
 
 func handle_player(_delta: float) -> void:
 	get_input();
@@ -63,6 +81,19 @@ func handle_player(_delta: float) -> void:
 	input.shooting_pressed = has_shot;
 	
 	input_recording.append(frame_count, input);
+	
+func handle_movement_animation(dir):
+	if !velocity:
+		animated_sprite.play("Idle")
+	if velocity:
+		animated_sprite.play("Run")
+		toggle_flip_sprite(dir)
+	
+func toggle_flip_sprite(dir: Vector2):
+	if dir.x < 0:
+		animated_sprite.flip_h = true
+	elif dir.x > 0:
+		animated_sprite.flip_h = false
 
 func handle_clone(_delta: float) -> void:
 	var current_input = input_recording.recording.get(frame_count);
@@ -75,33 +106,35 @@ func handle_clone(_delta: float) -> void:
 	if latest_input.shooting_pressed:
 		gun.shoot();
 	velocity = latest_input.move_direction;
+	handle_movement_animation(latest_input.move_direction)
 	move_and_slide();
 
 # Returns the current look direction, based on if we're player or clone
 func get_current_look_direction() -> Vector2:
 	match mode:
-		Global.PlayerMode.Player:
+		Global.PlayerMode.PLAYER:
 			return get_global_mouse_position();
-		Global.PlayerMode.Clone:
+		Global.PlayerMode.CLONE:
 			if latest_input:
 				return latest_input.look_direction;
 	return Vector2.ZERO;
 
 func _on_health_component_got_damaged(attack: Attack) -> void:
-	health.health -= attack.attack_damage;
+	if timer.time_left == 0:
+		health.health -= attack.attack_damage;
 	
-	if health.health <= 0:
-		match mode:
-			Global.PlayerMode.Player:
-				var attack_source = attack.damage_source;
-				if attack_source is Player:
-					should_die.emit(self); # tell the clone manager that the "real" player died. we died by a player (must be a clone) and thus we trigger a hard reset
-					return;
-				game_loop_manager.handle_soft_reset(); # we died through something else (e.g. boss), trigger a soft reset
-			Global.PlayerMode.Clone:
-				queue_free();
+		if health.health <= 0:
+			match mode:
+				Global.PlayerMode.PLAYER:
+					var attack_source := attack.damage_source;
+					if attack_source == Global.ProjectileMode.CLONE:
+						should_die.emit(self); # tell the clone manager that the "real" player died. we died by a player (must be a clone) and thus we trigger a hard reset
+						return;
+					game_loop_manager.handle_soft_reset(); # we died through something else (e.g. boss), trigger a soft reset
+				Global.PlayerMode.CLONE:
+					queue_free();
 
-func _on__mode_changed() -> void:
+func mode_changed() -> void:
 	collision_layer = 0;
 	collision_mask = 0;
 	
@@ -113,17 +146,17 @@ func _on__mode_changed() -> void:
 	
 	# set collision layer (change what we "are")
 	match mode:
-		Global.PlayerMode.Player:
+		Global.PlayerMode.PLAYER:
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.PLAYER, true);
 			hitbox.set_collision_layer_value(Global.CollisionLayer.PLAYER, true);
-		Global.PlayerMode.Clone:
-			# Layer
-			set_collision_layer_value(Global.CollisionLayer.ENEMY, true);
-			hitbox.set_collision_layer_value(Global.CollisionLayer.ENEMY, true);
 			
-			hitbox.set_collision_mask_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);
-
+			# Mask
+			hitbox.set_collision_mask_value(Global.CollisionLayer.CLONE_PROJECTILE, true);
+		Global.PlayerMode.CLONE:
+			# Layer
+			set_collision_layer_value(Global.CollisionLayer.CLONE, true);
+			hitbox.set_collision_layer_value(Global.CollisionLayer.CLONE, true);
 
 func _on_shoot_cooldown_timeout() -> void:
 	can_shoot = true;

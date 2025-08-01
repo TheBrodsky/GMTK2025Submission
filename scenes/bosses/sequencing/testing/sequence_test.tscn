@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1dy6lan3q2r"]
+
+[ext_resource type="Script" uid="uid://8hybt12mf8w0" path="res://scenes/bosses/sequencing/testing/sequence_test.gd" id="1_test123"]
+[ext_resource type="Script" uid="uid://blxypafv58cdy" path="res://scenes/bosses/sequencing/base/boss_sequence_builder.gd" id="2_build456"]
+[ext_resource type="PackedScene" uid="uid://b8x3k5nan2p1q" path="res://scenes/bosses/sequencing/testing/debug_action_pool.tscn" id="3_pool789"]
+
+[node name="SequenceTest" type="Node"]
+script = ExtResource("1_test123")
+
+[node name="BossSequenceBuilder" type="Node" parent="."]
+script = ExtResource("2_build456")
+action_pool_scene = ExtResource("3_pool789")
+
+[node name="TestBoss" type="Node" parent="."]
