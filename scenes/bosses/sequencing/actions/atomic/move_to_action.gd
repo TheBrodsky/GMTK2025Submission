@@ -30,7 +30,7 @@ func execute(boss: Node):
 	target_position = _calculate_target_position()
 	print(target_position)
 
-func _perform_action(delta: float):
+func _perform_action(_delta: float):
 	var progress = 1.0 - (timer.time_left / duration)
 	progress = clamp(progress, 0.0, 1.0)
 	

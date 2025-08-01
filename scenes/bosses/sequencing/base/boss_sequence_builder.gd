@@ -11,7 +11,7 @@ func initialize_action_pool():
 		add_child(action_pool)
 		print("Loaded action pool with ", action_pool.get_all_items().size(), " actions")
 
-func generate_sequence(sequence_duration: float, level: int = 1) -> BossSequence:
+func generate_sequence(sequence_duration: float, _level: int = 1) -> BossSequence:
 	# Use global SequenceRNG for consistent randomization across all boss actions
 	var rng = Global.SequenceRNG
 	
