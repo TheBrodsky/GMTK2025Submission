@@ -40,6 +40,9 @@ func handle_soft_reset() -> void:
 		soft_reset.queue_free();
 	soft_reset_timer.start();
 	
+	# Reset SequenceRNG to ensure consistent boss sequences on restart
+	Global.SequenceRNG.seed = Global.global_seed;
+	
 	# Select a boss to spawn and spawn it
 	var bosses_to_spawn = boss_collection.get(current_difficulty);
 	if bosses_to_spawn && bosses_to_spawn.bosses && bosses_to_spawn.bosses.size() > 0:
