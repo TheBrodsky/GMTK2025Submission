@@ -7,7 +7,7 @@ class_name BossAction extends Node
 
 signal completed(boss_node: Node)
 
-@export var duration: float = 1.0
+var duration: float = 1.0
 
 var boss_node: Node
 

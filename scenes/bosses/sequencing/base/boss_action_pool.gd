@@ -4,12 +4,13 @@
 class_name BossActionPool extends BossAction
 
 @export var is_subpool: bool = false # if true, all actions must have same duration
+@export var pool_duration: float = 1.0 # duration to enforce on all actions in subpool
 
 func _ready():
 	super._ready()
 	_validate_pool_has_items()
 	if is_subpool:
-		_calculate_and_enforce_subpool_duration()
+		_set_subpool_duration()
 
 func get_all_items() -> Array[BossAction]:
 	var items: Array[BossAction] = []
@@ -55,15 +56,14 @@ func _validate_pool_has_items():
 	if items.is_empty():
 		push_error("BossActionPool has no child actions")
 
-func _calculate_and_enforce_subpool_duration():
+func _set_subpool_duration():
 	var items = get_all_items()
 	
-	# Check that all items have the same duration
-	var first_duration = items[0].duration
+	# Set all items to the pool's duration
 	for item in items:
-		if abs(item.duration - first_duration) > 0.001: # small epsilon for float comparison
-			push_error("Subpool contains actions with different durations: " + str(item.duration) + " vs " + str(first_duration))
-			# Enforce the first duration on all items
-			item.duration = first_duration
+		item.duration = pool_duration
+		# If the item is an atomic action, also update its action_duration
+		if item is AtomicBossAction:
+			item.action_duration = pool_duration
 	
-	duration = first_duration
+	duration = pool_duration

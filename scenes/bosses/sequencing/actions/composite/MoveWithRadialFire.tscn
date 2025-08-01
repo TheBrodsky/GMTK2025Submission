@@ -7,16 +7,15 @@
 
 [node name="MoveWithRadialFire" type="Node"]
 script = ExtResource("1_composite")
-duration = 3.0
 
 [node name="MoveToPool" parent="." instance=ExtResource("2_movepool")]
-duration = 3.0
+pool_duration = 3.0
 
 [node name="RadialFire" type="Node" parent="."]
 script = ExtResource("3_radial")
 projectile_count = 12
-fire_rate = 2.0
+fire_rate = 4.0
 angle_offset_per_burst_degrees = 15.0
 aim_at_screen_center = true
 projectile_scene = ExtResource("4_lopt2")
-duration = 3.0
+action_duration = 3.0

@@ -7,16 +7,16 @@
 
 [node name="MoveAndStreamFire" type="Node"]
 script = ExtResource("1_sequence")
-duration = 5.0
 
 [node name="MoveToPool" parent="." instance=ExtResource("2_movepool")]
+pool_duration = 1.5
 
 [node name="StreamFire" type="Node" parent="."]
 script = ExtResource("3_stream")
 projectile_scene = ExtResource("4_bpkqa")
-fire_rate = 10.0
+fire_rate = 25.0
 starting_angle_degrees = -45.0
 ending_angle_degrees = 45.0
 oscillation_frequency = 2.0
 aim_at_screen_center = true
-duration = 3.0
+action_duration = 3.0
