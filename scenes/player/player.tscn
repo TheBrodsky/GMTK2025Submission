@@ -1,63 +1,27 @@
-[gd_scene load_steps=28 format=3 uid="uid://csx3k2jd8acqe"]
+[gd_scene load_steps=19 format=3 uid="uid://csx3k2jd8acqe"]
 
 [ext_resource type="Script" uid="uid://drm1qvc7cq3ga" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://dmelj2qgr8w7k" path="res://icon.svg" id="2_dovo2"]
 [ext_resource type="PackedScene" uid="uid://cspugrwhg2ahi" path="res://scenes/player/gun.tscn" id="3_gmlin"]
-[ext_resource type="Texture2D" uid="uid://c11hn3p40ysxk" path="res://player_assets/player_run_0000.png" id="3_gx1jg"]
-[ext_resource type="Texture2D" uid="uid://cbts668gb41vy" path="res://player_assets/PlayerIdle.png" id="3_ugbui"]
+[ext_resource type="Texture2D" uid="uid://cbts668gb41vy" path="res://assets/player_assets/PlayerIdle.png" id="3_myrg7"]
+[ext_resource type="Texture2D" uid="uid://c11hn3p40ysxk" path="res://assets/player_assets/player_run_0000.png" id="4_kvlxm"]
 [ext_resource type="PackedScene" uid="uid://biiy7u5apulx5" path="res://scenes/components/health_component.tscn" id="4_lvxji"]
-[ext_resource type="Texture2D" uid="uid://cpvm82ww7qvfi" path="res://player_assets/player_run_0001.png" id="4_ugbui"]
-[ext_resource type="Texture2D" uid="uid://20gah6jjtr6v" path="res://player_assets/player_run_0002.png" id="5_fcs02"]
 [ext_resource type="PackedScene" uid="uid://glogyi4fnftc" path="res://scenes/components/hit_box_component.tscn" id="5_p47bc"]
-[ext_resource type="Texture2D" uid="uid://xqq5rg36kpsg" path="res://player_assets/player_run_0003.png" id="6_myrg7"]
-[ext_resource type="Texture2D" uid="uid://x3b3v1ug4qb6" path="res://player_assets/player_run_0004.png" id="7_kvlxm"]
-[ext_resource type="Texture2D" uid="uid://djl07h8bfan2a" path="res://player_assets/player_run_0005.png" id="8_uf5tr"]
-[ext_resource type="Texture2D" uid="uid://dwnmet67ab0i6" path="res://player_assets/player_run_0006.png" id="9_lgqa7"]
-[ext_resource type="Texture2D" uid="uid://b81e7llmt4m2f" path="res://player_assets/player_run_0007.png" id="10_8ydkj"]
-[ext_resource type="Texture2D" uid="uid://bihxn5orimns1" path="res://player_assets/player_hand.png" id="13_fcs02"]
+[ext_resource type="Texture2D" uid="uid://cpvm82ww7qvfi" path="res://assets/player_assets/player_run_0001.png" id="5_uf5tr"]
+[ext_resource type="Texture2D" uid="uid://20gah6jjtr6v" path="res://assets/player_assets/player_run_0002.png" id="6_lgqa7"]
+[ext_resource type="Texture2D" uid="uid://xqq5rg36kpsg" path="res://assets/player_assets/player_run_0003.png" id="7_8ydkj"]
+[ext_resource type="Texture2D" uid="uid://x3b3v1ug4qb6" path="res://assets/player_assets/player_run_0004.png" id="8_3j4b4"]
+[ext_resource type="Texture2D" uid="uid://djl07h8bfan2a" path="res://assets/player_assets/player_run_0005.png" id="9_yj68g"]
+[ext_resource type="Texture2D" uid="uid://dwnmet67ab0i6" path="res://assets/player_assets/player_run_0006.png" id="10_ioxgp"]
+[ext_resource type="Texture2D" uid="uid://b81e7llmt4m2f" path="res://assets/player_assets/player_run_0007.png" id="11_cnsyf"]
+[ext_resource type="Texture2D" uid="uid://bihxn5orimns1" path="res://assets/player_assets/player_hand.png" id="13_myrg7"]
 [ext_resource type="PackedScene" uid="uid://6m24dn6m3kcf" path="res://scenes/projectile/projectile.tscn" id="14_myrg7"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fcs02"]
-atlas = ExtResource("3_ugbui")
-region = Rect2(0, 0, 400, 800)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ioxgp"]
-atlas = ExtResource("4_ugbui")
-region = Rect2(31, 0, 521, 800)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yj68g"]
-atlas = ExtResource("3_gx1jg")
-region = Rect2(31, 0, 521, 800)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cnsyf"]
-atlas = ExtResource("5_fcs02")
-region = Rect2(31, 0, 521, 800)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
-atlas = ExtResource("6_myrg7")
-region = Rect2(31, 0, 521, 800)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6cv16"]
-atlas = ExtResource("7_kvlxm")
-region = Rect2(31, 0, 521, 800)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j4nxn"]
-atlas = ExtResource("8_uf5tr")
-region = Rect2(31, 0, 521, 800)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_28m0y"]
-atlas = ExtResource("9_lgqa7")
-region = Rect2(31, 0, 521, 800)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uniwh"]
-atlas = ExtResource("10_8ydkj")
-region = Rect2(31, 0, 521, 800)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_iqsei"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fcs02")
+"texture": ExtResource("3_myrg7")
 }],
 "loop": true,
 "name": &"Idle",
@@ -65,28 +29,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ioxgp")
+"texture": ExtResource("4_kvlxm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yj68g")
+"texture": ExtResource("5_uf5tr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cnsyf")
+"texture": ExtResource("6_lgqa7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_007i1")
+"texture": ExtResource("7_8ydkj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6cv16")
+"texture": ExtResource("8_3j4b4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j4nxn")
+"texture": ExtResource("9_yj68g")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_28m0y")
+"texture": ExtResource("10_ioxgp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uniwh")
+"texture": ExtResource("11_cnsyf")
 }],
 "loop": true,
 "name": &"Run",
@@ -113,8 +77,6 @@ texture = ExtResource("2_dovo2")
 scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_iqsei")
 animation = &"Run"
-frame = 3
-frame_progress = 0.249073
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_x7p2l")
@@ -124,7 +86,7 @@ modulate = Color(1, 1, 1, 1)
 show_behind_parent = true
 position = Vector2(4, -6)
 scale = Vector2(0.04, 0.04)
-texture = ExtResource("13_fcs02")
+texture = ExtResource("13_myrg7")
 offset = Vector2(164, 51)
 projectile = ExtResource("14_myrg7")
 my_owner = NodePath("..")
