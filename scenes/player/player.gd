@@ -83,13 +83,13 @@ func handle_player(_delta: float) -> void:
 	input_recording.append(frame_count, input);
 	
 func handle_movement_animation(dir):
-	if mode == Global.PlayerMode.Player:
+	if mode == Global.PlayerMode.PLAYER:
 		if !velocity:
 			animated_sprite.play("IdlePlayer")
 		if velocity:
 			animated_sprite.play("RunPlayer")
 			toggle_flip_sprite(dir)
-	if mode == Global.PlayerMode.Clone:
+	if mode == Global.PlayerMode.CLONE:
 		if !velocity:
 			animated_sprite.play("IdleClone")
 		if velocity:

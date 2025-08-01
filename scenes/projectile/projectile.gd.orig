@@ -5,9 +5,14 @@ class_name Projectile;
 @export var despawn_time: int = 1; # in seconds
 @export var damage: int = 10;
 
+<<<<<<< HEAD
+=======
 @export var player_bullet: Node2D
 @export var clone_bullet: Node2D
 
+var my_owner: Gun;
+
+>>>>>>> Dan
 var target_position: Vector2 :
 	get:
 		return target_position;
@@ -41,18 +46,13 @@ func mode_changed() -> void:
 	# set collision layer (change what we "are") and mask (what we check for)
 	match mode:
 		Global.ProjectileMode.PLAYER:
-			player_bullet.visible = true
-			clone_bullet.visible = false
-			
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);
 			
+<<<<<<< HEAD
 			# Mask
 			set_collision_mask_value(Global.CollisionLayer.ENEMY, true);
 		Global.ProjectileMode.CLONE:
-			player_bullet.visible = false
-			clone_bullet.visible = true
-			
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.CLONE_PROJECTILE, true);
 			
@@ -60,12 +60,24 @@ func mode_changed() -> void:
 			set_collision_mask_value(Global.CollisionLayer.PLAYER, true);
 			set_collision_mask_value(Global.CollisionLayer.ENEMY, true);
 		Global.ProjectileMode.ENEMY:
+=======
+			player_bullet.visible = true
+			clone_bullet.visible = false
+			
+		Global.PlayerMode.Clone:
+>>>>>>> Dan
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.ENEMY_PROJECTILE, true);
 			
 			# Mask
 			set_collision_mask_value(Global.CollisionLayer.PLAYER, true);
+<<<<<<< HEAD
 			set_collision_mask_value(Global.CollisionLayer.CLONE, true);
+=======
+			
+			player_bullet.visible = false
+			clone_bullet.visible = true
+>>>>>>> Dan
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is not HitBoxComponent:
