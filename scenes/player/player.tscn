@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://csx3k2jd8acqe"]
+[gd_scene load_steps=49 format=3 uid="uid://csx3k2jd8acqe"]
 
 [ext_resource type="Script" uid="uid://drm1qvc7cq3ga" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://dmelj2qgr8w7k" path="res://icon.svg" id="2_dovo2"]
@@ -24,9 +24,10 @@
 [ext_resource type="Texture2D" uid="uid://c30fmv3q8hbf5" path="res://assets/clone_assets/clone_run_0006.png" id="11_pk8ii"]
 [ext_resource type="Texture2D" uid="uid://cfst2ga483lqj" path="res://assets/clone_assets/clone_run_0007.png" id="12_5mf0n"]
 [ext_resource type="Texture2D" uid="uid://bihxn5orimns1" path="res://assets/player_assets/player_hand.png" id="13_fcs02"]
-[ext_resource type="Script" path="res://scenes/player/clone_gun_overlay.gd" id="22_6cv16"]
+[ext_resource type="Script" uid="uid://b3n0iu1e1rdn8" path="res://scenes/player/clone_gun_overlay.gd" id="22_6cv16"]
 [ext_resource type="Texture2D" uid="uid://cjn2b23lp5l41" path="res://assets/clone_assets/clone_arm.png" id="23_4hvnv"]
-[ext_resource type="PackedScene" uid="uid://6m24dn6m3kcf" path="res://scenes/projectile/projectile.tscn" id="25_j4nxn"]
+[ext_resource type="PackedScene" uid="uid://bi67nxun54py" path="res://scenes/projectile/player_projectile.tscn" id="25_j4nxn"]
+[ext_resource type="PackedScene" uid="uid://b2hfrt8qnrixu" path="res://scenes/projectile/clone_projectile.tscn" id="26_28m0y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bbmj2"]
 atlas = ExtResource("3_007i1")
@@ -220,7 +221,8 @@ position = Vector2(4, -6)
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("13_fcs02")
 offset = Vector2(164, 51)
-projectile = ExtResource("25_j4nxn")
+player_projectile = ExtResource("25_j4nxn")
+clone_projectile = ExtResource("26_28m0y")
 my_owner = NodePath("..")
 owners_animation = NodePath("../AnimatedSprite2D")
 timer = NodePath("../ImmunityTimer")

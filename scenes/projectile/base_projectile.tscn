@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfc0xm65wxuol"]
+
+[ext_resource type="Script" uid="uid://nh66il8wcb0x" path="res://scenes/projectile/base_projectile.gd" id="1_base"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_base"]
+
+[node name="BaseProjectile" type="Area2D" groups=["HardReset", "SoftReset"]]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_base")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("CircleShape2D_base")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

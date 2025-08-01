@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c4yeb24boo5pd" path="res://scenes/bosses/sequencing/base/boss_sequence.gd" id="1_sequence"]
 [ext_resource type="PackedScene" uid="uid://bvxqy8r2qxf5h" path="res://scenes/bosses/sequencing/actions/subpools/MoveToPool.tscn" id="2_movepool"]
 [ext_resource type="Script" uid="uid://c8wt45ana5ke7" path="res://scenes/bosses/sequencing/actions/atomic/stream_fire_action.gd" id="3_stream"]
-[ext_resource type="PackedScene" uid="uid://6m24dn6m3kcf" path="res://scenes/projectile/projectile.tscn" id="4_bpkqa"]
+[ext_resource type="PackedScene" uid="uid://dqh3tanlfpbkc" path="res://scenes/projectile/boss/enemy_projectile.tscn" id="4_bpkqa"]
 
 [node name="MoveAndStreamFire" type="Node"]
 script = ExtResource("1_sequence")

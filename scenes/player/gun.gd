@@ -2,7 +2,8 @@ extends Sprite2D
 class_name Gun;
 
 @onready var projectile_spawn_point: Marker2D = $ProjectileSpawnPoint;
-@export var projectile: PackedScene
+@export var player_projectile: PackedScene
+@export var clone_projectile: PackedScene
 @export var my_owner: Player;
 
 @export var owners_animation: AnimatedSprite2D
@@ -29,17 +30,17 @@ func _process(_delta: float) -> void:
 		position = Vector2(-4, -6)
 
 func shoot() -> void:
-	var projectile_mode: Global.ProjectileMode;
+	var projectile_scene: PackedScene
 	match my_owner.mode:
 		Global.PlayerMode.PLAYER:
-			projectile_mode = Global.ProjectileMode.PLAYER;
+			projectile_scene = player_projectile
 		Global.PlayerMode.CLONE:
-			projectile_mode = Global.ProjectileMode.CLONE;
-	var new_projectile := projectile.instantiate() as Projectile;
-	new_projectile.mode = projectile_mode;
-	new_projectile.position = projectile_spawn_point.global_position;
-	new_projectile.direction = (my_owner.get_current_look_direction() - projectile_spawn_point.global_position).normalized();
-	get_tree().root.add_child(new_projectile);
+			projectile_scene = clone_projectile
+	
+	var new_projectile := projectile_scene.instantiate() as BaseProjectile
+	new_projectile.position = projectile_spawn_point.global_position
+	new_projectile.direction = (my_owner.get_current_look_direction() - projectile_spawn_point.global_position).normalized()
+	get_tree().root.add_child(new_projectile)
 
 func i_frame_effect() -> void:
 	var elapsed := 0.0

@@ -1,4 +1,4 @@
-extends Projectile
+extends BaseProjectile
 class_name Sidewinder
 
 @export var wave_amplitude: float = 50.0  # How far side-to-side it moves
