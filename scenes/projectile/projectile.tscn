@@ -19,5 +19,4 @@ modulate = Color(1, 0.282353, 0.384314, 1)
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("1_t8015")
 
-[connection signal="_mode_changed" from="." to="." method="mode_changed"]
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://csx3k2jd8acqe"]
+[gd_scene load_steps=8 format=3 uid="uid://csx3k2jd8acqe"]
 
 [ext_resource type="Script" uid="uid://drm1qvc7cq3ga" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://dmelj2qgr8w7k" path="res://icon.svg" id="2_dovo2"]
 [ext_resource type="PackedScene" uid="uid://cspugrwhg2ahi" path="res://scenes/player/gun.tscn" id="3_gmlin"]
+[ext_resource type="PackedScene" uid="uid://6m24dn6m3kcf" path="res://scenes/projectile/projectile.tscn" id="4_75vfm"]
 [ext_resource type="PackedScene" uid="uid://biiy7u5apulx5" path="res://scenes/components/health_component.tscn" id="4_lvxji"]
 [ext_resource type="PackedScene" uid="uid://glogyi4fnftc" path="res://scenes/components/hit_box_component.tscn" id="5_p47bc"]
 
@@ -24,13 +25,14 @@ texture = ExtResource("2_dovo2")
 shape = SubResource("CircleShape2D_x7p2l")
 
 [node name="Gun" parent="." node_paths=PackedStringArray("my_owner") instance=ExtResource("3_gmlin")]
+projectile = ExtResource("4_75vfm")
 my_owner = NodePath("..")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_lvxji")]
 max_health = 100.0
 
 [node name="ImmunityTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 0.5
 one_shot = true
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_p47bc")]
@@ -40,5 +42,4 @@ health_component = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 shape = SubResource("CircleShape2D_x7p2l")
 
-[connection signal="_mode_changed" from="." to="." method="_on__mode_changed"]
 [connection signal="got_damaged" from="HealthComponent" to="." method="_on_health_component_got_damaged"]

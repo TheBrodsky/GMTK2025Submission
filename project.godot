@@ -113,6 +113,7 @@ locale/translations=PackedStringArray("res://i18n/translation.de.translation", "
 2d_physics/layer_3="EnemyProjectiles"
 2d_physics/layer_4="Wall"
 2d_physics/layer_5="Enemy"
+2d_physics/layer_6="Clone"
 
 [rendering]
 

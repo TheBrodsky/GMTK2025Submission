@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BossCollection" load_steps=3 format=3 uid="uid://deh1n51cdlkwd"]
+
+[ext_resource type="PackedScene" uid="uid://jur5bey4kc4w" path="res://scenes/bosses/bosses/test/test_boss.tscn" id="1_2ghlw"]
+[ext_resource type="Script" path="res://scripts/boss_collection.gd" id="1_y1nst"]
+
+[resource]
+script = ExtResource("1_y1nst")
+bosses = Array[PackedScene]([ExtResource("1_2ghlw")])
+metadata/_custom_type_script = "uid://txsqicltv303"
