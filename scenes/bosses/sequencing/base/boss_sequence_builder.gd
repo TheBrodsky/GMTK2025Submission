@@ -9,11 +9,11 @@ func initialize_action_pool():
 	if action_pool_scene and not action_pool:
 		action_pool = action_pool_scene.instantiate()
 		add_child(action_pool)
-		print("Loaded action pool with ", action_pool.get_all_actions().size(), " actions")
+		print("Loaded action pool with ", action_pool.get_all_items().size(), " actions")
 
-func generate_sequence(sequence_duration: float, level: int = 1, run_seed: int = 0) -> BossSequence:
-	var rng = RandomNumberGenerator.new()
-	rng.seed = run_seed + level
+func generate_sequence(sequence_duration: float, level: int = 1) -> BossSequence:
+	# Use global SequenceRNG for consistent randomization across all boss actions
+	var rng = Global.SequenceRNG
 	
 	if not action_pool:
 		initialize_action_pool()
@@ -22,26 +22,20 @@ func generate_sequence(sequence_duration: float, level: int = 1, run_seed: int =
 		push_error("No action pool available for sequence generation")
 		return null
 	
-	var pool_actions = action_pool.get_all_actions()
-	if pool_actions.is_empty():
-		push_error("Action pool is empty")
-		return null
-	
 	var sequence = BossSequence.new()
 	var remaining_time = sequence_duration
 	
 	while remaining_time > 0:
-		var available_actions = pool_actions.filter(func(action): return action.duration <= remaining_time)
+		var selected_action = action_pool.select_random_action_with_max_duration(remaining_time, rng)
 		
-		if available_actions.is_empty():
-			var shortest_action = pool_actions.reduce(func(acc, action): return action if action.duration < acc.duration else acc)
+		if not selected_action:
+			var shortest_action = action_pool.select_shortest_action()
 			if shortest_action:
-				sequence.add_child(shortest_action.duplicate())
+				sequence.add_child(shortest_action.clone())
 				remaining_time -= shortest_action.duration
 			break
 		
-		var selected_action = available_actions[rng.randi() % available_actions.size()]
-		sequence.add_child(selected_action.duplicate())
+		sequence.add_child(selected_action.clone())
 		remaining_time -= selected_action.duration
 	
 	print("Generated boss sequence with ", sequence.get_child_count(), " actions")

@@ -9,10 +9,7 @@ func _ready():
 	print("=== Starting Sequence Test ===")
 	print("Generating 15-second sequence...")
 	
-	var random_seed = randi()
-	print("Using seed: ", random_seed)
-	
-	current_sequence = sequence_builder.generate_sequence(15.0, 1, random_seed)
+	current_sequence = sequence_builder.generate_sequence(15.0, 1)
 	if current_sequence:
 		add_child(current_sequence)
 		current_sequence.completed.connect(_on_sequence_completed)

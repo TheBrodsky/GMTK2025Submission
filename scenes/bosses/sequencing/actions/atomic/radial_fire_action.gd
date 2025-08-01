@@ -1,12 +1,15 @@
 ## Fires N projectiles in an arc at regular intervals
-extends AtomicBossAction
+class_name RadialFireAction extends AtomicBossAction
 
 @export_range(2, 50) var projectile_count: int = 8
 @export var arc_degrees: float = 360.0
 @export var fire_rate: float = 1.0 # fires per second
+@export var angle_offset_per_burst_degrees: float = 0.0 # degrees to offset each subsequent burst
+@export var aim_at_screen_center: bool = false # if true, orients the pattern toward screen center
 @export var projectile_scene: PackedScene
 
 var fire_timer: float = 0.0
+var current_angle_offset_degrees: float = 0.0
 
 func _perform_action(delta: float):
 	fire_timer += delta
@@ -18,13 +21,23 @@ func _perform_action(delta: float):
 
 func _fire_radial_burst():
 	var angles = _calculate_angles()
+	var offset_radians = deg_to_rad(current_angle_offset_degrees)
+	var base_angle_offset = 0.0
+	
+	if aim_at_screen_center:
+		var screen_center = get_viewport().get_visible_rect().size / 2.0
+		var direction_to_center = (screen_center - boss_node.global_position).normalized()
+		base_angle_offset = atan2(direction_to_center.y, direction_to_center.x)
 	
 	for angle in angles:
+		var final_angle = angle + offset_radians + base_angle_offset
 		var projectile = projectile_scene.instantiate() as Projectile
 		projectile.mode = Global.ProjectileMode.ENEMY;
 		projectile.position = boss_node.global_position
-		projectile.target_position = Vector2(cos(angle), sin(angle)) # normalized direction
+		projectile.target_position = Vector2(cos(final_angle), sin(final_angle)) # normalized direction
 		get_tree().root.add_child(projectile)
+	
+	current_angle_offset_degrees += angle_offset_per_burst_degrees
 
 func _calculate_angles() -> Array[float]:
 	var angles: Array[float] = []

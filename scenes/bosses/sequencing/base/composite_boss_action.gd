@@ -18,6 +18,22 @@ func execute(boss: Node):
 	for sub_action in sub_actions:
 		sub_action.execute(boss)
 
+func clone() -> BossAction:
+	var cloned = duplicate()
+	# Replace any subpools in the cloned composite
+	_replace_subpools_in_cloned_node(cloned)
+	return cloned
+
+func _replace_subpools_in_cloned_node(node: Node):
+	var children = node.get_children()
+	for child in children:
+		if child is BossActionPool and child.is_subpool:
+			var cloned_action = child.clone()
+			if cloned_action:
+				node.remove_child(child)
+				node.add_child(cloned_action)
+				child.queue_free()
+
 func _get_sub_actions():
 	sub_actions.clear()
 	for child in get_children():

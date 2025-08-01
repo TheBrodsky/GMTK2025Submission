@@ -7,7 +7,7 @@ class_name BossAction extends Node
 
 signal completed(boss_node: Node)
 
-@export var duration: float = 1.0
+var duration: float = 1.0
 
 var boss_node: Node
 
@@ -17,6 +17,10 @@ func _ready() -> void:
 ## Entry point for action; kicks it off
 func execute(boss: Node):
 	boss_node = boss
+
+## Creates a copy of this action - override for custom cloning behavior
+func clone() -> BossAction:
+	return duplicate()
 
 ## In case there's any cleanup an action needs to do before it expires
 func _on_complete(_boss_node: Node):
