@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(100, 100)
 
-[node name="TestBoss" type="CharacterBody2D"]
+[node name="TestBoss" type="CharacterBody2D" groups=["HardReset", "SoftReset"]]
 script = ExtResource("1_kpecr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

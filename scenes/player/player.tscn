@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://csx3k2jd8acqe"]
+[gd_scene load_steps=28 format=3 uid="uid://csx3k2jd8acqe"]
 
 [ext_resource type="Script" uid="uid://drm1qvc7cq3ga" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://dmelj2qgr8w7k" path="res://icon.svg" id="2_dovo2"]
 [ext_resource type="PackedScene" uid="uid://cspugrwhg2ahi" path="res://scenes/player/gun.tscn" id="3_gmlin"]
-[ext_resource type="PackedScene" uid="uid://6m24dn6m3kcf" path="res://scenes/projectile/projectile.tscn" id="4_75vfm"]
 [ext_resource type="Texture2D" uid="uid://c11hn3p40ysxk" path="res://player_assets/player_run_0000.png" id="3_gx1jg"]
 [ext_resource type="Texture2D" uid="uid://cbts668gb41vy" path="res://player_assets/PlayerIdle.png" id="3_ugbui"]
 [ext_resource type="PackedScene" uid="uid://biiy7u5apulx5" path="res://scenes/components/health_component.tscn" id="4_lvxji"]
@@ -16,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dwnmet67ab0i6" path="res://player_assets/player_run_0006.png" id="9_lgqa7"]
 [ext_resource type="Texture2D" uid="uid://b81e7llmt4m2f" path="res://player_assets/player_run_0007.png" id="10_8ydkj"]
 [ext_resource type="Texture2D" uid="uid://bihxn5orimns1" path="res://player_assets/player_hand.png" id="13_fcs02"]
+[ext_resource type="PackedScene" uid="uid://6m24dn6m3kcf" path="res://scenes/projectile/projectile.tscn" id="14_myrg7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcs02"]
 atlas = ExtResource("3_ugbui")
@@ -126,6 +126,7 @@ position = Vector2(4, -6)
 scale = Vector2(0.04, 0.04)
 texture = ExtResource("13_fcs02")
 offset = Vector2(164, 51)
+projectile = ExtResource("14_myrg7")
 my_owner = NodePath("..")
 owners_animation = NodePath("../AnimatedSprite2D")
 timer = NodePath("../ImmunityTimer")
