@@ -20,21 +20,29 @@ func execute(boss: Node):
 	
 	actions[0].execute(boss)
 
+func clone() -> BossAction:
+	var cloned = duplicate()
+	# Replace any subpools in the cloned sequence
+	_replace_subpools_in_cloned_node(cloned)
+	return cloned
+
+func _replace_subpools_in_cloned_node(node: Node):
+	var children = node.get_children()
+	for child in children:
+		if child is BossActionPool and child.is_subpool:
+			var cloned_action = child.clone()
+			if cloned_action:
+				var child_index = child.get_index()
+				node.remove_child(child)
+				node.add_child(cloned_action)
+				node.move_child(cloned_action, child_index)
+				child.queue_free()
+
 func _get_actions():
 	actions.clear()
 	for child in get_children():
 		if child is BossAction:
-			# If child is a subpool, "clone" it to get one of its child actions and replace it.
-			if child is BossActionPool and child.is_subpool:
-				var cloned_action = child.clone()
-				if cloned_action:
-					var child_index = child.get_index()
-					child.queue_free()
-					add_child(cloned_action)
-					move_child(cloned_action, child_index)
-					actions.append(cloned_action)
-			else:
-				actions.append(child)
+			actions.append(child)
 
 func _calculate_duration():
 	var total_duration = 0.0

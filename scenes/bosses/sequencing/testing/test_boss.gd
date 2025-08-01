@@ -24,8 +24,7 @@ func _start_new_sequence():
 		current_sequence.completed.connect(_on_sequence_completed)
 
 func _on_sequence_completed(boss: Node):
-	print("Boss sequence completed! Starting new sequence...")
-	_start_new_sequence()
+	print("Boss sequence completed!")
 
 func _physics_process(delta):
 	move_and_slide()
