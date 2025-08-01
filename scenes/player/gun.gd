@@ -5,8 +5,18 @@ class_name Gun;
 const PROJECTILE = preload("res://scenes/projectile/projectile.tscn")
 @export var my_owner: Player;
 
+@export var owners_animation: AnimatedSprite2D
+
 func _process(_delta: float) -> void:
 	look_at(my_owner.get_current_look_direction());
+	if rotation_degrees > 90 or rotation_degrees < -90:
+		flip_v = true
+	else:
+		flip_v = false
+	if owners_animation.flip_h == false:
+		position = Vector2(4, -6)
+	elif owners_animation.flip_h == true:
+		position = Vector2(-4, -6)
 
 func shoot() -> void:
 	var new_projectile := PROJECTILE.instantiate() as Projectile;
