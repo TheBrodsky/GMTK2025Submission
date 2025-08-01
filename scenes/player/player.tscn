@@ -118,7 +118,7 @@ frame_progress = 0.249073
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_x7p2l")
 
-[node name="Gun" parent="." node_paths=PackedStringArray("my_owner", "owners_animation") instance=ExtResource("3_gmlin")]
+[node name="Gun" parent="." node_paths=PackedStringArray("my_owner", "owners_animation", "timer") instance=ExtResource("3_gmlin")]
 modulate = Color(1, 1, 1, 1)
 show_behind_parent = true
 position = Vector2(4, -6)
@@ -127,6 +127,7 @@ texture = ExtResource("13_fcs02")
 offset = Vector2(164, 51)
 my_owner = NodePath("..")
 owners_animation = NodePath("../AnimatedSprite2D")
+timer = NodePath("../ImmunityTimer")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_lvxji")]
 max_health = 100.0

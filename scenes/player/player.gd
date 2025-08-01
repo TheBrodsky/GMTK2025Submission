@@ -18,6 +18,7 @@ class_name Player;
 @export var health: HealthComponent;
 
 @onready var timer = $ImmunityTimer
+@export var i_frame_effect_lenght = 0.25
 
 var shoot_cooldown_timer: Timer;
 var can_shoot: bool = true;
@@ -38,6 +39,7 @@ func _ready() -> void:
 	shoot_cooldown_timer.timeout.connect(_on_shoot_cooldown_timeout);
 	add_child(shoot_cooldown_timer);
 	timer.start()
+	i_frame_effect()
 
 func get_input():
 	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized();
@@ -51,6 +53,17 @@ func _physics_process(delta: float) -> void:
 			handle_player(delta);
 		Global.PlayerMode.Clone:
 			handle_clone(delta);
+			
+func i_frame_effect() -> void:
+	var elapsed := 0.0
+	var duration: float = timer.time_left
+	while elapsed < duration:
+		modulate.a = 0.5
+		await get_tree().create_timer(i_frame_effect_lenght).timeout
+		modulate.a = 1.0
+		await get_tree().create_timer(i_frame_effect_lenght).timeout
+		elapsed += i_frame_effect_lenght * 2
+	modulate.a = 1.0
 
 func handle_player(_delta: float) -> void:
 	get_input();
