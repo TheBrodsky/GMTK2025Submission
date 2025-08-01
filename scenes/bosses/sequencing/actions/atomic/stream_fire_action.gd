@@ -34,7 +34,7 @@ func _fire_bullet():
 	var projectile = projectile_scene.instantiate() as Projectile
 	projectile.mode = Global.PlayerMode.CLONE
 	projectile.position = boss_node.global_position
-	projectile.target_position = Vector2(cos(angle_radians), sin(angle_radians))
+	projectile.direction = Vector2(cos(angle_radians), sin(angle_radians))
 	get_tree().root.add_child(projectile)
 
 func _calculate_current_angle() -> float:

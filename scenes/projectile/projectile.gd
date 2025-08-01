@@ -8,12 +8,12 @@ class_name Projectile;
 @export var player_bullet: Node2D
 @export var clone_bullet: Node2D
 
-var target_position: Vector2 :
+var direction: Vector2 :
 	get:
-		return target_position;
+		return direction;
 	set(value):
-		target_position = value;
-		velocity = target_position * speed;
+		direction = value;
+		velocity = direction * speed;
 var mode: Global.ProjectileMode :
 	get:
 		return mode;

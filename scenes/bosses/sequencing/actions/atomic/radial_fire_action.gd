@@ -34,7 +34,7 @@ func _fire_radial_burst():
 		var projectile = projectile_scene.instantiate() as Projectile
 		projectile.mode = Global.ProjectileMode.ENEMY;
 		projectile.position = boss_node.global_position
-		projectile.target_position = Vector2(cos(final_angle), sin(final_angle)) # normalized direction
+		projectile.direction = Vector2(cos(final_angle), sin(final_angle)) # normalized direction
 		get_tree().root.add_child(projectile)
 	
 	current_angle_offset_degrees += angle_offset_per_burst_degrees

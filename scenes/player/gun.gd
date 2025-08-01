@@ -38,7 +38,7 @@ func shoot() -> void:
 	var new_projectile := projectile.instantiate() as Projectile;
 	new_projectile.mode = projectile_mode;
 	new_projectile.position = projectile_spawn_point.global_position;
-	new_projectile.target_position = (my_owner.get_current_look_direction() - projectile_spawn_point.global_position).normalized();
+	new_projectile.direction = (my_owner.get_current_look_direction() - projectile_spawn_point.global_position).normalized();
 	get_tree().root.add_child(new_projectile);
 
 func i_frame_effect() -> void:
