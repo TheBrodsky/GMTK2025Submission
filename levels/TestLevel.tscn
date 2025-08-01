@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/sequencing/testing/ScarySquare.png" id="2_sprite"]
 [ext_resource type="PackedScene" uid="uid://exvy8r2qxf5h" path="res://scenes/bosses/sequencing/actions/pools/BossAttackPool.tscn" id="3_pool"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(100, 100)
 
 [node name="TestLevel" type="Node2D"]
 metadata/_edit_vertical_guides_ = [144.0, 288.0, 432.0]
