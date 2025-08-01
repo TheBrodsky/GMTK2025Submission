@@ -5,7 +5,8 @@ class_name Projectile;
 @export var despawn_time: int = 1; # in seconds
 @export var damage: int = 10;
 
-var target_position: Vector2 :
+@export var player_bullet: Node2D
+@export var clone_bullet: Node2Dvar target_position: Vector2 :
 	get:
 		return target_position;
 	set(value):
@@ -20,6 +21,7 @@ var mode: Global.ProjectileMode :
 var velocity: Vector2 = Vector2.ZERO;
 
 func _ready() -> void:
+rotation = velocity.angle()
 	despawn();
 
 func _process(delta: float) -> void:
@@ -37,12 +39,18 @@ func mode_changed() -> void:
 	# set collision layer (change what we "are") and mask (what we check for)
 	match mode:
 		Global.ProjectileMode.PLAYER:
+			player_bullet.visible = true
+			clone_bullet.visible = false
+			
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);
 			
 			# Mask
 			set_collision_mask_value(Global.CollisionLayer.ENEMY, true);
 		Global.ProjectileMode.CLONE:
+			player_bullet.visible = false
+			clone_bullet.visible = true
+			
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.CLONE_PROJECTILE, true);
 			

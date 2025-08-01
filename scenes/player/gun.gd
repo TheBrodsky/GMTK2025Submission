@@ -9,15 +9,20 @@ class_name Gun;
 
 @export var timer: Timer
 
+@export var clone_overlay: Sprite2D
+
 func _ready() -> void:
-	i_frame_effect()
+	if my_owner.mode == Global.PlayerMode.Clone:
+		clone_overlay.modulate.a = 1
+		modulate.a = 0
+	elif my_owner.mode == Global.PlayerMode.Player:
+		clone_overlay.modulate.a = 0
+		modulate.a = 1
+	await i_frame_effect()
 
 func _process(_delta: float) -> void:
-	look_at(my_owner.get_current_look_direction());
-	if rotation_degrees > 90 or rotation_degrees < -90:
-		flip_v = true
-	else:
-		flip_v = false
+	global_rotation = (my_owner.get_current_look_direction() - global_position).angle()
+	flip_v = abs(rotation_degrees) > 90
 	if owners_animation.flip_h == false:
 		position = Vector2(4, -6)
 	elif owners_animation.flip_h == true:
@@ -40,9 +45,19 @@ func i_frame_effect() -> void:
 	var elapsed := 0.0
 	var duration := timer.time_left
 	while elapsed < duration:
-		modulate.a = 0.5
-		await get_tree().create_timer(my_owner.i_frame_effect_length).timeout
-		modulate.a = 1.0
-		await get_tree().create_timer(my_owner.i_frame_effect_length).timeout
-		elapsed += my_owner.i_frame_effect_length * 2
-	modulate.a = 1.0
+		if my_owner.mode == Global.PlayerMode.Player:
+			modulate.a = 0.5
+			await get_tree().create_timer(my_owner.i_frame_effect_length).timeout
+			modulate.a = 1.0
+			await get_tree().create_timer(my_owner.i_frame_effect_length).timeout
+			elapsed += my_owner.i_frame_effect_length * 2
+		elif my_owner.mode == Global.PlayerMode.Clone:
+			clone_overlay.modulate.a = 0.5
+			await get_tree().create_timer(my_owner.i_frame_effect_length).timeout
+			clone_overlay.modulate.a = 1.0
+			await get_tree().create_timer(my_owner.i_frame_effect_length).timeout
+			elapsed += my_owner.i_frame_effect_length * 2
+	if my_owner.mode == Global.PlayerMode.Player:
+		modulate.a = 1
+	elif my_owner.mode == Global.PlayerMode.Clone:
+		clone_overlay.modulate.a = 1
