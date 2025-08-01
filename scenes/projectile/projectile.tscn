@@ -1,23 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://6m24dn6m3kcf"]
+[gd_scene load_steps=5 format=3 uid="uid://6m24dn6m3kcf"]
 
 [ext_resource type="Script" uid="uid://d4kdhn25addd1" path="res://scenes/projectile/projectile.gd" id="1_2dulq"]
-[ext_resource type="Texture2D" uid="uid://dmelj2qgr8w7k" path="res://icon.svg" id="1_t8015"]
+[ext_resource type="Texture2D" uid="uid://duhl8f7kml6nk" path="res://assets/bullet.png" id="2_2dulq"]
+[ext_resource type="Texture2D" uid="uid://bso3udm8w0ws8" path="res://assets/clone_bullet.png" id="3_lw0th"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2dulq"]
 
-[node name="Projectile" type="Area2D" groups=["HardReset", "SoftReset"]]
+[node name="Projectile" type="Area2D" node_paths=PackedStringArray("player_bullet", "clone_bullet") groups=["HardReset", "SoftReset"]]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_2dulq")
+player_bullet = NodePath("PlayerBullet")
+clone_bullet = NodePath("CloneBullet")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_2dulq")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.282353, 0.384314, 1)
+[node name="PlayerBullet" type="Sprite2D" parent="."]
 scale = Vector2(0.075, 0.075)
-texture = ExtResource("1_t8015")
+texture = ExtResource("2_2dulq")
+
+[node name="CloneBullet" type="Sprite2D" parent="."]
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("3_lw0th")
 
 [connection signal="_mode_changed" from="." to="." method="mode_changed"]
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]

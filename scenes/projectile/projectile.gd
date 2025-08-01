@@ -7,6 +7,9 @@ signal _mode_changed;
 @export var despawn_time: int = 1; # in seconds
 @export var damage: int = 10;
 
+@export var player_bullet: Node2D
+@export var clone_bullet: Node2D
+
 var my_owner: Gun;
 
 var target_position: Vector2 :
@@ -24,6 +27,7 @@ var mode: Global.PlayerMode :
 var velocity: Vector2 = Vector2.ZERO;
 
 func _ready() -> void:
+	rotation = velocity.angle()
 	despawn();
 
 func _process(delta: float) -> void:
@@ -43,12 +47,19 @@ func mode_changed() -> void:
 		Global.PlayerMode.Player:
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.PLAYER_PROJECTILE, true);
+			
+			player_bullet.visible = true
+			clone_bullet.visible = false
+			
 		Global.PlayerMode.Clone:
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.ENEMY_PROJECTILE, true);
 			
 			# Mask
 			set_collision_mask_value(Global.CollisionLayer.PLAYER, true);
+			
+			player_bullet.visible = false
+			clone_bullet.visible = true
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is not HitBoxComponent:

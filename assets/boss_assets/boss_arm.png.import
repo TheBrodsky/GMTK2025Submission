@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djl07h8bfan2a"
-path="res://.godot/imported/player_run_0005.png-6219cfd99a9a5f81fec87541515c26e4.ctex"
+uid="uid://by6o1ruyeca6o"
+path="res://.godot/imported/boss_arm.png-f7803bd5cc8a103bc1d8d0402ced18b2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://player_assets/player_run_0005.png"
-dest_files=["res://.godot/imported/player_run_0005.png-6219cfd99a9a5f81fec87541515c26e4.ctex"]
+source_file="res://assets/boss_assets/boss_arm.png"
+dest_files=["res://.godot/imported/boss_arm.png-f7803bd5cc8a103bc1d8d0402ced18b2.ctex"]
 
 [params]
 
