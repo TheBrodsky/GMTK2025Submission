@@ -5,6 +5,9 @@ class_name BossActionPool extends BossAction
 
 @export var is_subpool: bool = false # if true, all actions must have same duration
 @export var pool_duration: float = 1.0 # duration to enforce on all actions in subpool
+@export var no_repeats: bool = false # if true, avoid selecting the same action twice in a row
+
+var last_selected_action: BossAction
 
 func _ready():
 	super._ready()
@@ -24,7 +27,9 @@ func select_shortest_action() -> BossAction:
 	if items.is_empty():
 		return null
 	
-	return items.reduce(func(acc, action): return action if action.duration < acc.duration else acc)
+	var min_duration = items.reduce(func(acc, action): return action.duration if action.duration < acc else acc, items[0].duration)
+	var shortest_items = items.filter(func(action): return action.duration == min_duration)
+	return _select_random_action(shortest_items)
 
 func select_random_action_with_max_duration(max_duration: float, rng: RandomNumberGenerator = null) -> BossAction:
 	var items = get_all_items()
@@ -49,7 +54,19 @@ func _select_random_action(items: Array[BossAction], rng: RandomNumberGenerator 
 	if items.is_empty():
 		return null
 	
-	return items[rng.randi() % items.size()]
+	var selected = null
+	# If only one item or no_repeats is disabled, just pick randomly
+	if items.size() == 1 or not no_repeats:
+		selected = items[rng.randi() % items.size()]
+		last_selected_action = selected
+		return selected
+	
+	# Filter out the last selected action
+	var filtered_items = items.filter(func(action): return action != last_selected_action)
+	
+	selected = filtered_items[rng.randi() % filtered_items.size()]
+	last_selected_action = selected
+	return selected
 
 func _validate_pool_has_items():
 	var items = get_all_items()
