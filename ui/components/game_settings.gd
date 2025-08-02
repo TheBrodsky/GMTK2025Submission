@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-@export var main_menu:PackedScene
+
 
 #@onready var master_volume_toggle := %MasterEnabledToggle
 @onready var master_volume_slider := %MasterVolumeSlider
@@ -16,8 +16,8 @@ extends VBoxContainer
 ## maps the index of a locale to the locale itself
 var locales:PackedStringArray = []
 
-func _ready() -> void:
-	back_button.pressed.connect(_on_back_button_pressed)
+#func _ready() -> void:
+	#back_button.pressed.connect(_on_back_button_pressed)
 	
 	#self.locales = TranslationServer.get_loaded_locales()
 	#var current_locale = TranslationServer.get_locale()
@@ -32,8 +32,7 @@ func _ready() -> void:
 	#language_dropdown.select(select_index)		
 			
 
-func _on_back_button_pressed() -> void:
-	get_tree().change_scene_to_packed(main_menu)
+
 
 
 
