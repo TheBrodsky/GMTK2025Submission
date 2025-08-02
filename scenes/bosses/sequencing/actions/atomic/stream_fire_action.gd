@@ -23,14 +23,23 @@ func _perform_action(delta: float):
 		_fire_bullet()
 
 func _fire_bullet():
-	var current_angle = _calculate_current_angle()
-	var angle_radians = deg_to_rad(current_angle)
+	var angle_radians: float
 	
 	if aim_at_screen_center:
-		var screen_center = get_viewport().get_visible_rect().size / 2.0
+		var screen_center = Vector2.ZERO#get_viewport().get_visible_rect().get_center()
 		var direction_to_center = (screen_center - boss_node.global_position).normalized()
-		var base_angle_offset = atan2(direction_to_center.y, direction_to_center.x)
-		angle_radians += base_angle_offset
+		var center_angle = atan2(direction_to_center.y, direction_to_center.x)
+		
+		# Center the oscillation arc around the direction to center
+		var oscillation_progress = _calculate_oscillation_progress()
+		print(oscillation_progress)
+		var arc_size_radians = deg_to_rad(abs(ending_angle_degrees - starting_angle_degrees))
+		var min_angle = center_angle - arc_size_radians / 2.0
+		var max_angle = center_angle + arc_size_radians / 2.0
+		angle_radians = lerp(min_angle, max_angle, oscillation_progress)
+	else:
+		var current_angle = _calculate_current_angle()
+		angle_radians = deg_to_rad(current_angle)
 	
 	var projectile = projectile_scene.instantiate() as BaseProjectile
 	projectile.position = boss_node.global_position
@@ -42,14 +51,23 @@ func _fire_bullet():
 	
 	get_tree().root.add_child(projectile)
 
-func _calculate_current_angle() -> float:
-	var oscillation_progress = sin(oscillation_timer * oscillation_frequency * 2.0 * PI)
-	oscillation_progress = (oscillation_progress + 1.0) / 2.0 # normalize to 0-1
+func _calculate_oscillation_progress() -> float:
+	var time_scaled = oscillation_timer * oscillation_frequency
+	var oscillation_progress: float
 	
 	if reset_oscillation_on_start:
-		# Check if we've reached the ending angle (oscillation_progress near 1.0)
+		# Sawtooth wave: 0->1, then reset to 0
+		oscillation_progress = fmod(time_scaled, 1.0)
 		if oscillation_progress > 0.99:
 			oscillation_timer = 0.0
 			oscillation_progress = 0.0
+	else:
+		# Triangle wave: 0->1->0
+		oscillation_progress = abs(fmod(time_scaled * 2.0, 2.0) - 1.0)
 	
+	return oscillation_progress
+
+func _calculate_current_angle() -> float:
+	var oscillation_progress = _calculate_oscillation_progress()
+	print(oscillation_progress)
 	return lerp(starting_angle_degrees, ending_angle_degrees, oscillation_progress)

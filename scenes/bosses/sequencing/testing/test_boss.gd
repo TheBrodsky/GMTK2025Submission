@@ -11,6 +11,7 @@ var previous_position: Vector2
 var estimated_velocity: Vector2 = Vector2.ZERO
 
 func _ready():
+	print(global_position)
 	previous_position = global_position
 	
 	# Create sequence builder and set the action pool
