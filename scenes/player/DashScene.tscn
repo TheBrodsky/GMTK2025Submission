@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://db74qakdins26" path="res://scenes/player/dash_scene.gd" id="1_4mrep"]
 
-[node name="DashScene" type="Sprite2D"]
+[node name="DashScene" type="Sprite2D" groups=["HardReset", "SoftReset"]]
 script = ExtResource("1_4mrep")
 
 [node name="DespawnTimer" type="Timer" parent="."]
