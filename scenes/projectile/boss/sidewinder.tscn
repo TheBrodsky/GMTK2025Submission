@@ -6,10 +6,6 @@
 
 [node name="Sidewinder" instance=ExtResource("2_base")]
 script = ExtResource("1_sidewinder")
-wave_amplitude = 50.0
-wave_frequency = 3.0
-speed = 200
-despawn_time = 3
 
 [node name="BossBulletPink" type="Sprite2D" parent="." index="2"]
 scale = Vector2(0.1, 0.1)

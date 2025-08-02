@@ -1,16 +1,14 @@
 extends Area2D
 class_name BaseProjectile
 
-@export var speed: int = 400
-@export var despawn_time: int = -1 # in seconds, -1 means no lifetime despawn
-@export var damage: int = 10 # TODO remove damage; the player only has 1 hp
+@export var config: BaseProjectileConfig
 
 var direction: Vector2
 var velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	# Calculate velocity from direction and speed
-	velocity = direction * speed
+	velocity = direction * config.speed
 	rotation = velocity.angle()
 	setup_collision()
 	despawn()
@@ -19,8 +17,8 @@ func _process(delta: float) -> void:
 	global_position += velocity * delta
 
 func despawn() -> void:
-	if despawn_time > 0:
-		await get_tree().create_timer(despawn_time).timeout
+	if config.despawn_time > 0:
+		await get_tree().create_timer(config.despawn_time).timeout
 		queue_free()
 
 func setup_collision() -> void:
@@ -33,7 +31,7 @@ func _on_area_entered(area: Area2D) -> void:
 	var hitbox : HitBoxComponent = area
 	
 	var attack = Attack.new()
-	attack.attack_damage = damage
+	attack.attack_damage = config.damage
 	attack.damage_source = get_damage_source()
 	
 	hitbox.damage(attack)

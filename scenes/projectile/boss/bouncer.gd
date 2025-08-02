@@ -1,21 +1,21 @@
 extends EnemyProjectile
 class_name Bouncer
 
-@export var max_bounces: int = 3  # Number of bounces before destroying
-@export var bounce_damping: float = 0.9  # Speed reduction per bounce (1.0 = no damping)
 
 var bounces_remaining: int
 var current_direction: Vector2
 
 func _ready() -> void:
-	bounces_remaining = max_bounces
+	assert(config is BouncerConfig, "Bouncer requires BouncerConfig")
+	var bouncer_config = config as BouncerConfig
+	bounces_remaining = bouncer_config.max_bounces
 	current_direction = direction
 	
 	super._ready()
 
 func _process(delta: float) -> void:
 	# Calculate next position
-	var next_position = global_position + current_direction * speed * delta
+	var next_position = global_position + current_direction * config.speed * delta
 	
 	# Check for wall collisions and bounce
 	var viewport_size = get_viewport().get_visible_rect().size
@@ -42,8 +42,9 @@ func _process(delta: float) -> void:
 	
 	# Handle bounce
 	if bounced:
+		var bouncer_config = config as BouncerConfig
 		bounces_remaining -= 1
-		speed *= bounce_damping  # Reduce speed on bounce
+		config.speed *= bouncer_config.bounce_damping  # Reduce speed on bounce
 		
 		# Destroy if no bounces left
 		if bounces_remaining < 0:

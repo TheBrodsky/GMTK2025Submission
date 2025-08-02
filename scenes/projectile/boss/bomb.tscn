@@ -7,13 +7,7 @@
 
 [node name="Bomb" instance=ExtResource("1_base")]
 script = ExtResource("2_bomb")
-deceleration = 75.0
 explosion_projectile_scene = ExtResource("3_gxqwi")
-explosion_projectile_count = 8
-explosion_speed = 100.0
-min_speed_threshold = 10.0
-base_blink_frequency = 2.0
-speed = 150
 
 [node name="BombSprite" type="Sprite2D" parent="." index="1"]
 scale = Vector2(0.2, 0.2)

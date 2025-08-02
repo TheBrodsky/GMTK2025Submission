@@ -7,7 +7,7 @@ class_name RadialFireAction extends AtomicBossAction
 @export var angle_offset_per_burst_degrees: float = 0.0 # degrees to offset each subsequent burst
 @export var aim_at_screen_center: bool = false # if true, orients the pattern toward screen center
 @export var projectile_scene: PackedScene
-@export var bullet_speed_override: float = -1.0 # if > 0, overrides projectile's default speed
+@export var projectile_config: BaseProjectileConfig
 @export var group_rotation_speed: float = 0.0 # radians per second to rotate the entire burst
 
 var fire_timer: float = 0.0
@@ -42,8 +42,10 @@ func _fire_radial_burst():
 		var projectile = projectile_scene.instantiate() as BaseProjectile
 		projectile.position = Vector2.ZERO  # Relative to group center
 		projectile.direction = Vector2(cos(final_angle), sin(final_angle))
-		if bullet_speed_override > 0.0:
-			projectile.speed = bullet_speed_override
+		
+		# Apply config if provided
+		if projectile_config:
+			projectile.config = projectile_config
 		
 		group.add_child(projectile)
 	

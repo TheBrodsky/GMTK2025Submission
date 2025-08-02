@@ -1,12 +1,7 @@
 extends EnemyProjectile
 class_name Bomb
 
-@export var deceleration: float = 50.0  # How fast it slows down
 @export var explosion_projectile_scene: PackedScene  # What projectile to spawn on explosion
-@export var explosion_projectile_count: int = 8  # Number of projectiles in explosion
-@export var explosion_speed: float = 200.0  # Speed of explosion projectiles
-@export var min_speed_threshold: float = 10.0  # Speed below which bomb explodes
-@export var base_blink_frequency: float = 2.0  # Base blinks per second in first third
 
 var current_speed: float
 var has_exploded: bool = false
@@ -15,9 +10,11 @@ var time_alive: float = 0.0
 var sprite_node: Node2D
 
 func _ready() -> void:
-	current_speed = speed
+	assert(config is BombConfig, "Bomb requires BombConfig")
+	var bomb_config = config as BombConfig
+	current_speed = config.speed
 	# Calculate time to explosion: time = (initial_speed - threshold) / deceleration
-	time_to_explosion = (speed - min_speed_threshold) / deceleration
+	time_to_explosion = (config.speed - bomb_config.min_speed_threshold) / bomb_config.deceleration
 	# Find the sprite node for blinking effect
 	sprite_node = get_node("BombSprite")
 	super._ready()
@@ -29,7 +26,8 @@ func _process(delta: float) -> void:
 	time_alive += delta
 	
 	# Decelerate over time
-	current_speed = max(current_speed - deceleration * delta, 0.0)
+	var bomb_config = config as BombConfig
+	current_speed = max(current_speed - bomb_config.deceleration * delta, 0.0)
 	
 	# Update velocity with new speed
 	velocity = direction * current_speed
@@ -42,7 +40,7 @@ func _process(delta: float) -> void:
 		var time_remaining = time_to_explosion - time_alive
 		var third = time_to_explosion / 3.0
 		
-		var blink_frequency = base_blink_frequency
+		var blink_frequency = bomb_config.base_blink_frequency
 		if time_remaining <= third * 2.0:  # Last two thirds
 			blink_frequency *= 2.0
 		if time_remaining <= third:  # Last third
@@ -59,7 +57,7 @@ func _process(delta: float) -> void:
 			sprite_node.modulate = Color(0.7, 0.7, 0.7, 1.0)  # Dimmed gray
 	
 	# Check if stopped and should explode
-	if current_speed <= min_speed_threshold:
+	if current_speed <= bomb_config.min_speed_threshold:
 		explode()
 
 func explode() -> void:
@@ -70,12 +68,18 @@ func explode() -> void:
 	
 	# Create explosion burst using radial pattern
 	if explosion_projectile_scene:
-		for i in range(explosion_projectile_count):
-			var angle = (2.0 * PI * i) / explosion_projectile_count
+		var bomb_config = config as BombConfig
+		for i in range(bomb_config.explosion_projectile_count):
+			var angle = (2.0 * PI * i) / bomb_config.explosion_projectile_count
 			var explosion_projectile = explosion_projectile_scene.instantiate() as BaseProjectile
 			explosion_projectile.position = global_position
 			explosion_projectile.direction = Vector2(cos(angle), sin(angle))
-			explosion_projectile.speed = explosion_speed
+			
+			# Create a config for the explosion projectile if it doesn't have one
+			if not explosion_projectile.config:
+				explosion_projectile.config = BaseProjectileConfig.new()
+			explosion_projectile.config.speed = bomb_config.explosion_speed
+			
 			get_tree().root.add_child(explosion_projectile)
 	
 	# Destroy the bomb
