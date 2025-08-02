@@ -41,6 +41,6 @@ game_loop_manager = NodePath("../../GameLoopManager")
 
 [connection signal="cause_hard_reset" from="GameLoopManager" to="." method="_on_game_loop_manager_cause_hard_reset"]
 [connection signal="cause_soft_reset" from="GameLoopManager" to="CloneManager" method="_on_game_loop_manager_cause_soft_reset"]
+[connection signal="new_boss_spawned" from="GameLoopManager" to="UI/PlayerHUD" method="_on_game_loop_manager_new_boss_spawned"]
 [connection signal="new_player_spawned" from="CloneManager" to="GameLoopManager" method="_on_clone_manager_new_player_spawned"]
-[connection signal="new_player_spawned" from="CloneManager" to="UI/PlayerHUD" method="_on_clone_manager_new_player_spawned"]
 [connection signal="on_complete_fade_out" from="UI/FadeOverlay" to="." method="_on_fade_overlay_on_complete_fade_out"]

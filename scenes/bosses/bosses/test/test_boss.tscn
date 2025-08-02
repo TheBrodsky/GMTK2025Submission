@@ -73,10 +73,12 @@ size = Vector2(100, 100)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dtyfw"]
 size = Vector2(18, 18)
 
-[node name="TestBoss" type="CharacterBody2D" groups=["HardReset", "SoftReset"]]
+[node name="TestBoss" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "health") groups=["HardReset", "SoftReset"]]
 collision_layer = 16
 collision_mask = 24
 script = ExtResource("1_kpecr")
+hitbox = NodePath("HitBoxComponent")
+health = NodePath("HealthComponent")
 metadata/_edit_horizontal_guides_ = [-162.0, 162.0]
 metadata/_edit_vertical_guides_ = [288.0, -288.0]
 
@@ -100,6 +102,7 @@ shape = SubResource("RectangleShape2D_1")
 [node name="BossAttackPool" parent="." instance=ExtResource("3_fyi2p")]
 
 [node name="BossHealthBar" type="ProgressBar" parent="."]
+visible = false
 offset_left = -136.0
 offset_top = -160.0
 offset_right = 139.0
@@ -107,9 +110,10 @@ offset_bottom = -133.0
 scale = Vector2(1, 0.75)
 show_percentage = false
 
-[node name="HitBoxComponent" parent="." instance=ExtResource("10_hbomv")]
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("10_hbomv")]
 collision_layer = 16
 collision_mask = 6
+health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
 scale = Vector2(2.9841, 4.30835)
@@ -117,3 +121,5 @@ shape = SubResource("RectangleShape2D_dtyfw")
 
 [node name="HealthComponent" parent="." instance=ExtResource("11_dtyfw")]
 max_health = 1000.0
+
+[connection signal="got_damaged" from="HealthComponent" to="." method="_on_health_component_got_damaged"]

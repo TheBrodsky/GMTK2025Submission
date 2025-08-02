@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Boss;
 
 @export var sequence_duration: float = 30.0
 
@@ -10,7 +10,6 @@ var current_sequence: BossSequence
 var previous_position: Vector2
 var estimated_velocity: Vector2 = Vector2.ZERO
 
-@export var health = 1000
 @onready var health_bar = $BossHealthBar
 
 var health_bar_global_pos: Vector2
@@ -18,7 +17,6 @@ var health_bar_global_pos: Vector2
 func _ready():
 	previous_position = global_position
 	
-	health_bar.value = health;
 	health_bar_global_pos = health_bar.global_position
 	
 	# Create sequence builder and set the action pool
@@ -63,7 +61,7 @@ func toggle_flip_sprite(dir: Vector2) -> void:
 		animated_sprite.flip_h = true
 	elif dir.x > 0:
 		animated_sprite.flip_h = false
-		
-func take_damage(): #NOT WORKING, NEED TO ADD A HITBOX AND HIT REGISTRATION!
-	health -= 1
-	health_bar.value = health;
+
+func _on_health_component_got_damaged(attack: Attack) -> void:
+	health.health -= attack.attack_damage;
+	print("DAMAGE")

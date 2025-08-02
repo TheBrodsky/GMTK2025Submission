@@ -9,6 +9,7 @@ class_name GameLoopManager;
 
 signal cause_soft_reset;
 signal cause_hard_reset;
+signal new_boss_spawned(boss: Boss);
 
 var player: Player;
 var soft_reset_timer: Timer;
@@ -44,11 +45,17 @@ func handle_soft_reset() -> void:
 	Global.SequenceRNG.seed = Global.global_seed;
 	
 	# Select a boss to spawn and spawn it
+	# TODO: THIS SHOULD ALWAYS BE THE SAME BOSS!!!!! (irrelevant if we only have one boss per difficulty)
 	var bosses_to_spawn = boss_collection.get(current_difficulty);
 	if bosses_to_spawn && bosses_to_spawn.bosses && bosses_to_spawn.bosses.size() > 0:
 		var boss_to_spawn: PackedScene = bosses_to_spawn.get_random_boss();
 		var instance = boss_to_spawn.instantiate();
+		if instance is not Boss:
+			push_error("Tried to spawn a Boss that is not of Class 'Boss'");
+			instance.queue_free();
+			return;
 		get_tree().root.call_deferred("add_child", instance);
+		new_boss_spawned.emit(instance);
 	else:
 		push_error("something went wrong with spawning a boss. are you sure you have at least 1 boss in difficulty: %s" % current_difficulty);
 
