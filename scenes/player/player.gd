@@ -30,7 +30,10 @@ var i_frame_effect_lenght: float; # set from the duration of the immunity timer
 var can_shoot: bool = true;
 var can_dash: bool = true;
 var is_dashing: bool = false;
-var is_invincible: bool = true;
+var is_invincible: bool = true:
+	set(value):
+		is_invincible = value;
+		toggle_hitbox();
 var frame_count = 0;
 var input_recording: InputRecording = InputRecording.new();
 var latest_input: InputSnapshot; # stores the latest input snapshot, if we're clone.
@@ -235,3 +238,7 @@ func create_dash_effect() -> void:
 	new_temporal_sprite.scale = Vector2(0.05,0.05);
 	new_temporal_sprite.flip_h = animated_sprite.flip_h;
 	get_tree().root.add_child(new_temporal_sprite);
+
+func toggle_hitbox() -> void:
+	hitbox.monitoring = !is_invincible;
+	hitbox.monitorable = !is_invincible;
