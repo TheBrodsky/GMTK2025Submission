@@ -8,7 +8,7 @@ func _ready() -> void:
 	life_time = despawn_timer.wait_time;
 	modulate.a = start_alpha
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if despawn_timer.time_left > 0:
 		modulate.a = start_alpha * (despawn_timer.time_left / life_time)
 	else:

@@ -31,7 +31,6 @@
 [ext_resource type="PackedScene" uid="uid://b2hfrt8qnrixu" path="res://scenes/projectile/clone_projectile.tscn" id="26_28m0y"]
 [ext_resource type="Script" uid="uid://dy7lhpiqyi6pm" path="res://resources/base_projectile_config.gd" id="27_uniwh"]
 
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_bbmj2"]
 atlas = ExtResource("3_007i1")
 region = Rect2(0, 0, 356, 729)
