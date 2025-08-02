@@ -7,6 +7,8 @@ class_name GameLoopManager;
 
 @export var boss_collection: Dictionary[Global.BossDifficulty, BossCollection];
 
+@export var boss_spawn_point: Marker2D;
+
 signal cause_soft_reset;
 signal cause_hard_reset;
 signal new_boss_spawned(boss: Boss);
@@ -49,11 +51,12 @@ func handle_soft_reset() -> void:
 	var bosses_to_spawn = boss_collection.get(current_difficulty);
 	if bosses_to_spawn && bosses_to_spawn.bosses && bosses_to_spawn.bosses.size() > 0:
 		var boss_to_spawn: PackedScene = bosses_to_spawn.get_random_boss();
-		var instance = boss_to_spawn.instantiate();
+		var instance: Boss = boss_to_spawn.instantiate();
 		if instance is not Boss:
 			push_error("Tried to spawn a Boss that is not of Class 'Boss'");
 			instance.queue_free();
 			return;
+		instance.global_position = boss_spawn_point.global_position;
 		get_tree().root.call_deferred("add_child", instance);
 		new_boss_spawned.emit(instance);
 	else:

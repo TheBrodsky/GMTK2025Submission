@@ -1,6 +1,8 @@
 extends Node;
 class_name CloneManager;
 
+@export var player_spawn_point: Marker2D;
+
 const PLAYER = preload("res://scenes/player/player.tscn");
 
 signal new_player_spawned(player: Player); # gets emitted whenever a new player gets spawned
@@ -12,6 +14,7 @@ var active_player: Player;
 func spawn_normal_player() -> void:
 	var new_player = PLAYER.instantiate();
 	get_tree().root.call_deferred("add_child", new_player);
+	new_player.global_position = player_spawn_point.global_position;
 	active_player = new_player;
 	new_player_spawned.emit(new_player);
 
@@ -25,6 +28,7 @@ func _on_game_loop_manager_cause_soft_reset() -> void:
 		var new_player = PLAYER.instantiate();
 		new_player.input_recording = recording;
 		new_player.mode = Global.PlayerMode.CLONE;
+		new_player.global_position = player_spawn_point.global_position;
 		get_tree().root.call_deferred("add_child", new_player);
 	
 	# spawn new normal player

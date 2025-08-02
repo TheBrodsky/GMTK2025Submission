@@ -88,7 +88,6 @@ func handle_player(_delta: float) -> void:
 	var input := InputSnapshot.new();
 	get_input();
 	move_and_slide();
-	clamp_to_screen();
 	
 	if can_dash && Input.is_action_just_pressed("dash"):
 		input.dashing = true;
@@ -143,7 +142,6 @@ func handle_clone(_delta: float) -> void:
 	velocity = latest_input.move_direction;
 	handle_movement_animation(latest_input.move_direction)
 	move_and_slide();
-	clamp_to_screen();
 
 # Returns the current look direction, based on if we're player or clone
 func get_current_look_direction() -> Vector2:
@@ -194,15 +192,6 @@ func mode_changed() -> void:
 			# Layer
 			set_collision_layer_value(Global.CollisionLayer.CLONE, true);
 			hitbox.set_collision_layer_value(Global.CollisionLayer.CLONE, true);
-
-func clamp_to_screen() -> void:
-	var viewport_size = get_viewport().get_visible_rect().size
-	var half_width = viewport_size.x / 2.0
-	var half_height = viewport_size.y / 2.0
-	var player_size = 25.0  # Approximate half-width of player sprite
-	
-	global_position.x = clamp(global_position.x, -half_width + player_size, half_width - player_size)
-	global_position.y = clamp(global_position.y, -half_height + player_size, half_height - player_size)
 
 func _on_shoot_cooldown_timeout() -> void:
 	can_shoot = true;

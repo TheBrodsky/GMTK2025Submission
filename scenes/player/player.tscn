@@ -1,7 +1,6 @@
 [gd_scene load_steps=52 format=3 uid="uid://csx3k2jd8acqe"]
 
 [ext_resource type="Script" uid="uid://drm1qvc7cq3ga" path="res://scenes/player/player.gd" id="1_8afob"]
-[ext_resource type="Texture2D" uid="uid://bp4x6u5jihyov" path="res://icon.svg" id="2_dovo2"]
 [ext_resource type="PackedScene" uid="uid://cwddm8s7evxkd" path="res://scenes/player/DashScene.tscn" id="2_iqsei"]
 [ext_resource type="Texture2D" uid="uid://5nv0v8acys10" path="res://assets/clone_assets/CloneIdle.png" id="3_007i1"]
 [ext_resource type="PackedScene" uid="uid://cspugrwhg2ahi" path="res://scenes/player/gun.tscn" id="3_gmlin"]
@@ -180,8 +179,8 @@ animations = [{
 "speed": 11.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_x7p2l"]
-radius = 10.0499
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uniwh"]
+size = Vector2(85.5556, 21.5625)
 
 [sub_resource type="Resource" id="Resource_iqsei"]
 script = ExtResource("27_uniwh")
@@ -189,6 +188,9 @@ speed = 400
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7p2l"]
+radius = 10.0499
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gun", "hitbox", "health") groups=["HardReset", "SoftReset"]]
 collision_mask = 8
@@ -200,26 +202,21 @@ hitbox = NodePath("HitBoxComponent")
 health = NodePath("HealthComponent")
 dash_scene = ExtResource("2_iqsei")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-top_level = true
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_dovo2")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.05, 0.05)
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_iqsei")
 animation = &"IdlePlayer"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 0)
+visible = false
+position = Vector2(9, 71.25)
 scale = Vector2(0.9, 1.6)
-shape = SubResource("CircleShape2D_x7p2l")
+shape = SubResource("RectangleShape2D_uniwh")
 
 [node name="CloneGunOverlay" type="Sprite2D" parent="." node_paths=PackedStringArray("my_owner", "owners_animation")]
 show_behind_parent = true
 position = Vector2(4, -6)
-scale = Vector2(0.04, 0.04)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("23_4hvnv")
 offset = Vector2(164, 51)
 script = ExtResource("22_6cv16")
@@ -230,7 +227,7 @@ owners_animation = NodePath("../AnimatedSprite2D")
 modulate = Color(1, 1, 1, 1)
 show_behind_parent = true
 position = Vector2(4, -6)
-scale = Vector2(0.04, 0.04)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("13_fcs02")
 offset = Vector2(164, 51)
 player_projectile = ExtResource("25_j4nxn")
@@ -271,7 +268,8 @@ monitorable = false
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
-position = Vector2(1, 0)
+position = Vector2(8.88889, 0)
+scale = Vector2(2.51111, 3.7)
 shape = SubResource("CircleShape2D_x7p2l")
 
 [connection signal="got_damaged" from="HealthComponent" to="." method="_on_health_component_got_damaged"]
