@@ -26,10 +26,10 @@ func _ready() -> void:
 	exit_button.pressed.connect(_on_exit_button_pressed)
 	overlay.on_complete_fade_out.connect(_on_fade_overlay_on_complete_fade_out)
 	
-	if credits_button.visible:
-		credits_button.grab_focus()
-	else:
-		new_game_button.grab_focus()
+	#if credits_button.visible:
+		#credits_button.grab_focus()
+	#else:
+		#new_game_button.grab_focus()
 
 func _on_settings_button_pressed() -> void:
 	new_game = false

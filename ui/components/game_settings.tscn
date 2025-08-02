@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://nbaodrlopo7y"]
+[gd_scene load_steps=4 format=3 uid="uid://nbaodrlopo7y"]
 
 [ext_resource type="PackedScene" uid="uid://cpo1u33eut0i4" path="res://ui/components/float_range_game_settings_option.tscn" id="1_0gpwr"]
 [ext_resource type="Script" uid="uid://bo5tf3pqs11s6" path="res://ui/components/game_settings.gd" id="1_eje8l"]
+[ext_resource type="PackedScene" uid="uid://dv2y18ye8j7o0" path="res://scenes/main_menu_scene.tscn" id="2_c5de8"]
 
 [node name="GameSettings" type="VBoxContainer"]
 offset_left = 198.0
@@ -10,6 +11,7 @@ offset_bottom = 247.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_eje8l")
+main_menu = ExtResource("2_c5de8")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
