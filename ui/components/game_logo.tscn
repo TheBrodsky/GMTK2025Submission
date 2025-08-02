@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b4blrdjthcxnn"]
 
-[ext_resource type="Texture2D" uid="uid://dmelj2qgr8w7k" path="res://icon.svg" id="1_scjn5"]
+[ext_resource type="Texture2D" uid="uid://bp4x6u5jihyov" path="res://icon.svg" id="1_scjn5"]
 
 [node name="GameLogo" type="CenterContainer"]
 offset_right = 128.0
