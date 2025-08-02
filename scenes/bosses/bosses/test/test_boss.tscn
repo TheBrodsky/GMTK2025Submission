@@ -82,7 +82,7 @@ texture = ExtResource("2_14plf")
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_7r2d3")
 animation = &"BossIdle"
-frame_progress = 0.625593
+frame_progress = 0.187092
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 2.38419e-07)
