@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2uyakudkl07q"]
+[gd_scene load_steps=3 format=3 uid="uid://c2uyakudkl07q"]
 
 [ext_resource type="Script" uid="uid://ce5f8qjutt6h" path="res://ui/components/game_credits.gd" id="1_o3bbv"]
+[ext_resource type="Theme" uid="uid://d22mpqutkotsu" path="res://ui/theme.tres" id="1_w10t2"]
 
 [node name="GameCredits" type="VBoxContainer"]
 anchors_preset = 5
@@ -10,6 +11,7 @@ offset_left = -213.5
 offset_right = 213.5
 offset_bottom = 16.0
 grow_horizontal = 2
+theme = ExtResource("1_w10t2")
 script = ExtResource("1_o3bbv")
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
@@ -19,17 +21,31 @@ size_flags_horizontal = 4
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 layout_mode = 2
 
-[node name="Empty3" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Empty" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Empty2" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Credits" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"BigLabel"
+text = "Credits"
+horizontal_alignment = 1
+
+[node name="Dragonphly" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Dragonphly: Audio and SFX "
+
+[node name="Lars" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Lars Snedker: Game design, UI design, Level design "
 
-[node name="Empty1" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="MightyDan" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "MightyDan: Programming "
+
+[node name="Soma" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Soma: Character design, animation, tileset"
 
-[node name="Empty4" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Stepthen" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Stephen: Programming"

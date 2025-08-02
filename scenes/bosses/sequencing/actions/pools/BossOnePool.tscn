@@ -19,7 +19,7 @@
 [sub_resource type="Resource" id="Resource_6flor"]
 resource_local_to_scene = true
 script = ExtResource("6_fs08p")
-speed = 250
+speed = 150
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
@@ -27,7 +27,7 @@ metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 [sub_resource type="Resource" id="Resource_bdum7"]
 resource_local_to_scene = true
 script = ExtResource("6_fs08p")
-speed = 300
+speed = 150
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
@@ -40,7 +40,7 @@ explosion_projectile_count = 8
 explosion_speed = 150.0
 min_speed_threshold = 10.0
 base_blink_frequency = 2.0
-speed = 200
+speed = 150
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://cdxjh7bnifl68"
@@ -50,7 +50,7 @@ resource_local_to_scene = true
 script = ExtResource("13_an80i")
 wave_amplitude = 50.0
 wave_frequency = 3.0
-speed = 250
+speed = 150
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://lic05cj24h3u"
@@ -58,7 +58,7 @@ metadata/_custom_type_script = "uid://lic05cj24h3u"
 [sub_resource type="Resource" id="Resource_an80i"]
 resource_local_to_scene = true
 script = ExtResource("6_fs08p")
-speed = 250
+speed = 150
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
