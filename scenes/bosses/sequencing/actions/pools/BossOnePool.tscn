@@ -19,7 +19,7 @@
 [sub_resource type="Resource" id="Resource_6flor"]
 resource_local_to_scene = true
 script = ExtResource("6_fs08p")
-speed = 150
+speed = 160
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
@@ -27,7 +27,7 @@ metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 [sub_resource type="Resource" id="Resource_bdum7"]
 resource_local_to_scene = true
 script = ExtResource("6_fs08p")
-speed = 150
+speed = 160
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
@@ -36,11 +36,11 @@ metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 resource_local_to_scene = true
 script = ExtResource("11_nfatk")
 deceleration = 75.0
-explosion_projectile_count = 8
-explosion_speed = 150.0
+explosion_projectile_count = 6
+explosion_speed = 160.0
 min_speed_threshold = 10.0
 base_blink_frequency = 2.0
-speed = 150
+speed = 160
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://cdxjh7bnifl68"
@@ -50,7 +50,7 @@ resource_local_to_scene = true
 script = ExtResource("13_an80i")
 wave_amplitude = 50.0
 wave_frequency = 3.0
-speed = 150
+speed = 160
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://lic05cj24h3u"
@@ -58,7 +58,7 @@ metadata/_custom_type_script = "uid://lic05cj24h3u"
 [sub_resource type="Resource" id="Resource_an80i"]
 resource_local_to_scene = true
 script = ExtResource("6_fs08p")
-speed = 150
+speed = 160
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
@@ -67,7 +67,7 @@ metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 resource_local_to_scene = true
 script = ExtResource("15_hnfks")
 angular_speed = -2.0
-speed = 150
+speed = 160
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://c5spfnuqnbago"
@@ -76,7 +76,7 @@ metadata/_custom_type_script = "uid://c5spfnuqnbago"
 resource_local_to_scene = true
 script = ExtResource("15_hnfks")
 angular_speed = 2.0
-speed = 150
+speed = 160
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://c5spfnuqnbago"
@@ -186,6 +186,41 @@ script = ExtResource("4_pe8fm")
 projectile_scene = ExtResource("14_xoy5t")
 projectile_config = SubResource("Resource_68nx8")
 action_duration = 5.0
+metadata/_custom_type_script = "uid://68bxw3r838x7"
+
+[node name="ToAnchor_THEN_SprayNormal2" type="Node" parent="."]
+script = ExtResource("5_pe8fm")
+metadata/_custom_type_script = "uid://c4yeb24boo5pd"
+
+[node name="MoveToPool" parent="ToAnchor_THEN_SprayNormal2" instance=ExtResource("3_j8u6u")]
+pool_duration = 2.0
+
+[node name="StreamFireAction" type="Node" parent="ToAnchor_THEN_SprayNormal2"]
+script = ExtResource("6_vduf1")
+projectile_scene = ExtResource("5_bdum7")
+projectile_config = SubResource("Resource_bdum7")
+fire_rate = 8.0
+oscillation_frequency = 2.0
+aim_at_screen_center = true
+action_duration = 3.0
+metadata/_custom_type_script = "uid://c8wt45ana5ke7"
+
+[node name="ToCenter_THEN_RadialBombs2" type="Node" parent="."]
+script = ExtResource("5_pe8fm")
+metadata/_custom_type_script = "uid://c4yeb24boo5pd"
+
+[node name="MoveToAction" type="Node" parent="ToCenter_THEN_RadialBombs2"]
+script = ExtResource("7_vduf1")
+metadata/_custom_type_script = "uid://cwgd1jyc8xd5i"
+
+[node name="RadialFireAction" type="Node" parent="ToCenter_THEN_RadialBombs2"]
+script = ExtResource("4_pe8fm")
+projectile_count = 4
+fire_rate = 0.5
+angle_offset_per_burst_degrees = 45.0
+projectile_scene = ExtResource("10_6flor")
+projectile_config = SubResource("Resource_hw7tf")
+action_duration = 4.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
 [node name="RandomDash" parent="." instance=ExtResource("3_j8u6u")]
