@@ -1,8 +1,69 @@
-[gd_scene load_steps=5 format=3 uid="uid://jur5bey4kc4w"]
+[gd_scene load_steps=18 format=3 uid="uid://jur5bey4kc4w"]
 
 [ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/sequencing/testing/test_boss.gd" id="1_kpecr"]
 [ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/sequencing/testing/ScarySquare.png" id="2_14plf"]
 [ext_resource type="PackedScene" uid="uid://exvy8r2qxf5h" path="res://scenes/bosses/sequencing/actions/pools/BossAttackPool.tscn" id="3_fyi2p"]
+[ext_resource type="Texture2D" uid="uid://dqgyrgtnefw62" path="res://assets/boss_assets/BossIdle.png" id="3_s8dle"]
+[ext_resource type="Texture2D" uid="uid://bnestjwd1qo7w" path="res://assets/boss_assets/boss_run_0000.png" id="4_hbomv"]
+[ext_resource type="Texture2D" uid="uid://vch14g50j8oy" path="res://assets/boss_assets/boss_run_0001.png" id="5_dtyfw"]
+[ext_resource type="Texture2D" uid="uid://bakcakvm5l7q7" path="res://assets/boss_assets/boss_run_0002.png" id="6_crlsh"]
+[ext_resource type="Texture2D" uid="uid://dxanbpdsyu0gj" path="res://assets/boss_assets/boss_run_0003.png" id="7_n02dm"]
+[ext_resource type="Texture2D" uid="uid://cd2wdi53dbxt6" path="res://assets/boss_assets/boss_run_0004.png" id="8_1e6mj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1ysq"]
+atlas = ExtResource("3_s8dle")
+region = Rect2(0, 0, 600, 900)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6we0i"]
+atlas = ExtResource("4_hbomv")
+region = Rect2(0, 0, 818, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lqsh"]
+atlas = ExtResource("5_dtyfw")
+region = Rect2(0, 0, 818, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlb8m"]
+atlas = ExtResource("6_crlsh")
+region = Rect2(0, 0, 818, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yn315"]
+atlas = ExtResource("7_n02dm")
+region = Rect2(0, 0, 818, 1000)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8nef"]
+atlas = ExtResource("8_1e6mj")
+region = Rect2(0, 0, 818, 1000)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7r2d3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1ysq")
+}],
+"loop": true,
+"name": &"BossIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6we0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lqsh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mlb8m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yn315")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8nef")
+}],
+"loop": true,
+"name": &"BossRun",
+"speed": 8.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(100, 100)
@@ -13,11 +74,27 @@ metadata/_edit_horizontal_guides_ = [-162.0, 162.0]
 metadata/_edit_vertical_guides_ = [288.0, -288.0]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_14plf")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_7r2d3")
+animation = &"BossIdle"
+frame_progress = 0.625593
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(0.5, 0.5)
+position = Vector2(1, 2.38419e-07)
+scale = Vector2(0.55, 0.75)
 shape = SubResource("RectangleShape2D_1")
 
 [node name="BossAttackPool" parent="." instance=ExtResource("3_fyi2p")]
+
+[node name="BossHealthBar" type="ProgressBar" parent="."]
+offset_left = -136.0
+offset_top = -160.0
+offset_right = 139.0
+offset_bottom = -133.0
+scale = Vector2(1, 0.75)
+show_percentage = false
