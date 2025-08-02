@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2uyakudkl07q"]
+
+[ext_resource type="Script" uid="uid://ce5f8qjutt6h" path="res://ui/components/game_credits.gd" id="1_o3bbv"]
+
+[node name="GameCredits" type="VBoxContainer"]
+script = ExtResource("1_o3bbv")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_top = 10
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 8
+columns = 4
+
+[node name="Empty1" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
