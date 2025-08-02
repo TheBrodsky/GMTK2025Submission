@@ -29,8 +29,8 @@ func _update_flash():
 	var visible = flash_value > 0.0
 	indicator_sprite.visible = visible
 
-func _on_action_completed():
-	super._on_action_completed()
+func _on_complete(_boss_node: Node):
+	super._on_complete(_boss_node)
 	if indicator_sprite:
 		indicator_sprite.queue_free()
 		indicator_sprite = null
