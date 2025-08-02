@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://cllrhwb6tq3gh"]
+[gd_scene load_steps=6 format=3 uid="uid://cllrhwb6tq3gh"]
 
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/fade_overlay.tscn" id="1_64dwf"]
 [ext_resource type="Script" uid="uid://c0ae3scnbkxdw" path="res://scenes/game_over_scene.gd" id="1_ny7m6"]
 [ext_resource type="Theme" uid="uid://d22mpqutkotsu" path="res://ui/theme.tres" id="2_k0nam"]
+[ext_resource type="AudioStream" uid="uid://d4k7aggoegl6x" path="res://assets/Sounds/SFX/UIHover.mp3" id="4_jy0sy"]
+[ext_resource type="AudioStream" uid="uid://djbgioq2j2lud" path="res://assets/Sounds/SFX/UIPress.mp3" id="5_5jg82"]
 
 [node name="GameOverScene" type="Node2D"]
 script = ExtResource("1_ny7m6")
@@ -53,7 +55,20 @@ text = "Exit"
 unique_name_in_owner = true
 visible = false
 
+[node name="UiHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jy0sy")
+volume_db = -5.0
+bus = &"Sound"
+
+[node name="UiPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_5jg82")
+volume_db = -5.0
+bus = &"Sound"
+
+[connection signal="mouse_entered" from="UI/CenterContainer/VSplitContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_mouse_entered"]
 [connection signal="pressed" from="UI/CenterContainer/VSplitContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="mouse_entered" from="UI/CenterContainer/VSplitContainer/VBoxContainer/ReturnToMainMenuButton" to="." method="_on_return_to_main_menu_button_mouse_entered"]
 [connection signal="pressed" from="UI/CenterContainer/VSplitContainer/VBoxContainer/ReturnToMainMenuButton" to="." method="_on_return_to_main_menu_button_pressed"]
+[connection signal="mouse_entered" from="UI/CenterContainer/VSplitContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_mouse_entered"]
 [connection signal="pressed" from="UI/CenterContainer/VSplitContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="on_complete_fade_out" from="UI/FadeOverlay" to="." method="_on_fade_overlay_on_complete_fade_out"]
