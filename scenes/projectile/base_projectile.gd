@@ -2,18 +2,15 @@ extends Area2D
 class_name BaseProjectile
 
 @export var speed: int = 400
-@export var despawn_time: int = 1 # in seconds
-@export var damage: int = 10
+@export var despawn_time: int = -1 # in seconds, -1 means no lifetime despawn
+@export var damage: int = 10 # TODO remove damage; the player only has 1 hp
 
-var direction: Vector2 :
-	get:
-		return direction
-	set(value):
-		direction = value
-		velocity = direction * speed
+var direction: Vector2
 var velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
+	# Calculate velocity from direction and speed
+	velocity = direction * speed
 	rotation = velocity.angle()
 	setup_collision()
 	despawn()
@@ -22,8 +19,9 @@ func _process(delta: float) -> void:
 	global_position += velocity * delta
 
 func despawn() -> void:
-	await get_tree().create_timer(despawn_time).timeout
-	queue_free()
+	if despawn_time > 0:
+		await get_tree().create_timer(despawn_time).timeout
+		queue_free()
 
 func setup_collision() -> void:
 	# Override in child classes to set up specific collision layers/masks

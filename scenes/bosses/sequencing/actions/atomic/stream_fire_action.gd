@@ -8,6 +8,7 @@ class_name StreamFireAction extends AtomicBossAction
 @export var oscillation_frequency: float = 1.0 # oscillations per second
 @export var reset_oscillation_on_start: bool = false # if true, always starts at starting_angle
 @export var aim_at_screen_center: bool = false # if true, orients the oscillation toward screen center
+@export var bullet_speed_override: float = -1.0 # if > 0, overrides projectile's default speed
 
 var fire_timer: float = 0.0
 var oscillation_timer: float = 0.0
@@ -34,6 +35,9 @@ func _fire_bullet():
 	var projectile = projectile_scene.instantiate() as BaseProjectile
 	projectile.position = boss_node.global_position
 	projectile.direction = Vector2(cos(angle_radians), sin(angle_radians))
+	if bullet_speed_override > 0.0:
+		projectile.speed = bullet_speed_override
+	
 	get_tree().root.add_child(projectile)
 
 func _calculate_current_angle() -> float:
