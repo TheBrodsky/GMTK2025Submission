@@ -26,10 +26,6 @@ boss_spawn_point = NodePath("../BossSpawnPoint")
 [node name="CloneManager" parent="." node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("2_2577t")]
 player_spawn_point = NodePath("../PlayerSpawnPoint")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1163, 383)
-zoom = Vector2(0.25, 0.25)
-
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="FadeOverlay" parent="UI" instance=ExtResource("1_y6ebv")]
@@ -59,6 +55,10 @@ position = Vector2(1281, -829)
 
 [node name="BossSpawnPoint" type="Marker2D" parent="."]
 position = Vector2(1277, 633)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1291, 144)
+zoom = Vector2(0.105, 0.105)
 
 [connection signal="cause_hard_reset" from="GameLoopManager" to="." method="_on_game_loop_manager_cause_hard_reset"]
 [connection signal="cause_soft_reset" from="GameLoopManager" to="CloneManager" method="_on_game_loop_manager_cause_soft_reset"]
