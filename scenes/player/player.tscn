@@ -1,7 +1,8 @@
-[gd_scene load_steps=51 format=3 uid="uid://csx3k2jd8acqe"]
+[gd_scene load_steps=52 format=3 uid="uid://csx3k2jd8acqe"]
 
 [ext_resource type="Script" uid="uid://drm1qvc7cq3ga" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://dmelj2qgr8w7k" path="res://icon.svg" id="2_dovo2"]
+[ext_resource type="PackedScene" uid="uid://cwddm8s7evxkd" path="res://scenes/player/DashScene.tscn" id="2_iqsei"]
 [ext_resource type="Texture2D" uid="uid://5nv0v8acys10" path="res://assets/clone_assets/CloneIdle.png" id="3_007i1"]
 [ext_resource type="PackedScene" uid="uid://cspugrwhg2ahi" path="res://scenes/player/gun.tscn" id="3_gmlin"]
 [ext_resource type="Texture2D" uid="uid://c11hn3p40ysxk" path="res://assets/player_assets/player_run_0000.png" id="3_gx1jg"]
@@ -192,9 +193,12 @@ metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gun", "hitbox", "health") groups=["HardReset", "SoftReset"]]
 collision_mask = 8
 script = ExtResource("1_8afob")
+dash_speed = 800
+dash_effect_creation_frame = 1
 gun = NodePath("Gun")
 hitbox = NodePath("HitBoxComponent")
 health = NodePath("HealthComponent")
+dash_scene = ExtResource("2_iqsei")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -243,11 +247,15 @@ max_health = 10.0
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 wait_time = 0.2
 
-[node name="DashCooldownTimer" type="Timer" parent="."]
-wait_time = 0.2
+[node name="Dashing" type="Node" parent="."]
 
-[node name="DashDurationTimer" type="Timer" parent="."]
+[node name="DashCooldownTimer" type="Timer" parent="Dashing"]
+wait_time = 0.5
+one_shot = true
+
+[node name="DashDurationTimer" type="Timer" parent="Dashing"]
 wait_time = 0.1
+one_shot = true
 
 [node name="ImmunityTimer" type="Timer" parent="."]
 wait_time = 0.5
@@ -266,5 +274,6 @@ shape = SubResource("CircleShape2D_x7p2l")
 
 [connection signal="got_damaged" from="HealthComponent" to="." method="_on_health_component_got_damaged"]
 [connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timeout"]
-[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="Dashing/DashCooldownTimer" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="Dashing/DashDurationTimer" to="." method="_on_dash_duration_timer_timeout"]
 [connection signal="timeout" from="ImmunityTimer" to="." method="_on_immunity_timer_timeout"]

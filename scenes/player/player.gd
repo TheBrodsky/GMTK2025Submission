@@ -10,28 +10,35 @@ class_name Player;
 
 @export_group("Stats")
 @export var speed: int = 200;
-@export var dash_speed: int = 300;
-var i_frame_effect_lenght: float;
+@export var dash_speed: int = 400;
+@export var dash_effect_creation_frame: int = 10; # after how many physics steps it should create a new dash effect when dashing
+var current_dash_effect_creation_frame: int = 0;
+
+var i_frame_effect_lenght: float; # set from the duration of the immunity timer
 
 @export_group("Components")
 @export var gun: Gun;
 @export var hitbox: HitBoxComponent;
 @export var health: HealthComponent;
+@export var dash_scene: PackedScene;
 
 @onready var immunity_timer: Timer = $ImmunityTimer
 @onready var shoot_cooldown_timer: Timer = $ShootCooldownTimer
-@onready var dash_cooldown_timer: Timer = $DashCooldownTimer
+@onready var dash_cooldown_timer: Timer = $Dashing/DashCooldownTimer # how long to wait until we can dash again. cooldown starts AFTER dash ended
+@onready var dash_duration_timer: Timer = $Dashing/DashDurationTimer # on timeout, ends dash. effectively saying how long the dash goes for
 
 var can_shoot: bool = true;
 var can_dash: bool = true;
+var is_dashing: bool = false;
 var is_invincible: bool = true;
 var frame_count = 0;
 var input_recording: InputRecording = InputRecording.new();
 var latest_input: InputSnapshot; # stores the latest input snapshot, if we're clone.
+var last_input_direction: Vector2 = Vector2.ZERO;
 
 var game_loop_manager: GameLoopManager;
 
-@onready var animated_sprite = $AnimatedSprite2D
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 signal should_die(player: Player); # gets emitted on a HARD RESET (when killed by its own clone)
 
@@ -40,12 +47,23 @@ func _ready() -> void:
 	i_frame_effect()
 
 func get_input():
+	if is_dashing:
+		velocity = last_input_direction * dash_speed;
+		return;
 	var input_direction := Input.get_vector("move_left", "move_right", "move_up", "move_down").normalized();
+	last_input_direction = input_direction;
 	handle_movement_animation(input_direction)
 	velocity = input_direction * speed;
 
 func _physics_process(delta: float) -> void:
 	frame_count += 1;
+	
+	if is_dashing:
+		current_dash_effect_creation_frame += 1;
+		if current_dash_effect_creation_frame >= dash_effect_creation_frame:
+			create_dash_effect();
+			current_dash_effect_creation_frame = 0;
+	
 	match mode:
 		Global.PlayerMode.PLAYER:
 			handle_player(delta);
@@ -64,21 +82,28 @@ func i_frame_effect() -> void:
 	modulate.a = 1.0
 
 func handle_player(_delta: float) -> void:
+	var input := InputSnapshot.new();
 	get_input();
 	move_and_slide();
 	clamp_to_screen();
 	
-	var has_shot = false;
-	if can_shoot && Input.is_action_pressed("shoot"): # todo: add cooldown
+	if can_dash && Input.is_action_just_pressed("dash"):
+		can_dash = false;
+		dash_duration_timer.start();
+		is_dashing = true;
+		is_invincible = true;
+		
+		input.dashing = true;
+	
+	if can_shoot && Input.is_action_pressed("shoot"):
 		gun.shoot();
-		has_shot = true;
 		can_shoot = false;
 		shoot_cooldown_timer.start();
+		
+		input.shooting_pressed = true;
 	
-	var input := InputSnapshot.new();
 	input.look_direction = get_global_mouse_position();
 	input.move_direction = velocity;
-	input.shooting_pressed = has_shot;
 	
 	input_recording.append(frame_count, input);
 	
@@ -184,3 +209,22 @@ func _on_dash_cooldown_timeout() -> void:
 
 func _on_immunity_timer_timeout() -> void:
 	is_invincible = false;
+
+func _on_dash_duration_timer_timeout() -> void:
+	is_dashing = false;
+	is_invincible = false;
+	dash_cooldown_timer.start();
+	current_dash_effect_creation_frame = 0;
+
+func create_dash_effect() -> void:
+	var frame_index: int = animated_sprite.frame;
+	var animation_name: String = animated_sprite.animation;
+	var sprite_frames: SpriteFrames = animated_sprite.sprite_frames;
+	var current_texture: Texture2D = sprite_frames.get_frame_texture(animation_name, frame_index);
+	
+	var new_temporal_sprite: DashScene = dash_scene.instantiate();
+	new_temporal_sprite.texture = current_texture;
+	new_temporal_sprite.position = global_position;
+	new_temporal_sprite.modulate.a = 0.25;
+	new_temporal_sprite.scale = Vector2(0.05,0.05);
+	get_tree().root.add_child(new_temporal_sprite);
