@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/sequencing/testing/test_boss.gd" id="1_kpecr"]
 [ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/sequencing/testing/ScarySquare.png" id="2_14plf"]
-[ext_resource type="PackedScene" uid="uid://exvy8r2qxf5h" path="res://scenes/bosses/sequencing/actions/pools/BossAttackPool.tscn" id="3_fyi2p"]
+[ext_resource type="PackedScene" uid="uid://exvy8r2qxf5h" path="res://scenes/bosses/sequencing/actions/pools/BossOnePool.tscn" id="3_fyi2p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(100, 100)

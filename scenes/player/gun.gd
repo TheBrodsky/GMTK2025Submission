@@ -4,6 +4,7 @@ class_name Gun;
 @onready var projectile_spawn_point: Marker2D = $ProjectileSpawnPoint;
 @export var player_projectile: PackedScene
 @export var clone_projectile: PackedScene
+@export var projectile_config: BaseProjectileConfig
 @export var my_owner: Player;
 
 @export var owners_animation: AnimatedSprite2D
@@ -40,6 +41,11 @@ func shoot() -> void:
 	var new_projectile := projectile_scene.instantiate() as BaseProjectile
 	new_projectile.position = projectile_spawn_point.global_position
 	new_projectile.direction = (my_owner.get_current_look_direction() - projectile_spawn_point.global_position).normalized()
+	
+	# Apply config (required)
+	assert(projectile_config != null, "Gun requires projectile_config")
+	new_projectile.config = projectile_config
+	
 	get_tree().root.add_child(new_projectile)
 
 func i_frame_effect() -> void:

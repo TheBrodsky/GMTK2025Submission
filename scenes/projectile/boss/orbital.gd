@@ -18,8 +18,8 @@ func _process(delta: float) -> void:
 	time_alive += delta
 	var orbital_config = config as OrbitalConfig
 	
-	# Increase radius at constant rate (outward movement)
-	current_radius += orbital_config.radial_speed * delta
+	# Increase radius at constant rate (outward movement) using base speed
+	current_radius += config.speed * delta
 	
 	# Rotate angle at constant rate
 	var current_angle = initial_angle + orbital_config.angular_speed * time_alive
@@ -32,8 +32,8 @@ func _process(delta: float) -> void:
 	
 	# Calculate velocity direction for proper rotation
 	var velocity_direction = Vector2(
-		orbital_config.radial_speed * cos(current_angle) - current_radius * orbital_config.angular_speed * sin(current_angle),
-		orbital_config.radial_speed * sin(current_angle) + current_radius * orbital_config.angular_speed * cos(current_angle)
+		config.speed * cos(current_angle) - current_radius * orbital_config.angular_speed * sin(current_angle),
+		config.speed * sin(current_angle) + current_radius * orbital_config.angular_speed * cos(current_angle)
 	)
 	
 	# Face movement direction
