@@ -10,18 +10,21 @@ class_name Player;
 
 @export_group("Stats")
 @export var speed: int = 200;
-@export var shoot_cooldown: float = 0.2; # in seconds
+@export var dash_speed: int = 300;
+var i_frame_effect_lenght: float;
 
 @export_group("Components")
 @export var gun: Gun;
 @export var hitbox: HitBoxComponent;
 @export var health: HealthComponent;
 
-@onready var timer = $ImmunityTimer
-@export var i_frame_effect_lenght = 0.25
+@onready var immunity_timer: Timer = $ImmunityTimer
+@onready var shoot_cooldown_timer: Timer = $ShootCooldownTimer
+@onready var dash_cooldown_timer: Timer = $DashCooldownTimer
 
-var shoot_cooldown_timer: Timer;
 var can_shoot: bool = true;
+var can_dash: bool = true;
+var is_invincible: bool = true;
 var frame_count = 0;
 var input_recording: InputRecording = InputRecording.new();
 var latest_input: InputSnapshot; # stores the latest input snapshot, if we're clone.
@@ -33,11 +36,7 @@ var game_loop_manager: GameLoopManager;
 signal should_die(player: Player); # gets emitted on a HARD RESET (when killed by its own clone)
 
 func _ready() -> void:
-	shoot_cooldown_timer = Timer.new();
-	shoot_cooldown_timer.wait_time = shoot_cooldown;
-	shoot_cooldown_timer.timeout.connect(_on_shoot_cooldown_timeout);
-	add_child(shoot_cooldown_timer);
-	timer.start()
+	i_frame_effect_lenght = immunity_timer.wait_time;
 	i_frame_effect()
 
 func get_input():
@@ -55,7 +54,7 @@ func _physics_process(delta: float) -> void:
 			
 func i_frame_effect() -> void:
 	var elapsed := 0.0
-	var duration: float = timer.time_left
+	var duration: float = immunity_timer.time_left
 	while elapsed < duration:
 		modulate.a = 0.5
 		await get_tree().create_timer(i_frame_effect_lenght).timeout
@@ -129,19 +128,20 @@ func get_current_look_direction() -> Vector2:
 	return Vector2.ZERO;
 
 func _on_health_component_got_damaged(attack: Attack) -> void:
-	if timer.time_left == 0:
-		health.health -= attack.attack_damage;
-	
-		if health.health <= 0:
-			match mode:
-				Global.PlayerMode.PLAYER:
-					var attack_source := attack.damage_source;
-					if attack_source == Global.ProjectileMode.CLONE:
-						should_die.emit(self); # tell the clone manager that the "real" player died. we died by a player (must be a clone) and thus we trigger a hard reset
-						return;
-					game_loop_manager.handle_soft_reset(); # we died through something else (e.g. boss), trigger a soft reset
-				Global.PlayerMode.CLONE:
-					queue_free();
+	if is_invincible:
+		return;
+	health.health -= attack.attack_damage;
+
+	if health.health <= 0:
+		match mode:
+			Global.PlayerMode.PLAYER:
+				var attack_source := attack.damage_source;
+				if attack_source == Global.ProjectileMode.CLONE:
+					should_die.emit(self); # tell the clone manager that the "real" player died. we died by a player (must be a clone) and thus we trigger a hard reset
+					return;
+				game_loop_manager.handle_soft_reset(); # we died through something else (e.g. boss), trigger a soft reset
+			Global.PlayerMode.CLONE:
+				queue_free();
 
 func mode_changed() -> void:
 	collision_layer = 0;
@@ -178,3 +178,9 @@ func clamp_to_screen() -> void:
 
 func _on_shoot_cooldown_timeout() -> void:
 	can_shoot = true;
+
+func _on_dash_cooldown_timeout() -> void:
+	can_dash = true;
+
+func _on_immunity_timer_timeout() -> void:
+	is_invincible = false;

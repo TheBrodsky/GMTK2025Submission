@@ -240,9 +240,19 @@ clone_overlay = NodePath("../CloneGunOverlay")
 [node name="HealthComponent" parent="." instance=ExtResource("4_lvxji")]
 max_health = 10.0
 
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="DashDurationTimer" type="Timer" parent="."]
+wait_time = 0.1
+
 [node name="ImmunityTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+autostart = true
 
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_p47bc")]
 position = Vector2(1, 0)
@@ -255,3 +265,6 @@ position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_x7p2l")
 
 [connection signal="got_damaged" from="HealthComponent" to="." method="_on_health_component_got_damaged"]
+[connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timeout"]
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="ImmunityTimer" to="." method="_on_immunity_timer_timeout"]
