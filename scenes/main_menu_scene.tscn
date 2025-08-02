@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dv2y18ye8j7o0"]
+[gd_scene load_steps=11 format=3 uid="uid://dv2y18ye8j7o0"]
 
 [ext_resource type="Script" uid="uid://k5f271qgai2d" path="res://scenes/main_menu_scene.gd" id="1_1foie"]
 [ext_resource type="PackedScene" uid="uid://cik30de5gaaah" path="res://scenes/ingame_scene.tscn" id="2_nl5i6"]
@@ -7,6 +7,9 @@
 [ext_resource type="Theme" uid="uid://d22mpqutkotsu" path="res://ui/theme.tres" id="4_6ad1t"]
 [ext_resource type="PackedScene" uid="uid://b4blrdjthcxnn" path="res://ui/components/game_logo.tscn" id="4_fnufg"]
 [ext_resource type="PackedScene" uid="uid://wnx76snk3gsv" path="res://scenes/game_credits_scene.tscn" id="4_wbyn4"]
+[ext_resource type="PackedScene" uid="uid://bqvg18qq2j1p7" path="res://ui/components/MenuMusicPlayer.tscn" id="8_pw2k5"]
+[ext_resource type="AudioStream" uid="uid://d4k7aggoegl6x" path="res://assets/Sounds/SFX/UIHover.mp3" id="9_pw2k5"]
+[ext_resource type="AudioStream" uid="uid://djbgioq2j2lud" path="res://assets/Sounds/SFX/UIPress.mp3" id="10_pe0bh"]
 
 [node name="MainMenuScene" type="Node2D"]
 script = ExtResource("1_1foie")
@@ -82,6 +85,14 @@ layout_mode = 2
 unique_name_in_owner = true
 visible = false
 
-[node name="Music" type="AudioStreamPlayer" parent="."]
-autoplay = true
-bus = &"Music"
+[node name="MenuMusicPlayer" parent="." instance=ExtResource("8_pw2k5")]
+
+[node name="UiHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_pw2k5")
+volume_db = -5.0
+bus = &"Sound"
+
+[node name="UiPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_pe0bh")
+volume_db = -5.0
+bus = &"Sound"

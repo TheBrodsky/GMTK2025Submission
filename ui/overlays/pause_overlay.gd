@@ -17,28 +17,49 @@ func _ready() -> void:
 	exit_button.pressed.connect(_exit)
 	back_button.pressed.connect(_pause_menu)
 	
-func grab_button_focus() -> void:
-	resume_button.grab_focus()
+	resume_button.mouse_entered.connect(_resume_entered)
+	settings_button.mouse_entered.connect(_settings_entered)
+	exit_button.mouse_entered.connect(_exit_entered)
+	back_button.mouse_entered.connect(_pause_menu_entered)
+	
+#func grab_button_focus() -> void:
+	#resume_button.grab_focus()
 	
 func _resume() -> void:
+	$UiPress.play()
 	get_tree().paused = false
 	visible = false
 	player_hud.visible = true;
 	
 func _settings() -> void:
+	$UiPress.play()
 	menu_container.visible = false
 	settings_container.visible = true
 	back_button.grab_focus()
 	
 func _exit() -> void:
+	$UiPress.play()
 	game_exited.emit()
 	get_tree().quit()
 	
 func _pause_menu() -> void:
+	$UiPress.play()
 	settings_container.visible = false
 	menu_container.visible = true
 	settings_button.grab_focus()
 	
+func _resume_entered() -> void:
+	$UiHover.play()
+	
+func _settings_entered() -> void:
+	$UiHover.play()
+	
+func _exit_entered() -> void:
+	$UiHover.play()
+
+func _pause_menu_entered() -> void:
+	$UiHover.play()
+
 func _unhandled_input(event):
 	if event.is_action_pressed("pause") and visible:
 		get_viewport().set_input_as_handled()
