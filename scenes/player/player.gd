@@ -233,4 +233,5 @@ func create_dash_effect() -> void:
 	new_temporal_sprite.position = global_position;
 	new_temporal_sprite.modulate.a = 0.25;
 	new_temporal_sprite.scale = Vector2(0.05,0.05);
+	new_temporal_sprite.flip_h = animated_sprite.flip_h;
 	get_tree().root.add_child(new_temporal_sprite);
