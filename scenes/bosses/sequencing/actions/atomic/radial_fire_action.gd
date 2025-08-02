@@ -7,6 +7,8 @@ class_name RadialFireAction extends AtomicBossAction
 @export var angle_offset_per_burst_degrees: float = 0.0 # degrees to offset each subsequent burst
 @export var aim_at_screen_center: bool = false # if true, orients the pattern toward screen center
 @export var projectile_scene: PackedScene
+@export var projectile_config: BaseProjectileConfig
+@export var group_rotation_speed: float = 0.0 # radians per second to rotate the entire burst
 
 var fire_timer: float = 0.0
 var current_angle_offset_degrees: float = 0.0
@@ -29,12 +31,23 @@ func _fire_radial_burst():
 		var direction_to_center = (screen_center - boss_node.global_position).normalized()
 		base_angle_offset = atan2(direction_to_center.y, direction_to_center.x)
 	
+	# Create a projectile group
+	var group = ProjectileGroup.new()
+	group.rotation_speed = group_rotation_speed
+	group.position = boss_node.global_position
+	get_tree().root.add_child(group)
+	
 	for angle in angles:
 		var final_angle = angle + offset_radians + base_angle_offset
 		var projectile = projectile_scene.instantiate() as BaseProjectile
-		projectile.position = boss_node.global_position
-		projectile.direction = Vector2(cos(final_angle), sin(final_angle)) # normalized direction
-		get_tree().root.add_child(projectile)
+		projectile.position = Vector2.ZERO  # Relative to group center
+		projectile.direction = Vector2(cos(final_angle), sin(final_angle))
+		
+		# Apply config if provided
+		if projectile_config:
+			projectile.config = projectile_config
+		
+		group.add_child(projectile)
 	
 	current_angle_offset_degrees += angle_offset_per_burst_degrees
 

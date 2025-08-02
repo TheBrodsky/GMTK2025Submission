@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/sequencing/testing/test_boss.gd" id="1_kpecr"]
 [ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/sequencing/testing/ScarySquare.png" id="2_14plf"]
-[ext_resource type="PackedScene" uid="uid://exvy8r2qxf5h" path="res://scenes/bosses/sequencing/actions/pools/BossAttackPool.tscn" id="3_fyi2p"]
 [ext_resource type="Texture2D" uid="uid://dqgyrgtnefw62" path="res://assets/boss_assets/BossIdle.png" id="3_s8dle"]
 [ext_resource type="Texture2D" uid="uid://bnestjwd1qo7w" path="res://assets/boss_assets/boss_run_0000.png" id="4_hbomv"]
 [ext_resource type="Texture2D" uid="uid://vch14g50j8oy" path="res://assets/boss_assets/boss_run_0001.png" id="5_dtyfw"]
 [ext_resource type="Texture2D" uid="uid://bakcakvm5l7q7" path="res://assets/boss_assets/boss_run_0002.png" id="6_crlsh"]
 [ext_resource type="Texture2D" uid="uid://dxanbpdsyu0gj" path="res://assets/boss_assets/boss_run_0003.png" id="7_n02dm"]
 [ext_resource type="Texture2D" uid="uid://cd2wdi53dbxt6" path="res://assets/boss_assets/boss_run_0004.png" id="8_1e6mj"]
+[ext_resource type="PackedScene" uid="uid://exvy8r2qxf5h" path="res://scenes/bosses/sequencing/actions/pools/BossOnePool.tscn" id="3_fyi2p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v1ysq"]
 atlas = ExtResource("3_s8dle")
