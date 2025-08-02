@@ -35,7 +35,7 @@ func _settings() -> void:
 	$UiPress.play()
 	menu_container.visible = false
 	settings_container.visible = true
-	back_button.grab_focus()
+	#back_button.grab_focus()
 	
 func _exit() -> void:
 	$UiPress.play()
@@ -46,7 +46,7 @@ func _pause_menu() -> void:
 	$UiPress.play()
 	settings_container.visible = false
 	menu_container.visible = true
-	settings_button.grab_focus()
+	#settings_button.grab_focus()
 	
 func _resume_entered() -> void:
 	$UiHover.play()
