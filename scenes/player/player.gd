@@ -9,8 +9,8 @@ class_name Player;
 		mode_changed();
 
 @export_group("Stats")
-@export var speed: int = 200;
-@export var dash_speed: int = 400;
+@export var speed: int = 600;
+@export var dash_speed: int = 1500;
 @export var dash_effect_creation_frame: int = 10; # after how many physics steps it should create a new dash effect when dashing
 var current_dash_effect_creation_frame: int = 0;
 
@@ -224,7 +224,7 @@ func create_dash_effect() -> void:
 	new_temporal_sprite.texture = current_texture;
 	new_temporal_sprite.position = global_position;
 	new_temporal_sprite.modulate.a = 0.25;
-	new_temporal_sprite.scale = Vector2(0.05,0.05);
+	new_temporal_sprite.scale = Vector2(0.25, 0.25);
 	new_temporal_sprite.flip_h = animated_sprite.flip_h;
 	get_tree().root.add_child(new_temporal_sprite);
 

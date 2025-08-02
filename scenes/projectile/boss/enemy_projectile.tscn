@@ -7,6 +7,12 @@
 [node name="EnemyProjectile" instance=ExtResource("1_base")]
 script = ExtResource("2_enemy")
 
-[node name="Sprite2D" type="Sprite2D" parent="." index="1"]
-scale = Vector2(0.0975, 0.0975)
+[node name="Sprite2D" type="Sprite2D" parent="." index="0"]
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_texture")
+
+[node name="CollisionShape2D" parent="." index="1"]
+scale = Vector2(2.09759, 2.10851)
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+scale = Vector2(1.72781, 1.68819)

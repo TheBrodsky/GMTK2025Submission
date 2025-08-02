@@ -184,7 +184,7 @@ size = Vector2(85.5556, 21.5625)
 
 [sub_resource type="Resource" id="Resource_iqsei"]
 script = ExtResource("27_uniwh")
-speed = 400
+speed = 1000
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
@@ -195,7 +195,6 @@ radius = 10.0499
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gun", "hitbox", "health") groups=["HardReset", "SoftReset"]]
 collision_mask = 8
 script = ExtResource("1_8afob")
-dash_speed = 800
 dash_effect_creation_frame = 1
 gun = NodePath("Gun")
 hitbox = NodePath("HitBoxComponent")
@@ -251,7 +250,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="DashDurationTimer" type="Timer" parent="Dashing"]
-wait_time = 0.1
+wait_time = 0.15
 one_shot = true
 
 [node name="ImmunityTimer" type="Timer" parent="."]
