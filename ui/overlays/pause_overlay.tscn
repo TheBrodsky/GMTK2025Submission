@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://jyv4g54adkmo"]
+[gd_scene load_steps=5 format=3 uid="uid://jyv4g54adkmo"]
 
 [ext_resource type="Script" uid="uid://xiphbph8v88o" path="res://ui/overlays/pause_overlay.gd" id="1_q2yda"]
 [ext_resource type="PackedScene" uid="uid://nbaodrlopo7y" path="res://ui/components/game_settings.tscn" id="2_n78uc"]
+[ext_resource type="AudioStream" uid="uid://d4k7aggoegl6x" path="res://assets/Sounds/SFX/UIHover.mp3" id="3_dypxm"]
+[ext_resource type="AudioStream" uid="uid://djbgioq2j2lud" path="res://assets/Sounds/SFX/UIPress.mp3" id="4_chcfv"]
 
 [node name="PauseOverlay" type="CenterContainer"]
 anchors_preset = 15
@@ -54,3 +56,13 @@ text = "settings"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Exit"
+
+[node name="UiHover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_dypxm")
+volume_db = -5.0
+bus = &"Sound"
+
+[node name="UiPress" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_chcfv")
+volume_db = -5.0
+bus = &"Sound"
