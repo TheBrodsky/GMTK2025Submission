@@ -10,14 +10,8 @@ var current_sequence: BossSequence
 var previous_position: Vector2
 var estimated_velocity: Vector2 = Vector2.ZERO
 
-@onready var health_bar = $BossHealthBar
-
-var health_bar_global_pos: Vector2
-
 func _ready():
 	previous_position = global_position
-	
-	health_bar_global_pos = health_bar.global_position
 	
 	# Create sequence builder and set the action pool
 	sequence_builder = BossSequenceBuilder.new()
@@ -39,11 +33,9 @@ func _on_sequence_completed(_boss: Node):
 	print("Boss sequence completed!")
 
 func _physics_process(_delta):
-	health_bar.global_position = health_bar_global_pos
 	move_and_slide()
 
 func _process(delta):
-	health_bar.global_position = health_bar_global_pos
 	estimated_velocity = (global_position - previous_position) / delta
 	previous_position = global_position
 	if !estimated_velocity and animated_sprite.animation != "IdleBoss":
@@ -51,10 +43,6 @@ func _process(delta):
 	if estimated_velocity:
 		animated_sprite.play("BossRun")
 		toggle_flip_sprite(estimated_velocity)
-		call_deferred("position_health_bar")
-
-func position_health_bar():
-	health_bar.global_position = health_bar_global_pos
 
 func toggle_flip_sprite(dir: Vector2) -> void:
 	if dir.x < 0:
@@ -64,4 +52,4 @@ func toggle_flip_sprite(dir: Vector2) -> void:
 
 func _on_health_component_got_damaged(attack: Attack) -> void:
 	health.health -= attack.attack_damage;
-	print("DAMAGE")
+	# TODO: Death -> next boss

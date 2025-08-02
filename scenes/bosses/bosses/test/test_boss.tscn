@@ -101,15 +101,6 @@ shape = SubResource("RectangleShape2D_1")
 
 [node name="BossAttackPool" parent="." instance=ExtResource("3_fyi2p")]
 
-[node name="BossHealthBar" type="ProgressBar" parent="."]
-visible = false
-offset_left = -136.0
-offset_top = -160.0
-offset_right = 139.0
-offset_bottom = -133.0
-scale = Vector2(1, 0.75)
-show_percentage = false
-
 [node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("10_hbomv")]
 collision_layer = 16
 collision_mask = 6
