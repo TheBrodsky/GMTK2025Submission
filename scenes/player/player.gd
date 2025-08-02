@@ -88,12 +88,8 @@ func handle_player(_delta: float) -> void:
 	clamp_to_screen();
 	
 	if can_dash && Input.is_action_just_pressed("dash"):
-		can_dash = false;
-		dash_duration_timer.start();
-		is_dashing = true;
-		is_invincible = true;
-		
 		input.dashing = true;
+		start_dashing();
 	
 	if can_shoot && Input.is_action_pressed("shoot"):
 		gun.shoot();
@@ -137,6 +133,10 @@ func handle_clone(_delta: float) -> void:
 		return;
 	if latest_input.shooting_pressed:
 		gun.shoot();
+		
+	if latest_input.dashing:
+		start_dashing();
+		
 	velocity = latest_input.move_direction;
 	handle_movement_animation(latest_input.move_direction)
 	move_and_slide();
@@ -215,6 +215,12 @@ func _on_dash_duration_timer_timeout() -> void:
 	is_invincible = false;
 	dash_cooldown_timer.start();
 	current_dash_effect_creation_frame = 0;
+
+func start_dashing() -> void:
+	can_dash = false;
+	dash_duration_timer.start();
+	is_dashing = true;
+	is_invincible = true;
 
 func create_dash_effect() -> void:
 	var frame_index: int = animated_sprite.frame;
