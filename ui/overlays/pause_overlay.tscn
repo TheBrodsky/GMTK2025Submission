@@ -13,17 +13,20 @@ script = ExtResource("1_q2yda")
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="."]
 layout_mode = 2
+theme_type_variation = &"VboxContainerSmallMargin"
+theme_override_constants/separation = 9
 
 [node name="Label" type="Label" parent="VBoxContainer3"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
-text = "game_paused"
+text = "Paused"
 horizontal_alignment = 1
 
 [node name="SettingsContainer" type="VBoxContainer" parent="VBoxContainer3"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+theme_override_constants/separation = -8
 
 [node name="GameSettings" parent="VBoxContainer3/SettingsContainer" instance=ExtResource("2_n78uc")]
 layout_mode = 2
@@ -31,7 +34,7 @@ layout_mode = 2
 [node name="BackButton" type="Button" parent="VBoxContainer3/SettingsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "return_to_menu"
+text = "back"
 
 [node name="MenuContainer" type="VBoxContainer" parent="VBoxContainer3"]
 unique_name_in_owner = true
@@ -40,7 +43,7 @@ layout_mode = 2
 [node name="ResumeButton" type="Button" parent="VBoxContainer3/MenuContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "resume_game"
+text = "resume"
 
 [node name="SettingsButton" type="Button" parent="VBoxContainer3/MenuContainer"]
 unique_name_in_owner = true
@@ -50,4 +53,4 @@ text = "settings"
 [node name="ExitButton" type="Button" parent="VBoxContainer3/MenuContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "leave_game"
+text = "Exit"
