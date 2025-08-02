@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://jur5bey4kc4w"]
+[gd_scene load_steps=16 format=3 uid="uid://jur5bey4kc4w"]
 
 [ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/sequencing/testing/test_boss.gd" id="1_kpecr"]
 [ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/sequencing/testing/ScarySquare.png" id="2_14plf"]
@@ -16,26 +16,6 @@
 atlas = ExtResource("3_s8dle")
 region = Rect2(0, 0, 600, 900)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6we0i"]
-atlas = ExtResource("4_hbomv")
-region = Rect2(0, 0, 818, 1000)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6lqsh"]
-atlas = ExtResource("5_dtyfw")
-region = Rect2(0, 0, 818, 1000)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mlb8m"]
-atlas = ExtResource("6_crlsh")
-region = Rect2(0, 0, 818, 1000)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yn315"]
-atlas = ExtResource("7_n02dm")
-region = Rect2(0, 0, 818, 1000)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u8nef"]
-atlas = ExtResource("8_1e6mj")
-region = Rect2(0, 0, 818, 1000)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_7r2d3"]
 animations = [{
 "frames": [{
@@ -48,19 +28,19 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6we0i")
+"texture": ExtResource("4_hbomv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6lqsh")
+"texture": ExtResource("5_dtyfw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mlb8m")
+"texture": ExtResource("6_crlsh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yn315")
+"texture": ExtResource("7_n02dm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_u8nef")
+"texture": ExtResource("8_1e6mj")
 }],
 "loop": true,
 "name": &"BossRun",
@@ -92,7 +72,6 @@ texture = ExtResource("2_14plf")
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_7r2d3")
 animation = &"BossIdle"
-frame_progress = 0.187092
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
