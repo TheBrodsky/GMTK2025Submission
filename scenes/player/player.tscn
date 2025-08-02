@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://csx3k2jd8acqe"]
+[gd_scene load_steps=51 format=3 uid="uid://csx3k2jd8acqe"]
 
 [ext_resource type="Script" uid="uid://drm1qvc7cq3ga" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="Texture2D" uid="uid://dmelj2qgr8w7k" path="res://icon.svg" id="2_dovo2"]
@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://cjn2b23lp5l41" path="res://assets/clone_assets/clone_arm.png" id="23_4hvnv"]
 [ext_resource type="PackedScene" uid="uid://bi67nxun54py" path="res://scenes/projectile/player_projectile.tscn" id="25_j4nxn"]
 [ext_resource type="PackedScene" uid="uid://b2hfrt8qnrixu" path="res://scenes/projectile/clone_projectile.tscn" id="26_28m0y"]
+[ext_resource type="Script" uid="uid://dy7lhpiqyi6pm" path="res://resources/base_projectile_config.gd" id="27_uniwh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bbmj2"]
 atlas = ExtResource("3_007i1")
@@ -181,6 +182,13 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_x7p2l"]
 radius = 10.0499
 
+[sub_resource type="Resource" id="Resource_iqsei"]
+script = ExtResource("27_uniwh")
+speed = 400
+despawn_time = -1
+damage = 10
+metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gun", "hitbox", "health") groups=["HardReset", "SoftReset"]]
 collision_mask = 8
 script = ExtResource("1_8afob")
@@ -223,6 +231,7 @@ texture = ExtResource("13_fcs02")
 offset = Vector2(164, 51)
 player_projectile = ExtResource("25_j4nxn")
 clone_projectile = ExtResource("26_28m0y")
+projectile_config = SubResource("Resource_iqsei")
 my_owner = NodePath("..")
 owners_animation = NodePath("../AnimatedSprite2D")
 timer = NodePath("../ImmunityTimer")

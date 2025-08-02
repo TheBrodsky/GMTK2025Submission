@@ -2,6 +2,7 @@
 class_name StreamFireAction extends AtomicBossAction
 
 @export var projectile_scene: PackedScene
+@export var projectile_config: BaseProjectileConfig
 @export var fire_rate: float = 5.0 # bullets per second
 @export var starting_angle_degrees: float = 0.0
 @export var ending_angle_degrees: float = 90.0
@@ -34,6 +35,11 @@ func _fire_bullet():
 	var projectile = projectile_scene.instantiate() as BaseProjectile
 	projectile.position = boss_node.global_position
 	projectile.direction = Vector2(cos(angle_radians), sin(angle_radians))
+	
+	# Apply config if provided
+	if projectile_config:
+		projectile.config = projectile_config
+	
 	get_tree().root.add_child(projectile)
 
 func _calculate_current_angle() -> float:
