@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://jur5bey4kc4w"]
+[gd_scene load_steps=21 format=3 uid="uid://jur5bey4kc4w"]
 
 [ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/sequencing/testing/test_boss.gd" id="1_kpecr"]
 [ext_resource type="Texture2D" uid="uid://boore22oimch7" path="res://scenes/bosses/sequencing/testing/ScarySquare.png" id="2_14plf"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bakcakvm5l7q7" path="res://assets/boss_assets/boss_run_0002.png" id="6_crlsh"]
 [ext_resource type="Texture2D" uid="uid://dxanbpdsyu0gj" path="res://assets/boss_assets/boss_run_0003.png" id="7_n02dm"]
 [ext_resource type="Texture2D" uid="uid://cd2wdi53dbxt6" path="res://assets/boss_assets/boss_run_0004.png" id="8_1e6mj"]
+[ext_resource type="PackedScene" uid="uid://glogyi4fnftc" path="res://scenes/components/hit_box_component.tscn" id="10_hbomv"]
+[ext_resource type="PackedScene" uid="uid://biiy7u5apulx5" path="res://scenes/components/health_component.tscn" id="11_dtyfw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v1ysq"]
 atlas = ExtResource("3_s8dle")
@@ -68,7 +70,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
 size = Vector2(100, 100)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtyfw"]
+size = Vector2(18, 18)
+
 [node name="TestBoss" type="CharacterBody2D" groups=["HardReset", "SoftReset"]]
+collision_layer = 16
+collision_mask = 24
 script = ExtResource("1_kpecr")
 metadata/_edit_horizontal_guides_ = [-162.0, 162.0]
 metadata/_edit_vertical_guides_ = [288.0, -288.0]
@@ -85,6 +92,7 @@ animation = &"BossIdle"
 frame_progress = 0.187092
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(1, 2.38419e-07)
 scale = Vector2(0.55, 0.75)
 shape = SubResource("RectangleShape2D_1")
@@ -98,3 +106,14 @@ offset_right = 139.0
 offset_bottom = -133.0
 scale = Vector2(1, 0.75)
 show_percentage = false
+
+[node name="HitBoxComponent" parent="." instance=ExtResource("10_hbomv")]
+collision_layer = 16
+collision_mask = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+scale = Vector2(2.9841, 4.30835)
+shape = SubResource("RectangleShape2D_dtyfw")
+
+[node name="HealthComponent" parent="." instance=ExtResource("11_dtyfw")]
+max_health = 1000.0
