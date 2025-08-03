@@ -26,7 +26,3 @@ func _process(delta: float) -> void:
 	
 	# Apply both movements
 	global_position += forward_movement + sideways_movement
-	
-	# Update rotation to face movement direction
-	var current_velocity = direction * config.speed + perpendicular_direction * cos(time_alive * sidewinder_config.wave_frequency) * sidewinder_config.wave_amplitude * sidewinder_config.wave_frequency
-	rotation = current_velocity.angle()

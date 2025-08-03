@@ -22,6 +22,7 @@ enum TargetType {
 @export var target_type: TargetType = TargetType.CENTER_CENTER
 @export var coords: Vector2 = Vector2.ZERO
 @export var max_speed: float = 800.0  # pixels per second
+@export var min_speed: float = 100.0  # pixels per second
 
 var start_position: Vector2
 var target_position: Vector2
@@ -32,13 +33,16 @@ func execute(boss: Node):
 	start_position = boss.global_position
 	target_position = _calculate_target_position()
 	
-	# Calculate effective duration based on speed limit
+	# Calculate effective duration based on speed limits
 	var distance = start_position.distance_to(target_position)
 	var required_speed = distance / duration
 	
 	if required_speed > max_speed:
-		# Speed limited - calculate how long it actually takes
+		# Speed limited by maximum - calculate how long it actually takes
 		effective_duration = distance / max_speed
+	elif required_speed < min_speed:
+		# Speed limited by minimum - will reach destination early
+		effective_duration = distance / min_speed
 	else:
 		# Normal movement
 		effective_duration = duration
@@ -50,6 +54,11 @@ func _perform_action(_delta: float):
 	progress = clamp(progress, 0.0, 1.0)
 	
 	boss_node.global_position = start_position.lerp(target_position, progress)
+	
+	# End action early if we've reached the destination
+	if progress >= 1.0:
+		timer.stop()
+		completed.emit(boss_node)
 
 func _calculate_target_position() -> Vector2:
 	if target_type == TargetType.COORDS:

@@ -33,7 +33,6 @@ func _fire_bullet():
 		
 		# Center the oscillation arc around the direction to center
 		var oscillation_progress = _calculate_oscillation_progress()
-		print(oscillation_progress)
 		var arc_size_radians = deg_to_rad(abs(ending_angle_degrees - starting_angle_degrees))
 		var min_angle = center_angle - arc_size_radians / 2.0
 		var max_angle = center_angle + arc_size_radians / 2.0
@@ -70,5 +69,4 @@ func _calculate_oscillation_progress() -> float:
 
 func _calculate_current_angle() -> float:
 	var oscillation_progress = _calculate_oscillation_progress()
-	print(oscillation_progress)
 	return lerp(starting_angle_degrees, ending_angle_degrees, oscillation_progress)
