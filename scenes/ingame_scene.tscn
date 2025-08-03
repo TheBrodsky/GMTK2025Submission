@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ck8hbq0vjt55x" path="res://scenes/manager/GameLoopManager.tscn" id="3_gadrd"]
 [ext_resource type="Script" uid="uid://txsqicltv303" path="res://scripts/boss_collection.gd" id="4_1sh3m"]
 [ext_resource type="PackedScene" uid="uid://cxikw1ik77wii" path="res://scenes/player/player_hud.tscn" id="5_2577t"]
-[ext_resource type="Resource" uid="uid://deh1n51cdlkwd" path="res://scenes/bosses/bosses/test/test_bosses.tres" id="5_etwux"]
+[ext_resource type="Resource" uid="uid://deh1n51cdlkwd" path="res://scenes/bosses/bosses/easy_boss.tres" id="5_etwux"]
 [ext_resource type="AudioStream" uid="uid://14aycvn2anbs" path="res://assets/Sounds/Music/Combat.mp3" id="10_etwux"]
 [ext_resource type="TileSet" uid="uid://dmffq13v2vimi" path="res://assets/tileset.tres" id="11_iid22"]
 

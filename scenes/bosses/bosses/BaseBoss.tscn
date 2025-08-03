@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://jur5bey4kc4w"]
+
+[ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/bosses/boss.gd" id="1_560g0"]
+[ext_resource type="Texture2D" uid="uid://dqgyrgtnefw62" path="res://assets/boss_assets/BossIdle.png" id="2_fylwb"]
+[ext_resource type="Texture2D" uid="uid://bnestjwd1qo7w" path="res://assets/boss_assets/boss_run_0000.png" id="3_784k0"]
+[ext_resource type="Texture2D" uid="uid://vch14g50j8oy" path="res://assets/boss_assets/boss_run_0001.png" id="4_qfaln"]
+[ext_resource type="Texture2D" uid="uid://bakcakvm5l7q7" path="res://assets/boss_assets/boss_run_0002.png" id="5_as61j"]
+[ext_resource type="Texture2D" uid="uid://dxanbpdsyu0gj" path="res://assets/boss_assets/boss_run_0003.png" id="6_bwfj1"]
+[ext_resource type="Texture2D" uid="uid://cd2wdi53dbxt6" path="res://assets/boss_assets/boss_run_0004.png" id="7_du264"]
+[ext_resource type="PackedScene" uid="uid://glogyi4fnftc" path="res://scenes/components/hit_box_component.tscn" id="8_2o5ac"]
+[ext_resource type="PackedScene" uid="uid://biiy7u5apulx5" path="res://scenes/components/health_component.tscn" id="9_hnci5"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7r2d3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fylwb")
+}],
+"loop": true,
+"name": &"BossIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_784k0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qfaln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_as61j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_bwfj1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_du264")
+}],
+"loop": true,
+"name": &"BossRun",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1"]
+size = Vector2(305.455, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dtyfw"]
+size = Vector2(69.7028, 67.5433)
+
+[node name="BaseBoss" type="CharacterBody2D" groups=["HardReset", "SoftReset"]]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("1_560g0")
+metadata/_edit_horizontal_guides_ = [-162.0, 162.0]
+metadata/_edit_vertical_guides_ = [288.0, -288.0]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
+sprite_frames = SubResource("SpriteFrames_7r2d3")
+animation = &"BossIdle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-34, 96)
+scale = Vector2(0.55, 0.75)
+shape = SubResource("RectangleShape2D_1")
+
+[node name="HitBoxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("8_2o5ac")]
+collision_layer = 16
+collision_mask = 6
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBoxComponent"]
+position = Vector2(-24, 0.499992)
+scale = Vector2(2.9841, 4.30835)
+shape = SubResource("RectangleShape2D_dtyfw")
+
+[node name="HealthComponent" parent="." instance=ExtResource("9_hnci5")]
+max_health = 1000.0
+
+[connection signal="got_damaged" from="HealthComponent" to="." method="_on_health_component_got_damaged"]

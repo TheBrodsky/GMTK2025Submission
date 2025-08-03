@@ -1,14 +1,16 @@
-extends Boss;
+class_name Boss extends CharacterBody2D
 
-@export var sequence_duration: float = 30.0
-
-@onready var action_pool = $BossAttackPool
-var sequence_builder: BossSequenceBuilder
-var current_sequence: BossSequence
+@export var sequence_duration: float = 60.0
+@export var action_pool: BossActionPool
+@export_group("Components")
+@export var hitbox: HitBoxComponent;
+@export var health: HealthComponent;
 
 @onready var animated_sprite = $AnimatedSprite2D
 var previous_position: Vector2
 var estimated_velocity: Vector2 = Vector2.ZERO
+var sequence_builder: BossSequenceBuilder
+var current_sequence: BossSequence
 
 func _ready():
 	previous_position = global_position
