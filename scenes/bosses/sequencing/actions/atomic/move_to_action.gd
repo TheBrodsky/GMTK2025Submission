@@ -21,18 +21,32 @@ enum TargetType {
 
 @export var target_type: TargetType = TargetType.CENTER_CENTER
 @export var coords: Vector2 = Vector2.ZERO
+@export var max_speed: float = 800.0  # pixels per second
 
 var start_position: Vector2
 var target_position: Vector2
+var effective_duration: float
 
 func execute(boss: Node):
 	super.execute(boss)
 	start_position = boss.global_position
 	target_position = _calculate_target_position()
-	print("Moving boss from", boss.global_position, "to", target_position)
+	
+	# Calculate effective duration based on speed limit
+	var distance = start_position.distance_to(target_position)
+	var required_speed = distance / duration
+	
+	if required_speed > max_speed:
+		# Speed limited - calculate how long it actually takes
+		effective_duration = distance / max_speed
+	else:
+		# Normal movement
+		effective_duration = duration
 
 func _perform_action(_delta: float):
-	var progress = 1.0 - (timer.time_left / duration)
+	# Calculate progress based on effective duration
+	var elapsed_time = duration - timer.time_left
+	var progress = elapsed_time / effective_duration
 	progress = clamp(progress, 0.0, 1.0)
 	
 	boss_node.global_position = start_position.lerp(target_position, progress)
@@ -47,7 +61,7 @@ func _calculate_target_position() -> Vector2:
 	var camera = get_viewport().get_camera_2d()
 	var camera_size = get_viewport().get_visible_rect().size / camera.zoom
 	var camera_center = camera.global_position
-	print(camera_size)
+
 	var half_width = camera_size.x / 2.0
 	var half_height = camera_size.y / 2.0
 	
