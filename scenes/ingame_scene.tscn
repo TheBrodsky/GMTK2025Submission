@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://cik30de5gaaah"]
+[gd_scene load_steps=11 format=4 uid="uid://cik30de5gaaah"]
 
 [ext_resource type="Script" uid="uid://ovjegpk30m4h" path="res://scenes/ingame_scene.gd" id="1_objyc"]
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/fade_overlay.tscn" id="1_y6ebv"]
@@ -6,9 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://b5dxpaf6jg8xc" path="res://scenes/manager/clone_manager.tscn" id="2_2577t"]
 [ext_resource type="PackedScene" uid="uid://jyv4g54adkmo" path="res://ui/overlays/pause_overlay.tscn" id="3_8o178"]
 [ext_resource type="PackedScene" uid="uid://ck8hbq0vjt55x" path="res://scenes/manager/GameLoopManager.tscn" id="3_gadrd"]
-[ext_resource type="Script" uid="uid://txsqicltv303" path="res://scripts/boss_collection.gd" id="4_1sh3m"]
+[ext_resource type="PackedScene" uid="uid://h62mto7pu6kx" path="res://scenes/bosses/bosses/MediumBoss.tscn" id="4_etwux"]
 [ext_resource type="PackedScene" uid="uid://cxikw1ik77wii" path="res://scenes/player/player_hud.tscn" id="5_2577t"]
-[ext_resource type="Resource" uid="uid://deh1n51cdlkwd" path="res://scenes/bosses/bosses/easy_boss.tres" id="5_etwux"]
 [ext_resource type="AudioStream" uid="uid://14aycvn2anbs" path="res://assets/Sounds/Music/Combat.mp3" id="10_etwux"]
 [ext_resource type="TileSet" uid="uid://dmffq13v2vimi" path="res://assets/tileset.tres" id="11_iid22"]
 
@@ -18,8 +17,8 @@ game_over_screen = ExtResource("2_5jhce")
 
 [node name="GameLoopManager" parent="." node_paths=PackedStringArray("clone_manager", "boss_spawn_point") instance=ExtResource("3_gadrd")]
 clone_manager = NodePath("../CloneManager")
-boss_collection = Dictionary[int, ExtResource("4_1sh3m")]({
-0: ExtResource("5_etwux")
+boss_collection = Dictionary[int, PackedScene]({
+2: ExtResource("4_etwux")
 })
 boss_spawn_point = NodePath("../BossSpawnPoint")
 

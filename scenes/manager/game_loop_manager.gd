@@ -5,7 +5,7 @@ class_name GameLoopManager;
 
 @export var soft_reset_time: float = 60; # soft reset time in seconds
 
-@export var boss_collection: Dictionary[Global.BossDifficulty, BossCollection];
+@export var boss_collection: Dictionary[Global.BossDifficulty, PackedScene];
 
 @export var boss_spawn_point: Marker2D;
 
@@ -15,16 +15,12 @@ signal new_boss_spawned(boss: Boss);
 
 var player: Player;
 var soft_reset_timer: Timer;
-var current_difficulty: Global.BossDifficulty = Global.BossDifficulty.EASY; # decides what bosses to spawn
 
 func _ready() -> void:
 	soft_reset_timer = Timer.new();
 	soft_reset_timer.wait_time = soft_reset_time;
 	add_child(soft_reset_timer);
 	soft_reset_timer.timeout.connect(_on_soft_reset_timer_timeout);
-	
-	if OS.is_debug_build():
-		current_difficulty = Global.BossDifficulty.TEST;
 	
 	# Start the Game # TODO: start the game in a different way?
 	handle_soft_reset();
@@ -47,10 +43,8 @@ func handle_soft_reset() -> void:
 	Global.SequenceRNG.seed = Global.global_seed;
 	
 	# Select a boss to spawn and spawn it
-	# TODO: THIS SHOULD ALWAYS BE THE SAME BOSS!!!!! (irrelevant if we only have one boss per difficulty)
-	var bosses_to_spawn = boss_collection.get(current_difficulty);
-	if bosses_to_spawn && bosses_to_spawn.bosses && bosses_to_spawn.bosses.size() > 0:
-		var boss_to_spawn: PackedScene = bosses_to_spawn.get_random_boss();
+	var boss_to_spawn = boss_collection.get(Global.selected_difficulty);
+	if boss_to_spawn:
 		var instance: Boss = boss_to_spawn.instantiate();
 		if instance is not Boss:
 			push_error("Tried to spawn a Boss that is not of Class 'Boss'");
@@ -60,7 +54,7 @@ func handle_soft_reset() -> void:
 		get_tree().root.call_deferred("add_child", instance);
 		new_boss_spawned.emit(instance);
 	else:
-		push_error("something went wrong with spawning a boss. are you sure you have at least 1 boss in difficulty: %s" % current_difficulty);
+		push_error("Difficulty", Global.selected_difficulty, "does not have PackedScene");
 
 func handle_hard_reset() -> void:
 	cause_hard_reset.emit();

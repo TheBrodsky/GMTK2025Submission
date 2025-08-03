@@ -47,10 +47,12 @@ size = Vector2(305.455, 100)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dtyfw"]
 size = Vector2(69.7028, 67.5433)
 
-[node name="BaseBoss" type="CharacterBody2D" groups=["HardReset", "SoftReset"]]
+[node name="BaseBoss" type="CharacterBody2D" node_paths=PackedStringArray("hitbox", "health") groups=["HardReset", "SoftReset"]]
 collision_layer = 16
 collision_mask = 8
 script = ExtResource("1_560g0")
+hitbox = NodePath("HitBoxComponent")
+health = NodePath("HealthComponent")
 metadata/_edit_horizontal_guides_ = [-162.0, 162.0]
 metadata/_edit_vertical_guides_ = [288.0, -288.0]
 

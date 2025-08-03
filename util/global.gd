@@ -31,9 +31,16 @@ enum BossDifficulty {
 	HARD = 3,
 }
 
-static var global_seed: int = 0
+static var global_seed: int = 10
+static var use_random_seed: bool = true
 static var SequenceRNG: RandomNumberGenerator
+static var selected_difficulty: BossDifficulty = BossDifficulty.EASY
 
 static func _static_init():
 	SequenceRNG = RandomNumberGenerator.new()
+	
+	if use_random_seed:
+		# Generate a random seed and overwrite global_seed with it
+		global_seed = randi()
+	
 	SequenceRNG.seed = global_seed

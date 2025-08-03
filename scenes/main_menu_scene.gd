@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var game_scene:PackedScene
+@export var difficulty_scene:PackedScene
 @export var settings_scene:PackedScene
 @export var credits_scene:PackedScene
 
@@ -10,12 +10,12 @@ extends Node2D
 @onready var settings_button := %SettingsButton
 @onready var exit_button := %ExitButton
 
-var next_scene = game_scene
+var next_scene = difficulty_scene
 var new_game = true
 
 func _ready() -> void:
 	overlay.visible = true
-	new_game_button.disabled = game_scene == null
+	new_game_button.disabled = difficulty_scene == null
 	settings_button.disabled = settings_scene == null
 	credits_button.disabled = settings_scene == null
 	
@@ -43,7 +43,7 @@ func _on_settings_button_pressed() -> void:
 	
 func _on_play_button_pressed() -> void:
 	$UiPress.play()
-	next_scene = game_scene
+	next_scene = difficulty_scene
 	overlay.fade_out()
 	
 func _on_credits_button_pressed() -> void:
