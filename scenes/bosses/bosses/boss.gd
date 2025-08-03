@@ -7,6 +7,7 @@ class_name Boss extends CharacterBody2D
 @export var health: HealthComponent;
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var fire_audio = $Fire
 var previous_position: Vector2
 var estimated_velocity: Vector2 = Vector2.ZERO
 var sequence_builder: BossSequenceBuilder
@@ -53,6 +54,8 @@ func toggle_flip_sprite(dir: Vector2) -> void:
 		animated_sprite.flip_h = false
 
 func _on_health_component_got_damaged(attack: Attack) -> void:
-	#$Damage.play()
+	$Damage.play()
 	health.health -= attack.attack_damage;
+	if health.health <= 0:
+		$Death.play()
 	# TODO: Death -> next boss

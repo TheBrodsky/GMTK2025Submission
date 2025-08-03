@@ -8,5 +8,5 @@ action_pool = NodePath("BossAttackPool")
 
 [node name="BossAttackPool" parent="." index="0" instance=ExtResource("2_ctg5i")]
 
-[node name="HealthComponent" parent="." index="4"]
+[node name="HealthComponent" parent="." index="7"]
 max_health = 3500.0

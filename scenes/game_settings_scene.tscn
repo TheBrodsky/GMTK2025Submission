@@ -31,8 +31,8 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="MainMenu" type="Sprite2D" parent="UI/CenterContainer2/AspectRatioContainer"]
-position = Vector2(1, 1.47594)
-scale = Vector2(0.299479, 0.302778)
+position = Vector2(0.499994, 1.47594)
+scale = Vector2(0.305208, 0.302778)
 texture = ExtResource("2_h7ju1")
 
 [node name="CenterContainer" type="CenterContainer" parent="UI"]
