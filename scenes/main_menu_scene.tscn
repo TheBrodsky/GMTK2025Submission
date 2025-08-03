@@ -56,8 +56,11 @@ texture = ExtResource("6_pe0bh")
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/Control"]
 layout_mode = 2
-offset_right = 577.0
-offset_bottom = 148.0
+offset_left = 150.0
+offset_top = 10.0
+offset_right = 1725.0
+offset_bottom = 504.0
+scale = Vector2(0.194732, 0.194499)
 size_flags_vertical = 0
 
 [node name="GameLogo" parent="UI/Control/CenterContainer" instance=ExtResource("4_fnufg")]
