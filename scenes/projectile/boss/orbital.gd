@@ -25,16 +25,4 @@ func _process(delta: float) -> void:
 	var current_angle = initial_angle + orbital_config.angular_speed * time_alive
 	
 	# Convert polar to cartesian and set position
-	global_position = orbital_center + Vector2(
-		current_radius * cos(current_angle),
-		current_radius * sin(current_angle)
-	)
-	
-	# Calculate velocity direction for proper rotation
-	var velocity_direction = Vector2(
-		config.speed * cos(current_angle) - current_radius * orbital_config.angular_speed * sin(current_angle),
-		config.speed * sin(current_angle) + current_radius * orbital_config.angular_speed * cos(current_angle)
-	)
-	
-	# Face movement direction
-	rotation = velocity_direction.angle()
+	global_position = orbital_center + Vector2(cos(current_angle), sin(current_angle)) * current_radius
