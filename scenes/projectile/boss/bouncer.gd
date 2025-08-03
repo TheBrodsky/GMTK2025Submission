@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 	global_position += current_direction * current_speed * delta
 	rotation = current_direction.angle()
 
-func _on_wall_collision(_body: Node2D) -> void:
+func _on_wall_collision(body: Node2D) -> void:
 	# Override parent behavior: bounce instead of despawning
 	if bounces_remaining <= 0:
 		queue_free()

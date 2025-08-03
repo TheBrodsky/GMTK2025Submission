@@ -24,6 +24,13 @@ theme = ExtResource("2_k0nam")
 [node name="VSplitContainer" type="VSplitContainer" parent="UI/CenterContainer"]
 layout_mode = 2
 
+[node name="Label" type="Label" parent="UI/CenterContainer/VSplitContainer"]
+layout_mode = 2
+theme_type_variation = &"BigLabel"
+text = "game over"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
@@ -47,30 +54,6 @@ text = "Exit"
 [node name="FadeOverlay" parent="UI" instance=ExtResource("1_64dwf")]
 unique_name_in_owner = true
 visible = false
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -288.0
-offset_top = 45.0
-offset_right = 288.0
-offset_bottom = 106.0
-grow_horizontal = 2
-theme = ExtResource("2_k0nam")
-
-[node name="Label" type="Label" parent="UI/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"HeaderSmall"
-text = "CLONE #*attempt number* FAILED TO OUTPERFORM PREDECESSORS"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"TooltipLabel"
-text = "Terminating simulation..."
-horizontal_alignment = 1
 
 [node name="UiHover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_jy0sy")

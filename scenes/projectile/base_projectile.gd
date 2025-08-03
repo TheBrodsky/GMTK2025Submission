@@ -26,7 +26,7 @@ func setup_collision() -> void:
 	set_collision_mask_value(Global.CollisionLayer.WALL, true)
 	body_entered.connect(_on_wall_collision)
 
-func _on_wall_collision(_body: Node2D) -> void:
+func _on_wall_collision(body: Node2D) -> void:
 	# Default behavior: despawn when hitting walls
 	queue_free()
 

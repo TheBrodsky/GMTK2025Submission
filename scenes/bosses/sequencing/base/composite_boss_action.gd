@@ -34,9 +34,6 @@ func _replace_subpools_in_cloned_node(node: Node):
 				node.remove_child(child)
 				node.add_child(cloned_action)
 				child.queue_free()
-		elif child is BossSequence or child is CompositeBossAction:
-			# Recursively process nested boss actions that might contain subpools
-			child._replace_subpools_in_cloned_node(child)
 
 func _get_sub_actions():
 	sub_actions.clear()

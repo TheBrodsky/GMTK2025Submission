@@ -14,8 +14,6 @@ var next_scene = difficulty_scene
 var new_game = true
 
 func _ready() -> void:
-	AudioPlayer.play_main_menu_music()
-	
 	overlay.visible = true
 	new_game_button.disabled = difficulty_scene == null
 	settings_button.disabled = settings_scene == null
