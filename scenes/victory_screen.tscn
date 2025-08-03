@@ -1,15 +1,14 @@
-[gd_scene load_steps=8 format=4 uid="uid://cllrhwb6tq3gh"]
+[gd_scene load_steps=7 format=4 uid="uid://b2823wj4cvu3x"]
 
-[ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/fade_overlay.tscn" id="1_64dwf"]
-[ext_resource type="Script" uid="uid://c0ae3scnbkxdw" path="res://scenes/game_over_scene.gd" id="1_ny7m6"]
-[ext_resource type="Theme" uid="uid://d22mpqutkotsu" path="res://ui/theme.tres" id="2_k0nam"]
-[ext_resource type="TileSet" uid="uid://dmffq13v2vimi" path="res://assets/tileset.tres" id="3_lt2b8"]
-[ext_resource type="Script" uid="uid://brsfcxluoxvgc" path="res://scenes/label_hard.gd" id="4_5jg82"]
-[ext_resource type="AudioStream" uid="uid://d4k7aggoegl6x" path="res://assets/Sounds/SFX/UIHover.mp3" id="4_jy0sy"]
-[ext_resource type="AudioStream" uid="uid://djbgioq2j2lud" path="res://assets/Sounds/SFX/UIPress.mp3" id="5_5jg82"]
+[ext_resource type="Script" uid="uid://dtdywjccyqg3v" path="res://scenes/victory_screen.gd" id="1_1juoc"]
+[ext_resource type="Theme" uid="uid://d22mpqutkotsu" path="res://ui/theme.tres" id="2_u4hde"]
+[ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/fade_overlay.tscn" id="3_66hvp"]
+[ext_resource type="AudioStream" uid="uid://d4k7aggoegl6x" path="res://assets/Sounds/SFX/UIHover.mp3" id="5_uycue"]
+[ext_resource type="AudioStream" uid="uid://djbgioq2j2lud" path="res://assets/Sounds/SFX/UIPress.mp3" id="6_ox400"]
+[ext_resource type="TileSet" uid="uid://dmffq13v2vimi" path="res://assets/tileset.tres" id="7_7l423"]
 
-[node name="GameOverScene" type="Node2D"]
-script = ExtResource("1_ny7m6")
+[node name="VictoryScreen" type="Node2D"]
+script = ExtResource("1_1juoc")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -17,30 +16,61 @@ script = ExtResource("1_ny7m6")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = 54.0
-offset_bottom = 54.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-theme = ExtResource("2_k0nam")
+theme = ExtResource("2_u4hde")
 
 [node name="VSplitContainer" type="VSplitContainer" parent="UI/CenterContainer"]
 layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/CenterContainer/VSplitContainer"]
+layout_mode = 2
+theme = ExtResource("2_u4hde")
+theme_override_constants/separation = 1
+
+[node name="TrialCounter" type="Label" parent="UI/CenterContainer/VSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "TRIAL #*attempt number* "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Success" type="Label" parent="UI/CenterContainer/VSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "SUCCESS ON"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloneNumber" type="Label" parent="UI/CenterContainer/VSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"HeaderSmall"
+text = "CLONE #*CLONE NUMBER*"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SimulationTerminating" type="Label" parent="UI/CenterContainer/VSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"TooltipLabel"
+text = "SIMULATION TERMINATING"
+horizontal_alignment = 1
+
+[node name="ThankYou" type="Label" parent="UI/CenterContainer/VSplitContainer/VBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"TooltipLabel"
+text = "THANK YOU"
+horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/CenterContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="RestartButton" type="Button" parent="UI/CenterContainer/VSplitContainer/VBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-text = "restart"
-
 [node name="ReturnToMainMenuButton" type="Button" parent="UI/CenterContainer/VSplitContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "   Abort misson   "
+text = "Return "
 
 [node name="ExitButton" type="Button" parent="UI/CenterContainer/VSplitContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -49,56 +79,17 @@ layout_mode = 2
 text = "Exit the game
 "
 
-[node name="FadeOverlay" parent="UI" instance=ExtResource("1_64dwf")]
+[node name="FadeOverlay" parent="UI" instance=ExtResource("3_66hvp")]
 unique_name_in_owner = true
 visible = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI"]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -288.0
-offset_top = 94.0
-offset_right = 288.0
-offset_bottom = 155.0
-grow_horizontal = 2
-theme = ExtResource("2_k0nam")
-
-[node name="Label3" type="Label" parent="UI/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"HeaderSmall"
-text = "FAILED TO OUTPERFORM PREDECESSORS"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="UI/VBoxContainer"]
-layout_mode = 2
-theme_type_variation = &"TooltipLabel"
-text = "Terminating simulation..."
-horizontal_alignment = 1
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI"]
-offset_left = 150.0
-offset_top = 65.0
-offset_right = 413.0
-offset_bottom = 86.0
-theme = ExtResource("2_k0nam")
-
-[node name="Label" type="Label" parent="UI/VBoxContainer2"]
-layout_mode = 2
-theme_type_variation = &"HeaderSmall"
-text = "CLONE #*attempt number* "
-horizontal_alignment = 1
-vertical_alignment = 1
-script = ExtResource("4_5jg82")
-
 [node name="UiHover" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_jy0sy")
+stream = ExtResource("5_uycue")
 volume_db = -5.0
 bus = &"Sound"
 
 [node name="UiPress" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_5jg82")
+stream = ExtResource("6_ox400")
 volume_db = -5.0
 bus = &"Sound"
 
@@ -107,10 +98,8 @@ modulate = Color(1, 1, 1, 0.67451)
 position = Vector2(101, 65)
 scale = Vector2(0.15, 0.15)
 tile_map_data = PackedByteArray("AAABAP//AQABAAMAAAACAP//AQABAAMAAAAEAP//AQABAAMAAAAFAP//AQABAAMAAAAGAP//AQABAAMAAAAIAP//AQABAAMAAAAHAP//AQABAAMAAAADAP//AQABAAMAAAAIAAAAAQAHAAEAAAAHAAAAAQAHAAEAAAAGAAAAAQAHAAEAAAAFAAAAAQAHAAEAAAAEAAAAAQAHAAEAAAADAAAAAQAHAAEAAAACAAAAAQAHAAEAAAABAAAAAQAHAAEAAAAAAAAAAQAHAAEAAAAAAAEAAQAHAAEAAAABAAEAAQAHAAEAAAACAAEAAQAHAAEAAAADAAEAAQAHAAEAAAAFAAEAAQAHAAEAAAAGAAEAAQAHAAEAAAAHAAEAAQAHAAEAAAAIAAEAAQAHAAEAAAAIAAIAAQAHAAEAAAAHAAIAAQAHAAEAAAAGAAIAAQAHAAEAAAAFAAIAAQAHAAEAAAAEAAIAAQAHAAEAAAADAAIAAQAHAAEAAAACAAIAAQAHAAEAAAABAAIAAQAHAAEAAAAAAAIAAQAHAAEAAAAAAAMAAQAHAAEAAAABAAMAAQAHAAEAAAACAAMAAQAHAAEAAAADAAMAAQAHAAEAAAAEAAMAAQAHAAEAAAAFAAMAAQAHAAEAAAAGAAMAAQAHAAEAAAAHAAMAAQAHAAEAAAAIAAMAAQAHAAEAAAAIAAQAAQAHAAEAAAAHAAQAAQAHAAEAAAAGAAQAAQAHAAEAAAAFAAQAAQAHAAEAAAAEAAQAAQAHAAEAAAADAAQAAQAHAAEAAAACAAQAAQAHAAEAAAABAAQAAQAHAAEAAAAAAAQAAQAHAAEAAAAJAAAAAQAHAAEAAAAJAAEAAQAHAAEAAAAJAAIAAQAHAAEAAAAJAAMAAQAHAAEAAAAJAAQAAQAHAAEAAAAIAAUAAQAGAAEAAFAHAAUAAQAGAAEAAFAGAAUAAQAGAAEAAFAFAAUAAQAGAAEAAFADAAUAAQAGAAEAAFACAAUAAQAGAAEAAFABAAUAAQAGAAEAAFD//wQAAQAGAAEAADD//wMAAQAGAAEAADD//wIAAQAGAAEAADD//wEAAQAGAAEAADAEAAUAAQAGAAEAAFAAAAUAAQAGAAEAAFAJAP//AQABAAMAAAAJAAUAAQAGAAEAAFD//wUAAQAAAAcAAAAKAAUAAQACAAcAAAAKAAQAAQAGAAEAAAAKAAMAAQAGAAEAAAAKAAIAAQAGAAEAAAAKAAEAAQAGAAEAAAAKAAAAAQAGAAEAAAAJAP7/AQABAAIAAAAIAP7/AQABAAIAAAAHAP7/AQABAAIAAAAGAP7/AQABAAIAAAAFAP7/AQABAAIAAAAEAP7/AQABAAIAAAADAP7/AQABAAIAAAACAP7/AQABAAIAAAABAP7/AQABAAIAAAD///7/AQAAAAUAAAD/////AQAAAAYAAAAAAP7/AQABAAIAAAAAAP//AQABAAMAAAD//wAAAQAFAAEAAAAKAP7/AQACAAUAAAAKAP//AQACAAYAAAAEAAEAAQAHAAEAAAALAAUAAQAHAAAAAAALAAQAAQAHAAAAAAALAAMAAQAHAAAAAAALAAIAAQAHAAAAAAALAAEAAQAHAAAAAAALAAAAAQAHAAAAAAALAP//AQAHAAAAAAALAP7/AQAHAAAAAAAMAP7/AQAHAAAAAAAMAP//AQAHAAAAAAAMAAAAAQAHAAAAAAAMAAEAAQAHAAAAAAAMAAIAAQAHAAAAAAAMAAMAAQAHAAAAAAAMAAQAAQAHAAAAAAAMAAUAAQAHAAAAAAAMAAYAAQAHAAAAAAAMAAcAAQAHAAAAAAALAAcAAQAHAAAAAAAKAAcAAQAHAAAAAAAJAAcAAQAHAAAAAAAIAAcAAQAHAAAAAAAHAAcAAQAHAAAAAAAGAAcAAQAHAAAAAAAFAAcAAQAHAAAAAAAEAAcAAQAHAAAAAAADAAcAAQAHAAAAAAACAAcAAQAHAAAAAAABAAcAAQAHAAAAAAAAAAcAAQAHAAAAAAD//wcAAQAHAAAAAAD+/wcAAQAHAAAAAAD9/wcAAQAHAAAAAAD8/wcAAQAHAAAAAAD8/wYAAQAHAAAAAAD8/wUAAQAHAAAAAAD8/wQAAQAHAAAAAAD8/wMAAQAHAAAAAAD8/wIAAQAHAAAAAAD8/wEAAQAHAAAAAAD8/wAAAQAHAAAAAAD8////AQAHAAAAAAD8//7/AQAHAAAAAAD8//3/AQAHAAAAAAD9//3/AQAHAAAAAAD+//3/AQAHAAAAAAD///3/AQAHAAAAAAAAAP3/AQAHAAAAAAABAP3/AQAHAAAAAAACAP3/AQAHAAAAAAADAP3/AQAHAAAAAAAEAP3/AQAHAAAAAAAFAP3/AQAHAAAAAAAGAP3/AQAHAAAAAAAHAP3/AQAHAAAAAAAIAP3/AQAHAAAAAAAJAP3/AQAHAAAAAAAKAP3/AQAHAAAAAAAMAP3/AQAHAAAAAAALAP3/AQAHAAAAAAD+//7/AQAHAAAAAAD9//7/AQAHAAAAAAD9////AQAHAAAAAAD9/wAAAQAHAAAAAAD9/wEAAQAHAAAAAAD9/wIAAQAHAAAAAAD9/wMAAQAHAAAAAAD9/wQAAQAHAAAAAAD9/wUAAQAHAAAAAAD9/wYAAQAHAAAAAAD+/wYAAQAHAAAAAAD+/wUAAQAHAAAAAAD+/wQAAQAHAAAAAAD+/wMAAQAHAAAAAAD+/wIAAQAHAAAAAAD+/wEAAQAHAAAAAAD+/wAAAQAHAAAAAAD+////AQAHAAAAAAD//wYAAQAHAAAAAAAAAAYAAQAHAAAAAAABAAYAAQAHAAAAAAACAAYAAQAHAAAAAAADAAYAAQAHAAAAAAAEAAYAAQAHAAAAAAAFAAYAAQAHAAAAAAAGAAYAAQAHAAAAAAAHAAYAAQAHAAAAAAAIAAYAAQAHAAAAAAAJAAYAAQAHAAAAAAAKAAYAAQAHAAAAAAALAAYAAQAHAAAAAAANAAYAAQAHAAAAAAANAAcAAQAHAAAAAAANAAUAAQAHAAAAAAANAAQAAQAHAAAAAAANAAMAAQAHAAAAAAANAAIAAQAHAAAAAAANAAEAAQAHAAAAAAANAAAAAQAHAAAAAAANAP7/AQAHAAAAAAANAP3/AQAHAAAAAAANAP//AQAHAAAAAAA=")
-tile_set = ExtResource("3_lt2b8")
+tile_set = ExtResource("7_7l423")
 
-[connection signal="mouse_entered" from="UI/CenterContainer/VSplitContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_mouse_entered"]
-[connection signal="pressed" from="UI/CenterContainer/VSplitContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="mouse_entered" from="UI/CenterContainer/VSplitContainer/VBoxContainer/ReturnToMainMenuButton" to="." method="_on_return_to_main_menu_button_mouse_entered"]
 [connection signal="pressed" from="UI/CenterContainer/VSplitContainer/VBoxContainer/ReturnToMainMenuButton" to="." method="_on_return_to_main_menu_button_pressed"]
 [connection signal="mouse_entered" from="UI/CenterContainer/VSplitContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_mouse_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cik30de5gaaah"]
+[gd_scene load_steps=15 format=4 uid="uid://cik30de5gaaah"]
 
 [ext_resource type="Script" uid="uid://ovjegpk30m4h" path="res://scenes/ingame_scene.gd" id="1_objyc"]
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/fade_overlay.tscn" id="1_y6ebv"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://v6lf0qtjbl6a" path="res://scenes/bosses/bosses/EasyBoss.tscn" id="5_2vs8u"]
 [ext_resource type="PackedScene" uid="uid://cxikw1ik77wii" path="res://scenes/player/player_hud.tscn" id="5_2577t"]
 [ext_resource type="PackedScene" uid="uid://ckeahbknishai" path="res://scenes/bosses/bosses/HardBoss.tscn" id="6_juwkt"]
+[ext_resource type="PackedScene" uid="uid://b2823wj4cvu3x" path="res://scenes/victory_screen.tscn" id="7_ilpo5"]
 [ext_resource type="AudioStream" uid="uid://14aycvn2anbs" path="res://assets/Sounds/Music/Combat.mp3" id="10_etwux"]
 [ext_resource type="TileSet" uid="uid://dmffq13v2vimi" path="res://assets/tileset.tres" id="11_iid22"]
 [ext_resource type="AudioStream" uid="uid://dt3a58iijac8" path="res://assets/Sounds/SFX/Spawn.mp3" id="13_juwkt"]
@@ -26,6 +27,7 @@ boss_collection = Dictionary[int, PackedScene]({
 3: ExtResource("6_juwkt")
 })
 boss_spawn_point = NodePath("../BossSpawnPoint")
+victory_screen = ExtResource("7_ilpo5")
 
 [node name="CloneManager" parent="." node_paths=PackedStringArray("player_spawn_point") instance=ExtResource("2_2577t")]
 player_spawn_point = NodePath("../PlayerSpawnPoint")

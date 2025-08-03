@@ -9,6 +9,8 @@ class_name GameLoopManager;
 
 @export var boss_spawn_point: Marker2D;
 
+@export var victory_screen: PackedScene;
+
 signal cause_soft_reset;
 signal cause_hard_reset;
 signal new_boss_spawned(boss: Boss);
@@ -33,6 +35,8 @@ func _on_soft_reset_timer_timeout() -> void:
 	handle_soft_reset();
 
 func handle_soft_reset() -> void:
+	UserSettings.attempt_counter += 1
+	
 	$"../Spawn".play()
 	cause_soft_reset.emit();
 	# despawn everything in group "SoftReset"
@@ -51,13 +55,18 @@ func handle_soft_reset() -> void:
 			push_error("Tried to spawn a Boss that is not of Class 'Boss'");
 			instance.queue_free();
 			return;
+		instance.boss_dies.connect(handle_victory);
 		instance.global_position = boss_spawn_point.global_position;
 		get_tree().root.call_deferred("add_child", instance);
 		new_boss_spawned.emit(instance);
 	else:
 		push_error("Difficulty", Global.selected_difficulty, "does not have PackedScene");
 
+func handle_victory() -> void:
+	get_tree().change_scene_to_packed(victory_screen);
+
 func handle_hard_reset() -> void:
+	UserSettings.hard_resets += 1;
 	cause_hard_reset.emit();
 	# despawn everything in group "HardReset"
 	for hard_reset in get_tree().get_nodes_in_group("HardReset"):

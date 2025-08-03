@@ -13,6 +13,8 @@ var estimated_velocity: Vector2 = Vector2.ZERO
 var sequence_builder: BossSequenceBuilder
 var current_sequence: BossSequence
 
+signal boss_dies;
+
 func _ready():
 	previous_position = global_position
 	
@@ -58,4 +60,4 @@ func _on_health_component_got_damaged(attack: Attack) -> void:
 	health.health -= attack.attack_damage;
 	if health.health <= 0:
 		$Death.play()
-	# TODO: Death -> next boss
+		boss_dies.emit();

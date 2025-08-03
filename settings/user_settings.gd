@@ -30,6 +30,7 @@ var USER_SETTING_DEFAULTS = {
 var config:ConfigFile
 
 var attempt_counter: int = 0
+var hard_resets: int = 0;
 
 func _ready():
 	config = ConfigFile.new()
