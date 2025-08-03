@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cvfmy2bsyhr6q"]
+[gd_scene load_steps=4 format=3 uid="uid://q6i48rxhtnsd"]
 
 [ext_resource type="Theme" uid="uid://d22mpqutkotsu" path="res://ui/theme.tres" id="1_gmipb"]
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/fade_overlay.tscn" id="2_javar"]
-[ext_resource type="Script" uid="uid://djrqtnmibtu7t" path="res://scenes/label_soft.gd" id="3_javar"]
+[ext_resource type="Script" path="res://scenes/label_soft.gd" id="3_javar"]
 
 [node name="SoftReset" type="Node2D"]
 
