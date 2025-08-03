@@ -20,27 +20,33 @@ func _process(delta: float) -> void:
 	var next_position = global_position + current_direction * current_speed * delta
 	
 	# Check for wall collisions and bounce
-	var viewport_size = get_viewport().get_visible_rect().size
-	var half_width = viewport_size.x / 2.0
-	var half_height = viewport_size.y / 2.0
+	var camera = get_viewport().get_camera_2d()
+	var camera_size = get_viewport().get_visible_rect().size / camera.zoom
+	var camera_center = camera.global_position
+	var half_width = camera_size.x / 2.0
+	var half_height = camera_size.y / 2.0
 	
 	var bounced = false
 	
 	# Check horizontal bounds
-	if next_position.x <= -half_width or next_position.x >= half_width:
+	var left_bound = camera_center.x - half_width
+	var right_bound = camera_center.x + half_width
+	if next_position.x <= left_bound or next_position.x >= right_bound:
 		current_direction.x = -current_direction.x  # Reflect X direction
 		bounced = true
 		
 		# Clamp position to stay within bounds
-		next_position.x = clamp(next_position.x, -half_width, half_width)
+		next_position.x = clamp(next_position.x, left_bound, right_bound)
 	
 	# Check vertical bounds  
-	if next_position.y <= -half_height or next_position.y >= half_height:
+	var top_bound = camera_center.y - half_height
+	var bottom_bound = camera_center.y + half_height
+	if next_position.y <= top_bound or next_position.y >= bottom_bound:
 		current_direction.y = -current_direction.y  # Reflect Y direction
 		bounced = true
 		
 		# Clamp position to stay within bounds
-		next_position.y = clamp(next_position.y, -half_height, half_height)
+		next_position.y = clamp(next_position.y, top_bound, bottom_bound)
 	
 	# Handle bounce
 	if bounced:

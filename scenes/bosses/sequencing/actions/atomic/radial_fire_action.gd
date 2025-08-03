@@ -27,7 +27,8 @@ func _fire_radial_burst():
 	var base_angle_offset = 0.0
 	
 	if aim_at_screen_center:
-		var screen_center = Vector2.ZERO#get_viewport().get_visible_rect().get_center()
+		var camera = get_viewport().get_camera_2d()
+		var screen_center = camera.global_position
 		var direction_to_center = (screen_center - boss_node.global_position).normalized()
 		base_angle_offset = atan2(direction_to_center.y, direction_to_center.x)
 	

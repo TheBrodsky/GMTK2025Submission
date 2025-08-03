@@ -26,7 +26,8 @@ func _fire_bullet():
 	var angle_radians: float
 	
 	if aim_at_screen_center:
-		var screen_center = Vector2.ZERO#get_viewport().get_visible_rect().get_center()
+		var camera = get_viewport().get_camera_2d()
+		var screen_center = camera.global_position
 		var direction_to_center = (screen_center - boss_node.global_position).normalized()
 		var center_angle = atan2(direction_to_center.y, direction_to_center.x)
 		
