@@ -31,8 +31,8 @@ enum BossDifficulty {
 	HARD = 3,
 }
 
-static var global_seed: int = 10
-static var use_random_seed: bool = true
+static var global_seed: int = 1
+static var use_random_seed: bool = false
 static var SequenceRNG: RandomNumberGenerator
 static var selected_difficulty: BossDifficulty = BossDifficulty.EASY
 

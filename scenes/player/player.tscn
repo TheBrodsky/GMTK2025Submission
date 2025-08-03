@@ -244,7 +244,7 @@ timer = NodePath("../ImmunityTimer")
 clone_overlay = NodePath("../CloneGunOverlay")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_lvxji")]
-max_health = 10000.0
+max_health = 1.0
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 wait_time = 0.2
