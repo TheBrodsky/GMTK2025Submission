@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://exvy8r2qxf5h"]
+[gd_scene load_steps=33 format=3 uid="uid://exvy8r2qxf5h"]
 
 [ext_resource type="Script" uid="uid://1g5wyjxvrcjr" path="res://scenes/bosses/sequencing/base/boss_action_pool.gd" id="1_qi6nv"]
 [ext_resource type="Script" uid="uid://cmby1448i1rh2" path="res://scenes/bosses/sequencing/base/composite_boss_action.gd" id="2_b0cgu"]
@@ -9,8 +9,10 @@
 [ext_resource type="Script" uid="uid://c4yeb24boo5pd" path="res://scenes/bosses/sequencing/base/boss_sequence.gd" id="7_t8xui"]
 [ext_resource type="PackedScene" uid="uid://bmqwkds10ni8k" path="res://scenes/bosses/sequencing/actions/subpools/MoveToEdges.tscn" id="8_colxw"]
 [ext_resource type="Script" uid="uid://c8wt45ana5ke7" path="res://scenes/bosses/sequencing/actions/atomic/stream_fire_action.gd" id="9_3l232"]
+[ext_resource type="PackedScene" uid="uid://bjhildn75bydw" path="res://scenes/projectile/boss/lurcher.tscn" id="10_amu71"]
 [ext_resource type="PackedScene" uid="uid://dqh3tanlfpbkc" path="res://scenes/projectile/boss/enemy_projectile.tscn" id="10_jbn58"]
 [ext_resource type="Script" uid="uid://dy7lhpiqyi6pm" path="res://resources/base_projectile_config.gd" id="11_0oefk"]
+[ext_resource type="Script" uid="uid://c28w02ig2biju" path="res://resources/lurcher_config.gd" id="11_frlos"]
 [ext_resource type="Script" uid="uid://cwgd1jyc8xd5i" path="res://scenes/bosses/sequencing/actions/atomic/move_to_action.gd" id="12_pw7w3"]
 [ext_resource type="PackedScene" uid="uid://vluucpq4qfov" path="res://scenes/projectile/boss/bomb.tscn" id="13_cvqk0"]
 [ext_resource type="Script" uid="uid://cdxjh7bnifl68" path="res://resources/bomb_config.gd" id="14_g6c32"]
@@ -30,13 +32,15 @@ despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://lic05cj24h3u"
 
-[sub_resource type="Resource" id="Resource_bdum7"]
-resource_local_to_scene = true
-script = ExtResource("11_0oefk")
+[sub_resource type="Resource" id="Resource_35j14"]
+script = ExtResource("11_frlos")
+lurch_cycle_time = 1.0
+lurch_distance_multiplier = 2.0
+pause_ratio = 0.3
 speed = 400
 despawn_time = -1
 damage = 10
-metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
+metadata/_custom_type_script = "uid://c28w02ig2biju"
 
 [sub_resource type="Resource" id="Resource_hw7tf"]
 resource_local_to_scene = true
@@ -51,21 +55,24 @@ despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://cdxjh7bnifl68"
 
-[sub_resource type="Resource" id="Resource_xoy5t"]
-resource_local_to_scene = true
-script = ExtResource("11_0oefk")
+[sub_resource type="Resource" id="Resource_frlos"]
+script = ExtResource("11_frlos")
+lurch_cycle_time = 1.0
+lurch_distance_multiplier = 2.0
+pause_ratio = 0.3
 speed = 400
 despawn_time = -1
 damage = 10
-metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
+metadata/_custom_type_script = "uid://c28w02ig2biju"
 
-[sub_resource type="Resource" id="Resource_an80i"]
-resource_local_to_scene = true
-script = ExtResource("11_0oefk")
-speed = 400
+[sub_resource type="Resource" id="Resource_amu71"]
+script = ExtResource("20_j556y")
+max_bounces = 1
+bounce_damping = 0.9
+speed = 500
 despawn_time = -1
 damage = 10
-metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
+metadata/_custom_type_script = "uid://jaw2n6mfllbo"
 
 [sub_resource type="Resource" id="Resource_hnfks"]
 script = ExtResource("17_4wej2")
@@ -123,7 +130,6 @@ pool_duration = 3.0
 
 [node name="RadialFireAction" type="Node" parent="ToAnchor_AND_RadialNormal"]
 script = ExtResource("4_frlos")
-projectile_count = 6
 angle_offset_per_burst_degrees = 25.0
 projectile_scene = ExtResource("5_35j14")
 projectile_config = SubResource("Resource_xdvqx")
@@ -139,10 +145,10 @@ pool_duration = 1.5
 
 [node name="StreamFireAction" type="Node" parent="ToEdge_THEN_SprayNormal"]
 script = ExtResource("9_3l232")
-projectile_scene = ExtResource("10_jbn58")
-projectile_config = SubResource("Resource_bdum7")
-fire_rate = 15.0
-ending_angle_degrees = 120.0
+projectile_scene = ExtResource("10_amu71")
+projectile_config = SubResource("Resource_35j14")
+fire_rate = 23.0
+ending_angle_degrees = 180.0
 oscillation_frequency = 1.1
 aim_at_screen_center = true
 action_duration = 3.0
@@ -195,8 +201,8 @@ metadata/_custom_type_script = "uid://cwgd1jyc8xd5i"
 
 [node name="StreamFireAction" type="Node" parent="ToCenter_THEN_CircularStreamNormal"]
 script = ExtResource("9_3l232")
-projectile_scene = ExtResource("10_jbn58")
-projectile_config = SubResource("Resource_xoy5t")
+projectile_scene = ExtResource("10_amu71")
+projectile_config = SubResource("Resource_frlos")
 fire_rate = 15.0
 ending_angle_degrees = 360.0
 oscillation_frequency = 1.1
@@ -206,10 +212,10 @@ metadata/_custom_type_script = "uid://c8wt45ana5ke7"
 
 [node name="RadialSpiralNormal" type="Node" parent="."]
 script = ExtResource("4_frlos")
-fire_rate = 2.5
+fire_rate = 2.0
 angle_offset_per_burst_degrees = 15.0
-projectile_scene = ExtResource("10_jbn58")
-projectile_config = SubResource("Resource_an80i")
+projectile_scene = ExtResource("19_mqnsy")
+projectile_config = SubResource("Resource_amu71")
 action_duration = 3.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
@@ -391,7 +397,7 @@ metadata/_custom_type_script = "uid://cwgd1jyc8xd5i"
 
 [node name="RadialFireAction" type="Node" parent="InOuterCircuit_AND_ArcBouncers/CompositeBossAction"]
 script = ExtResource("4_frlos")
-projectile_count = 3
+projectile_count = 4
 arc_degrees = 120.0
 aim_at_screen_center = true
 projectile_scene = ExtResource("19_mqnsy")
