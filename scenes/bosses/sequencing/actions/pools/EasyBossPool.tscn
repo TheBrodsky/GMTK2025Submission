@@ -21,7 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://c62qddu2dtfxf" path="res://scenes/projectile/boss/bouncer.tscn" id="19_8tonc"]
 [ext_resource type="Script" uid="uid://jaw2n6mfllbo" path="res://resources/bouncer_config.gd" id="20_io5j5"]
 
-[sub_resource type="Resource" id="Resource_xdvqx"]
+[sub_resource type="Resource" id="Resource_easy_sidewinder"]
 script = ExtResource("6_gghd3")
 wave_amplitude = 300.0
 wave_frequency = 2.0
@@ -30,7 +30,7 @@ despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://lic05cj24h3u"
 
-[sub_resource type="Resource" id="Resource_bdum7"]
+[sub_resource type="Resource" id="Resource_easy_normal"]
 resource_local_to_scene = true
 script = ExtResource("11_mgecj")
 speed = 400
@@ -38,7 +38,7 @@ despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 
-[sub_resource type="Resource" id="Resource_hw7tf"]
+[sub_resource type="Resource" id="Resource_easy_bomb"]
 resource_local_to_scene = true
 script = ExtResource("14_441mm")
 deceleration = 100.0
@@ -51,7 +51,7 @@ despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://cdxjh7bnifl68"
 
-[sub_resource type="Resource" id="Resource_xoy5t"]
+[sub_resource type="Resource" id="Resource_easy_stream"]
 resource_local_to_scene = true
 script = ExtResource("11_mgecj")
 speed = 400
@@ -59,7 +59,7 @@ despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 
-[sub_resource type="Resource" id="Resource_an80i"]
+[sub_resource type="Resource" id="Resource_easy_spiral"]
 resource_local_to_scene = true
 script = ExtResource("11_mgecj")
 speed = 400
@@ -67,7 +67,7 @@ despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 
-[sub_resource type="Resource" id="Resource_hnfks"]
+[sub_resource type="Resource" id="Resource_easy_orbital1"]
 script = ExtResource("17_eyy8g")
 angular_speed = -0.5
 speed = 400
@@ -75,7 +75,7 @@ despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://c5spfnuqnbago"
 
-[sub_resource type="Resource" id="Resource_68nx8"]
+[sub_resource type="Resource" id="Resource_easy_orbital2"]
 script = ExtResource("17_eyy8g")
 angular_speed = 0.5
 speed = 400
@@ -83,7 +83,7 @@ despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://c5spfnuqnbago"
 
-[sub_resource type="Resource" id="Resource_alternating_burst"]
+[sub_resource type="Resource" id="Resource_easy_burst"]
 resource_local_to_scene = true
 script = ExtResource("11_mgecj")
 speed = 400
@@ -91,7 +91,7 @@ despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 
-[sub_resource type="Resource" id="Resource_sidewinder"]
+[sub_resource type="Resource" id="Resource_easy_sidewinder2"]
 resource_local_to_scene = true
 script = ExtResource("6_gghd3")
 wave_amplitude = 60.0
@@ -101,7 +101,7 @@ despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://cmkov7t4hwm64"
 
-[sub_resource type="Resource" id="Resource_vqcif"]
+[sub_resource type="Resource" id="Resource_easy_bouncer"]
 script = ExtResource("20_io5j5")
 max_bounces = 2
 bounce_damping = 0.9
@@ -126,7 +126,7 @@ script = ExtResource("4_45b28")
 projectile_count = 6
 angle_offset_per_burst_degrees = 25.0
 projectile_scene = ExtResource("5_bqj41")
-projectile_config = SubResource("Resource_xdvqx")
+projectile_config = SubResource("Resource_easy_sidewinder")
 action_duration = 3.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
@@ -140,7 +140,7 @@ pool_duration = 1.5
 [node name="StreamFireAction" type="Node" parent="ToEdge_THEN_SprayNormal"]
 script = ExtResource("9_8ngyk")
 projectile_scene = ExtResource("10_21avb")
-projectile_config = SubResource("Resource_bdum7")
+projectile_config = SubResource("Resource_easy_normal")
 fire_rate = 15.0
 ending_angle_degrees = 120.0
 oscillation_frequency = 1.1
@@ -163,7 +163,7 @@ projectile_count = 4
 fire_rate = 2.0
 angle_offset_per_burst_degrees = 45.0
 projectile_scene = ExtResource("13_jrdlp")
-projectile_config = SubResource("Resource_hw7tf")
+projectile_config = SubResource("Resource_easy_bomb")
 action_duration = 0.5
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
@@ -177,7 +177,7 @@ projectile_count = 4
 fire_rate = 2.0
 angle_offset_per_burst_degrees = 45.0
 projectile_scene = ExtResource("13_jrdlp")
-projectile_config = SubResource("Resource_hw7tf")
+projectile_config = SubResource("Resource_easy_bomb")
 action_duration = 0.5
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
@@ -196,7 +196,7 @@ metadata/_custom_type_script = "uid://cwgd1jyc8xd5i"
 [node name="StreamFireAction" type="Node" parent="ToCenter_THEN_CircularStreamNormal"]
 script = ExtResource("9_8ngyk")
 projectile_scene = ExtResource("10_21avb")
-projectile_config = SubResource("Resource_xoy5t")
+projectile_config = SubResource("Resource_easy_stream")
 fire_rate = 15.0
 ending_angle_degrees = 360.0
 oscillation_frequency = 1.1
@@ -209,7 +209,7 @@ script = ExtResource("4_45b28")
 fire_rate = 2.5
 angle_offset_per_burst_degrees = 15.0
 projectile_scene = ExtResource("10_21avb")
-projectile_config = SubResource("Resource_an80i")
+projectile_config = SubResource("Resource_easy_spiral")
 action_duration = 3.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
@@ -228,7 +228,7 @@ script = ExtResource("4_45b28")
 projectile_count = 6
 angle_offset_per_burst_degrees = 15.0
 projectile_scene = ExtResource("16_masms")
-projectile_config = SubResource("Resource_hnfks")
+projectile_config = SubResource("Resource_easy_orbital1")
 action_duration = 8.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
@@ -237,7 +237,7 @@ script = ExtResource("4_45b28")
 projectile_count = 6
 angle_offset_per_burst_degrees = -15.0
 projectile_scene = ExtResource("16_masms")
-projectile_config = SubResource("Resource_68nx8")
+projectile_config = SubResource("Resource_easy_orbital2")
 action_duration = 8.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
@@ -256,7 +256,7 @@ projectile_count = 4
 fire_rate = 10.0
 angle_offset_per_burst_degrees = 6.0
 projectile_scene = ExtResource("10_21avb")
-projectile_config = SubResource("Resource_alternating_burst")
+projectile_config = SubResource("Resource_easy_burst")
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
 [node name="RadialBurst2" type="Node" parent="ToCenterRow_THEN_AlternatingRadialBursts"]
@@ -265,7 +265,7 @@ projectile_count = 4
 fire_rate = 10.0
 angle_offset_per_burst_degrees = -6.0
 projectile_scene = ExtResource("10_21avb")
-projectile_config = SubResource("Resource_alternating_burst")
+projectile_config = SubResource("Resource_easy_burst")
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
 [node name="RadialBurst3" type="Node" parent="ToCenterRow_THEN_AlternatingRadialBursts"]
@@ -274,7 +274,7 @@ projectile_count = 4
 fire_rate = 10.0
 angle_offset_per_burst_degrees = 6.0
 projectile_scene = ExtResource("10_21avb")
-projectile_config = SubResource("Resource_alternating_burst")
+projectile_config = SubResource("Resource_easy_burst")
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
 [node name="RadialBurst4" type="Node" parent="ToCenterRow_THEN_AlternatingRadialBursts"]
@@ -283,7 +283,7 @@ projectile_count = 4
 fire_rate = 10.0
 angle_offset_per_burst_degrees = -6.0
 projectile_scene = ExtResource("10_21avb")
-projectile_config = SubResource("Resource_alternating_burst")
+projectile_config = SubResource("Resource_easy_burst")
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
 [node name="RadialBurst5" type="Node" parent="ToCenterRow_THEN_AlternatingRadialBursts"]
@@ -292,7 +292,7 @@ projectile_count = 4
 fire_rate = 10.0
 angle_offset_per_burst_degrees = 6.0
 projectile_scene = ExtResource("10_21avb")
-projectile_config = SubResource("Resource_alternating_burst")
+projectile_config = SubResource("Resource_easy_burst")
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
 [node name="RadialBurst6" type="Node" parent="ToCenterRow_THEN_AlternatingRadialBursts"]
@@ -301,7 +301,7 @@ projectile_count = 4
 fire_rate = 10.0
 angle_offset_per_burst_degrees = -6.0
 projectile_scene = ExtResource("10_21avb")
-projectile_config = SubResource("Resource_alternating_burst")
+projectile_config = SubResource("Resource_easy_burst")
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
 [node name="WaitAction" type="Node" parent="ToCenterRow_THEN_AlternatingRadialBursts"]
@@ -326,7 +326,7 @@ projectile_count = 5
 arc_degrees = 90.0
 aim_at_screen_center = true
 projectile_scene = ExtResource("5_bqj41")
-projectile_config = SubResource("Resource_sidewinder")
+projectile_config = SubResource("Resource_easy_sidewinder2")
 action_duration = 2.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
@@ -343,7 +343,7 @@ projectile_count = 5
 arc_degrees = 90.0
 aim_at_screen_center = true
 projectile_scene = ExtResource("5_bqj41")
-projectile_config = SubResource("Resource_sidewinder")
+projectile_config = SubResource("Resource_easy_sidewinder2")
 action_duration = 2.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
@@ -395,6 +395,6 @@ projectile_count = 3
 arc_degrees = 120.0
 aim_at_screen_center = true
 projectile_scene = ExtResource("19_8tonc")
-projectile_config = SubResource("Resource_vqcif")
+projectile_config = SubResource("Resource_easy_bouncer")
 action_duration = 8.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
