@@ -94,6 +94,7 @@ func handle_player(_delta: float) -> void:
 		start_dashing();
 	
 	if can_shoot && Input.is_action_pressed("shoot"):
+		$Shooting.play()
 		gun.shoot();
 		can_shoot = false;
 		shoot_cooldown_timer.start();

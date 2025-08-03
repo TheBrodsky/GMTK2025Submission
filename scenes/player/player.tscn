@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://csx3k2jd8acqe"]
+[gd_scene load_steps=53 format=3 uid="uid://csx3k2jd8acqe"]
 
 [ext_resource type="Script" uid="uid://drm1qvc7cq3ga" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="PackedScene" uid="uid://cwddm8s7evxkd" path="res://scenes/player/DashScene.tscn" id="2_iqsei"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://bi67nxun54py" path="res://scenes/projectile/player_projectile.tscn" id="25_j4nxn"]
 [ext_resource type="PackedScene" uid="uid://b2hfrt8qnrixu" path="res://scenes/projectile/clone_projectile.tscn" id="26_28m0y"]
 [ext_resource type="Script" uid="uid://dy7lhpiqyi6pm" path="res://resources/base_projectile_config.gd" id="27_uniwh"]
+[ext_resource type="AudioStream" uid="uid://bvd1ttl1jog2d" path="res://assets/Sounds/SFX/PlayerGunShot.mp3" id="30_iqsei"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bbmj2"]
 atlas = ExtResource("3_007i1")
@@ -184,7 +185,7 @@ size = Vector2(85.5556, 21.5625)
 
 [sub_resource type="Resource" id="Resource_iqsei"]
 script = ExtResource("27_uniwh")
-speed = 1000
+speed = 2000
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
@@ -270,6 +271,13 @@ health_component = NodePath("../HealthComponent")
 position = Vector2(8.88889, 0)
 scale = Vector2(2.51111, 3.7)
 shape = SubResource("CircleShape2D_x7p2l")
+
+[node name="Shooting" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("30_iqsei")
+volume_db = 10.0
+max_distance = 4096.0
+attenuation = 1e-05
+bus = &"Sound"
 
 [connection signal="got_damaged" from="HealthComponent" to="." method="_on_health_component_got_damaged"]
 [connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_shoot_cooldown_timeout"]
