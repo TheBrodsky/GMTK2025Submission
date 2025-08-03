@@ -1,5 +1,6 @@
 ## Actions that run one after another in sequence
 ## A boss' actions are defined by a sequence, which itself can include sequences.
+@icon("res://assets/editor_icons/sequence_icon.svg")
 class_name BossSequence extends BossAction
 
 @export var loops: bool = false

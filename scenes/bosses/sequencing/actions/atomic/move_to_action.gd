@@ -3,6 +3,7 @@
 ## TOP_LEFT     TOP_CENTER     TOP_RIGHT
 ## CENTER_LEFT  CENTER_CENTER  CENTER_RIGHT  
 ## BOTTOM_LEFT  BOTTOM_CENTER  BOTTOM_RIGHT
+@icon("res://assets/editor_icons/move_icon.svg")
 class_name MoveToAction extends AtomicBossAction
 
 enum TargetType {

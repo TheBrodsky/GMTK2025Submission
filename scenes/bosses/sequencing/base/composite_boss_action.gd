@@ -1,4 +1,5 @@
 ## Multiple actions that run simultaneously, completes when all children complete
+@icon("res://assets/editor_icons/compound_icon.svg")
 class_name CompositeBossAction extends BossAction
 
 var sub_actions: Array[BossAction] = []

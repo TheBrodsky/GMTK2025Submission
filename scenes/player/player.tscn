@@ -213,6 +213,11 @@ position = Vector2(9, 71.25)
 scale = Vector2(0.9, 1.6)
 shape = SubResource("RectangleShape2D_uniwh")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(10, -69)
+scale = Vector2(0.9, 1.6)
+shape = SubResource("RectangleShape2D_uniwh")
+
 [node name="CloneGunOverlay" type="Sprite2D" parent="." node_paths=PackedStringArray("my_owner", "owners_animation")]
 show_behind_parent = true
 position = Vector2(4, -6)
@@ -239,7 +244,7 @@ timer = NodePath("../ImmunityTimer")
 clone_overlay = NodePath("../CloneGunOverlay")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_lvxji")]
-max_health = 1.0
+max_health = 10000.0
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
 wait_time = 0.2

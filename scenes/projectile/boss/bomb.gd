@@ -13,8 +13,14 @@ func _ready() -> void:
 	assert(config is BombConfig, "Bomb requires BombConfig")
 	var bomb_config = config as BombConfig
 	current_speed = config.speed
-	# Calculate time to explosion: time = (initial_speed - threshold) / deceleration
-	time_to_explosion = (config.speed - bomb_config.min_speed_threshold) / bomb_config.deceleration
+	
+	# Calculate time to explosion based on detonation mode
+	if bomb_config.detonation_mode == BombConfig.DetonationMode.DECELERATION:
+		# Calculate time to explosion: time = (initial_speed - threshold) / deceleration
+		time_to_explosion = (config.speed - bomb_config.min_speed_threshold) / bomb_config.deceleration
+	else:  # TIME_LIMIT mode
+		time_to_explosion = bomb_config.time_limit
+	
 	# Find the sprite node for blinking effect
 	sprite_node = get_node("BombSprite")
 	super._ready()
@@ -24,10 +30,14 @@ func _process(delta: float) -> void:
 		return
 	
 	time_alive += delta
-	
-	# Decelerate over time
 	var bomb_config = config as BombConfig
-	current_speed = max(current_speed - bomb_config.deceleration * delta, 0.0)
+	
+	# Handle movement based on detonation mode
+	if bomb_config.detonation_mode == BombConfig.DetonationMode.DECELERATION:
+		# Decelerate over time
+		current_speed = max(current_speed - bomb_config.deceleration * delta, 0.0)
+	else:  # TIME_LIMIT mode - maintain constant speed
+		current_speed = config.speed
 	
 	# Update velocity with new speed
 	velocity = direction * current_speed
@@ -56,9 +66,15 @@ func _process(delta: float) -> void:
 		else:
 			sprite_node.modulate = Color(0.7, 0.7, 0.7, 1.0)  # Dimmed gray
 	
-	# Check if stopped and should explode
-	if current_speed <= bomb_config.min_speed_threshold:
-		explode()
+	# Check detonation conditions based on mode
+	if bomb_config.detonation_mode == BombConfig.DetonationMode.DECELERATION:
+		# Check if stopped and should explode
+		if current_speed <= bomb_config.min_speed_threshold:
+			explode()
+	else:  # TIME_LIMIT mode
+		# Check if time limit reached
+		if time_alive >= bomb_config.time_limit:
+			explode()
 
 func explode() -> void:
 	if has_exploded:
