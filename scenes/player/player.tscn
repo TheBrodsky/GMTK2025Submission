@@ -193,6 +193,7 @@ metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 radius = 10.0499
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("gun", "hitbox", "health") groups=["HardReset", "SoftReset"]]
+collision_layer = 0
 collision_mask = 8
 script = ExtResource("1_8afob")
 dash_effect_creation_frame = 1
