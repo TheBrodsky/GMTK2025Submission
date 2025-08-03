@@ -10,17 +10,17 @@ offset_bottom = 494.0
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 2
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+[node name="Logo" type="Sprite2D" parent="CenterContainer"]
+position = Vector2(14, -121.028)
+scale = Vector2(0.135021, 0.135021)
+
+[node name="MarginContainer#TextureRect" type="TextureRect" parent="."]
 visible = false
 layout_mode = 2
 texture = ExtResource("1_scjn5")
 stretch_mode = 2
-[node name="Logo" type="Sprite2D" parent="CenterContainer"]
-position = Vector2(14, -121.028)
-scale = Vector2(0.135021, 0.135021)
-texture = ExtResource("1_73npv")
 
-[node name="TextureRect2" type="TextureRect" parent="MarginContainer"]
+[node name="MarginContainer#TextureRect2" type="TextureRect" parent="."]
 layout_mode = 2
 texture = ExtResource("2_7jqdi")
 stretch_mode = 2
