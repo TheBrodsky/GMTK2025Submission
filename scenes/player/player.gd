@@ -192,14 +192,14 @@ func mode_changed() -> void:
 	match mode:
 		Global.PlayerMode.PLAYER:
 			# Layer
-			set_collision_layer_value(Global.CollisionLayer.PLAYER, true);
+			#set_collision_layer_value(Global.CollisionLayer.PLAYER, true);
 			hitbox.set_collision_layer_value(Global.CollisionLayer.PLAYER, true);
 			
 			# Mask
 			hitbox.set_collision_mask_value(Global.CollisionLayer.CLONE_PROJECTILE, true);
 		Global.PlayerMode.CLONE:
 			# Layer
-			set_collision_layer_value(Global.CollisionLayer.CLONE, true);
+			#set_collision_layer_value(Global.CollisionLayer.CLONE, true);
 			hitbox.set_collision_layer_value(Global.CollisionLayer.CLONE, true);
 
 func _on_shoot_cooldown_timeout() -> void:
