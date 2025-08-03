@@ -23,7 +23,7 @@ func _perform_action(delta: float):
 		_fire_radial_burst()
 
 func _fire_radial_burst():
-	$Fire.play()
+	boss_node.fire_audio.play()
 	var angles = _calculate_angles()
 	var offset_radians = deg_to_rad(current_angle_offset_degrees)
 	var base_angle_offset = 0.0

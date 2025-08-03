@@ -7,6 +7,7 @@ class_name Boss extends CharacterBody2D
 @export var health: HealthComponent;
 
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var fire_audio = $Fire
 var previous_position: Vector2
 var estimated_velocity: Vector2 = Vector2.ZERO
 var sequence_builder: BossSequenceBuilder
