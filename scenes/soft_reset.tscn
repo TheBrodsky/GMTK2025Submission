@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cvfmy2bsyhr6q"]
+[gd_scene load_steps=4 format=3 uid="uid://cvfmy2bsyhr6q"]
 
 [ext_resource type="Theme" uid="uid://d22mpqutkotsu" path="res://ui/theme.tres" id="1_gmipb"]
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/fade_overlay.tscn" id="2_javar"]
+[ext_resource type="Script" uid="uid://djrqtnmibtu7t" path="res://scenes/label_soft.gd" id="3_javar"]
 
 [node name="SoftReset" type="Node2D"]
 
@@ -11,6 +12,8 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -55,6 +58,7 @@ theme_type_variation = &"HeaderMedium"
 text = "CLONE #*attempt number* IS A FAILURE"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("3_javar")
 
 [node name="Label2" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2

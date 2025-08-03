@@ -29,6 +29,8 @@ var USER_SETTING_DEFAULTS = {
 
 var config:ConfigFile
 
+var attempt_counter: int = 0
+
 func _ready():
 	config = ConfigFile.new()
 	config.load(SETTINGS_FILE)

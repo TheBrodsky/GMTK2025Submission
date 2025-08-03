@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cllrhwb6tq3gh"]
+[gd_scene load_steps=7 format=3 uid="uid://cllrhwb6tq3gh"]
 
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/fade_overlay.tscn" id="1_64dwf"]
 [ext_resource type="Script" uid="uid://c0ae3scnbkxdw" path="res://scenes/game_over_scene.gd" id="1_ny7m6"]
 [ext_resource type="Theme" uid="uid://d22mpqutkotsu" path="res://ui/theme.tres" id="2_k0nam"]
+[ext_resource type="Script" uid="uid://brsfcxluoxvgc" path="res://scenes/label_hard.gd" id="4_5jg82"]
 [ext_resource type="AudioStream" uid="uid://d4k7aggoegl6x" path="res://assets/Sounds/SFX/UIHover.mp3" id="4_jy0sy"]
 [ext_resource type="AudioStream" uid="uid://djbgioq2j2lud" path="res://assets/Sounds/SFX/UIPress.mp3" id="5_5jg82"]
 
@@ -15,6 +16,8 @@ script = ExtResource("1_ny7m6")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 40.0
+offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -65,6 +68,7 @@ theme_type_variation = &"HeaderSmall"
 text = "CLONE #*attempt number* FAILED TO OUTPERFORM PREDECESSORS"
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("4_5jg82")
 
 [node name="Label2" type="Label" parent="UI/VBoxContainer"]
 layout_mode = 2
