@@ -9,6 +9,8 @@ extends Node2D
 var next_scene: PackedScene;
 
 func _ready() -> void:
+	AudioPlayer.play_combat_music();
+	
 	fade_overlay.visible = true
 	
 	if SaveGame.has_save():

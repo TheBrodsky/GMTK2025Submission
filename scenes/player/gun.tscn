@@ -11,4 +11,4 @@ offset = Vector2(64, -24)
 script = ExtResource("2_j0ebl")
 
 [node name="ProjectileSpawnPoint" type="Marker2D" parent="."]
-position = Vector2(133.333, -37.037)
+position = Vector2(160, -37.037)

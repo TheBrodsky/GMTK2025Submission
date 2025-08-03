@@ -22,6 +22,12 @@ func execute(boss: Node):
 func clone() -> BossAction:
 	return duplicate()
 
+## Recursively processes node tree to replace subpools with cloned actions
+## Override in composite/sequence actions that can contain subpools
+func _replace_subpools_in_cloned_node(_node: Node):
+	# Default implementation does nothing - atomic actions don't contain subpools
+	pass
+
 ## In case there's any cleanup an action needs to do before it expires
 func _on_complete(_boss_node: Node):
 	pass

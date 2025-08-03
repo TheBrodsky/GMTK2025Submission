@@ -224,7 +224,7 @@ shape = SubResource("RectangleShape2D_uniwh")
 
 [node name="CloneGunOverlay" type="Sprite2D" parent="." node_paths=PackedStringArray("my_owner", "owners_animation")]
 show_behind_parent = true
-position = Vector2(4, -6)
+position = Vector2(22.5, -36.25)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("23_4hvnv")
 offset = Vector2(164, 51)
@@ -235,7 +235,7 @@ owners_animation = NodePath("../AnimatedSprite2D")
 [node name="Gun" parent="." node_paths=PackedStringArray("my_owner", "owners_animation", "timer", "clone_overlay") instance=ExtResource("3_gmlin")]
 modulate = Color(1, 1, 1, 1)
 show_behind_parent = true
-position = Vector2(4, -6)
+position = Vector2(22.5, -36.25)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("13_fcs02")
 offset = Vector2(164, 51)
