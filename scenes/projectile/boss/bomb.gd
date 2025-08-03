@@ -14,6 +14,9 @@ func _ready() -> void:
 	var bomb_config = config as BombConfig
 	current_speed = config.speed
 	
+	$AnimatedSprite2D.visible = false
+	$BombSpriteHighlighted.visible = false
+	
 	# Calculate time to explosion based on detonation mode
 	if bomb_config.detonation_mode == BombConfig.DetonationMode.DECELERATION:
 		# Calculate time to explosion: time = (initial_speed - threshold) / deceleration
@@ -62,26 +65,40 @@ func _process(delta: float) -> void:
 		
 		# Flash between bright white and dimmed gray
 		if is_flash_on:
-			sprite_node.modulate = Color(2.0, 2.0, 2.0, 1.0)  # Bright flash
+			$BombSpriteHighlighted.visible = true
+			$BombSprite.visible = false
+			#sprite_node.modulate = Color(2.0, 2.0, 2.0, 1.0)  # Bright flash
 		else:
-			sprite_node.modulate = Color(0.7, 0.7, 0.7, 1.0)  # Dimmed gray
+			$BombSpriteHighlighted.visible = false
+			$BombSprite.visible = true
+			#sprite_node.modulate = Color(0.7, 0.7, 0.7, 1.0)  # Dimmed gray
 	
 	# Check detonation conditions based on mode
 	if bomb_config.detonation_mode == BombConfig.DetonationMode.DECELERATION:
 		# Check if stopped and should explode
 		if current_speed <= bomb_config.min_speed_threshold:
+
 			explode()
 	else:  # TIME_LIMIT mode
 		# Check if time limit reached
 		if time_alive >= bomb_config.time_limit:
+			$BombSpriteHighlighted.visible = false
+			$BombSprite.visible = false
+			$AnimatedSprite2D.visible = true
+			$AnimatedSprite2D.play("default")
 			explode()
 
 func explode() -> void:
+	
 	if has_exploded:
 		return
 	
 	has_exploded = true
-	
+	$BombSpriteHighlighted.visible = false
+	$BombSprite.visible = false
+	$AnimatedSprite2D.visible = true
+	$AnimatedSprite2D.play("default")
+
 	# Create explosion burst using radial pattern
 	if explosion_projectile_scene:
 		var bomb_config = config as BombConfig

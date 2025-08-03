@@ -1,20 +1,91 @@
-[gd_scene load_steps=5 format=3 uid="uid://vluucpq4qfov"]
+[gd_scene load_steps=17 format=3 uid="uid://vluucpq4qfov"]
 
 [ext_resource type="PackedScene" uid="uid://bfc0xm65wxuol" path="res://scenes/projectile/base_projectile.tscn" id="1_base"]
 [ext_resource type="Script" uid="uid://bj7hgwpqduix3" path="res://scenes/projectile/boss/bomb.gd" id="2_bomb"]
 [ext_resource type="PackedScene" uid="uid://dqh3tanlfpbkc" path="res://scenes/projectile/boss/enemy_projectile.tscn" id="3_gxqwi"]
-[ext_resource type="Texture2D" uid="uid://cbgdenklkimqf" path="res://assets/boss_assets/boss_bullet_red.png" id="3_texture"]
+[ext_resource type="Texture2D" uid="uid://bremux13s1bru" path="res://assets/bomb/bomb.png" id="4_fq8b6"]
+[ext_resource type="Script" uid="uid://cdxjh7bnifl68" path="res://resources/bomb_config.gd" id="4_jwr63"]
+[ext_resource type="Texture2D" uid="uid://bc383xrldvkgq" path="res://assets/bomb/bomb_highlighted.png" id="5_jwr63"]
+[ext_resource type="Texture2D" uid="uid://744ona83dv8m" path="res://assets/bomb/bomb_0000.png" id="6_vaesp"]
+[ext_resource type="Texture2D" uid="uid://ruu7lobpms4y" path="res://assets/bomb/bomb_0001.png" id="7_158n3"]
+[ext_resource type="Texture2D" uid="uid://bfqoujks1f6rw" path="res://assets/bomb/bomb_0002.png" id="8_kyl0l"]
+[ext_resource type="Texture2D" uid="uid://c3u74y156i5b8" path="res://assets/bomb/bomb_0003.png" id="9_wytij"]
+[ext_resource type="Texture2D" uid="uid://b0oe58uv16gbe" path="res://assets/bomb/bomb_0004.png" id="10_c1xrj"]
+[ext_resource type="Texture2D" uid="uid://dekkx2ov7b6y" path="res://assets/bomb/bomb_0005.png" id="11_284c3"]
+[ext_resource type="Texture2D" uid="uid://djsqmamac8s2i" path="res://assets/bomb/bomb_0006.png" id="12_4ecmb"]
+[ext_resource type="Texture2D" uid="uid://bpcaa3yvoyxbk" path="res://assets/bomb/bomb_0007.png" id="13_f0qgi"]
+
+[sub_resource type="Resource" id="Resource_vaesp"]
+script = ExtResource("4_jwr63")
+detonation_mode = 1
+deceleration = 75.0
+explosion_projectile_count = 8
+explosion_speed = 100.0
+min_speed_threshold = 10.0
+base_blink_frequency = 2.0
+time_limit = 3.0
+speed = 1000
+despawn_time = -1
+damage = 10
+metadata/_custom_type_script = "uid://cdxjh7bnifl68"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_48mer"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_vaesp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_158n3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kyl0l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wytij")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c1xrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_284c3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4ecmb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_f0qgi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Bomb" instance=ExtResource("1_base")]
+position = Vector2(296, 171)
 script = ExtResource("2_bomb")
 explosion_projectile_scene = ExtResource("3_gxqwi")
+config = SubResource("Resource_vaesp")
 
 [node name="BombSprite" type="Sprite2D" parent="." index="0"]
 scale = Vector2(0.64, 0.64)
-texture = ExtResource("3_texture")
+texture = ExtResource("4_fq8b6")
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="BombSpriteHighlighted" type="Sprite2D" parent="." index="1"]
+visible = false
+scale = Vector2(0.64, 0.64)
+texture = ExtResource("5_jwr63")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="2"]
+visible = false
+scale = Vector2(0.64, 0.64)
+sprite_frames = SubResource("SpriteFrames_48mer")
+frame = 5
+frame_progress = 0.983159
+speed_scale = 2.0
+
+[node name="CollisionShape2D" parent="." index="3"]
 scale = Vector2(3, 3)
 
-[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+[node name="VisibleOnScreenNotifier2D" parent="." index="4"]
 scale = Vector2(3, 3)
