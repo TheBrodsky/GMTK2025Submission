@@ -185,7 +185,7 @@ size = Vector2(85.5556, 21.5625)
 
 [sub_resource type="Resource" id="Resource_iqsei"]
 script = ExtResource("27_uniwh")
-speed = 2000
+speed = 1600
 despawn_time = -1
 damage = 10
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
