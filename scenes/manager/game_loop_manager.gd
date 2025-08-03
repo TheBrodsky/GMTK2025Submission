@@ -63,6 +63,12 @@ func handle_soft_reset() -> void:
 		push_error("Difficulty", Global.selected_difficulty, "does not have PackedScene");
 
 func handle_victory() -> void:
+	for hard_reset in get_tree().get_nodes_in_group("HardReset"):
+		hard_reset.queue_free();
+	
+	for soft_reset in get_tree().get_nodes_in_group("SoftReset"):
+		soft_reset.queue_free();
+	
 	get_tree().change_scene_to_packed(victory_screen);
 
 func handle_hard_reset() -> void:
