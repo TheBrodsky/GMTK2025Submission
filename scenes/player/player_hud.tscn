@@ -19,10 +19,13 @@ soft_reset_timer_label = NodePath("HBoxContainer/SoftResetTimerLabel")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-offset_left = 7.5
-offset_top = 7.5
-offset_right = 64.5
-offset_bottom = 30.5
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 7.0
+offset_bottom = 30.0
+grow_horizontal = 2
 
 [node name="SoftResetTimerLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
@@ -33,10 +36,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -190.687
-offset_top = 10.0
-offset_right = 166.126
-offset_bottom = 33.0
+offset_left = -193.333
+offset_top = 7.0
+offset_right = 232.667
+offset_bottom = 30.0
 grow_horizontal = 2
 
 [node name="Container" type="VBoxContainer" parent="HBoxContainer2"]
