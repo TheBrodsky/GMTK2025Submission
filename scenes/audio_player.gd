@@ -17,9 +17,9 @@ func play_main_menu_music() -> void:
 func play_combat_music() -> void:
 	_play_music(COMBAT, 0.0);
 
-func play_fx(stream: AudioStream, volume = 0.0) -> void:
+func play_fx(music: AudioStream, volume = 0.0) -> void:
 	var fx_player = AudioStreamPlayer.new()
-	fx_player.stream = stream;
+	fx_player.stream = music;
 	fx_player.name = "FX_PLAYER"
 	fx_player.volume_db = volume;
 	add_child(fx_player);
