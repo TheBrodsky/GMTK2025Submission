@@ -14,29 +14,36 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("1_0cgte")
 script = ExtResource("1_v4fpl")
-boss_health_bar = NodePath("HBoxContainer/Container/BossHealthBar")
+boss_health_bar = NodePath("HBoxContainer2/Container/BossHealthBar")
 soft_reset_timer_label = NodePath("HBoxContainer/SoftResetTimerLabel")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 23.0
-grow_horizontal = 2
+offset_left = 7.5
+offset_top = 7.5
+offset_right = 64.5
+offset_bottom = 30.5
 
 [node name="SoftResetTimerLabel" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "TIMER"
 
-[node name="BossLabel" type="Label" parent="HBoxContainer"]
-layout_mode = 2
-text = "BOSS"
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -190.687
+offset_top = 10.0
+offset_right = 166.126
+offset_bottom = 33.0
+grow_horizontal = 2
 
-[node name="Container" type="VBoxContainer" parent="HBoxContainer"]
+[node name="Container" type="VBoxContainer" parent="HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="BossHealthBar" type="ProgressBar" parent="HBoxContainer/Container"]
+[node name="BossHealthBar" type="ProgressBar" parent="HBoxContainer2/Container"]
 layout_mode = 2
 size_flags_vertical = 3
 show_percentage = false
