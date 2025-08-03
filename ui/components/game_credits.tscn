@@ -38,31 +38,31 @@ horizontal_alignment = 1
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-text = "Dragonphly: Audio and SFX "
+text = "Dragonphly – Audio and SFX "
 
 [node name="Lars" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-text = "Lars Snedker: Game design, UI design"
+text = "Lars Snedker – Game design, UI design, Level design "
 
 [node name="MightyDan" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-text = "MightyDan: Programming "
+text = "MightyDan – Programming"
 
 [node name="Soma" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-text = "Soma: Character design, animation, tileset"
+text = "Soma – Character design, animation, tileset"
 
 [node name="Stepthen" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 8
-text = "Stephen: Programming"
+text = "Stephen – Programming"
 
 [node name="Tim" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
