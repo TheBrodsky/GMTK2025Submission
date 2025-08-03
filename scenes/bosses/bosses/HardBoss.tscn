@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://jur5bey4kc4w" path="res://scenes/bosses/bosses/BaseBoss.tscn" id="1_ueb6h"]
 
 [node name="HardBoss" instance=ExtResource("1_ueb6h")]
+
+[node name="HealthComponent" parent="." index="3"]
+max_health = 5000.0
