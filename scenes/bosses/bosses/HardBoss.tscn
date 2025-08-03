@@ -4,5 +4,5 @@
 
 [node name="HardBoss" instance=ExtResource("1_ueb6h")]
 
-[node name="HealthComponent" parent="." index="3"]
+[node name="HealthComponent" parent="." index="6"]
 max_health = 5000.0
