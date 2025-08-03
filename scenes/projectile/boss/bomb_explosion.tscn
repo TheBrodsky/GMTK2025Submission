@@ -42,7 +42,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="BombExplosion" type="AnimatedSprite2D"]
+[node name="BombExplosion" type="AnimatedSprite2D" groups=["HardReset", "SoftReset"]]
 scale = Vector2(0.64, 0.64)
 sprite_frames = SubResource("SpriteFrames_o4nw1")
 autoplay = "default"

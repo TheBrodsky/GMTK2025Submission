@@ -5,7 +5,7 @@ class_name VictoryScreen;
 const MAIN_MENU_SCENE := "res://scenes/main_menu_scene.tscn";
 @onready var trial_counter: Label = $UI/CenterContainer/VSplitContainer/VBoxContainer2/TrialCounter
 @onready var clone_number: Label = $UI/CenterContainer/VSplitContainer/VBoxContainer2/CloneNumber
-
+const PLAYER_VICTORY = preload("res://assets/Sounds/SFX/PlayerVictory.mp3")
 
 var next_scene: String;
 
@@ -15,6 +15,9 @@ func _ready() -> void:
 	
 	clone_number.text = "CLONE #" + str(UserSettings.attempt_counter).pad_zeros(3)
 	UserSettings.attempt_counter = 0;
+	
+	AudioPlayer.play_fx(PLAYER_VICTORY);
+	AudioPlayer.play_main_menu_music();
 
 func _on_return_to_main_menu_button_pressed() -> void:
 	$UiPress.play()
