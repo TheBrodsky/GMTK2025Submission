@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://wsailsg3akbn" path="res://scenes/projectile/boss/orbital.tscn" id="14_xoy5t"]
 [ext_resource type="Script" uid="uid://c5spfnuqnbago" path="res://resources/orbital_config.gd" id="15_hnfks"]
 [ext_resource type="PackedScene" uid="uid://c62qddu2dtfxf" path="res://scenes/projectile/boss/bouncer.tscn" id="16_68nx8"]
-[ext_resource type="PackedScene" path="res://scenes/bosses/sequencing/actions/subpools/MoveToCenterRow.tscn" id="16_xdvqx"]
+[ext_resource type="PackedScene" uid="uid://bfv17ugtitykg" path="res://scenes/bosses/sequencing/actions/subpools/MoveToCenterRow.tscn" id="16_xdvqx"]
 [ext_resource type="Script" uid="uid://jaw2n6mfllbo" path="res://resources/bouncer_config.gd" id="17_ap17e"]
 [ext_resource type="PackedScene" uid="uid://bk8m3dn6m3kcf" path="res://scenes/projectile/boss/sidewinder.tscn" id="18_sw"]
 [ext_resource type="Script" uid="uid://lic05cj24h3u" path="res://resources/sidewinder_config.gd" id="19_sw"]
@@ -344,6 +344,7 @@ metadata/_custom_type_script = "uid://c4yeb24boo5pd"
 [node name="MoveToTopLeft" type="Node" parent="InOuterCircuit_AND_ArcBouncers"]
 script = ExtResource("7_vduf1")
 target_type = 1
+action_duration = 1.5
 metadata/_custom_type_script = "uid://cwgd1jyc8xd5i"
 
 [node name="CompositeBossAction" type="Node" parent="InOuterCircuit_AND_ArcBouncers"]
@@ -357,23 +358,25 @@ metadata/_custom_type_script = "uid://c4yeb24boo5pd"
 [node name="MoveToAction2" type="Node" parent="InOuterCircuit_AND_ArcBouncers/CompositeBossAction/MoveInOuterCircuit"]
 script = ExtResource("7_vduf1")
 target_type = 3
-action_duration = 2.0
+action_duration = 3.0
 metadata/_custom_type_script = "uid://cwgd1jyc8xd5i"
 
 [node name="MoveToAction3" type="Node" parent="InOuterCircuit_AND_ArcBouncers/CompositeBossAction/MoveInOuterCircuit"]
 script = ExtResource("7_vduf1")
 target_type = 9
+action_duration = 2.0
 metadata/_custom_type_script = "uid://cwgd1jyc8xd5i"
 
 [node name="MoveToAction4" type="Node" parent="InOuterCircuit_AND_ArcBouncers/CompositeBossAction/MoveInOuterCircuit"]
 script = ExtResource("7_vduf1")
 target_type = 7
-action_duration = 2.0
+action_duration = 3.0
 metadata/_custom_type_script = "uid://cwgd1jyc8xd5i"
 
 [node name="MoveToAction5" type="Node" parent="InOuterCircuit_AND_ArcBouncers/CompositeBossAction/MoveInOuterCircuit"]
 script = ExtResource("7_vduf1")
 target_type = 1
+action_duration = 2.0
 metadata/_custom_type_script = "uid://cwgd1jyc8xd5i"
 
 [node name="RadialFireAction" type="Node" parent="InOuterCircuit_AND_ArcBouncers/CompositeBossAction"]
@@ -383,5 +386,5 @@ arc_degrees = 120.0
 aim_at_screen_center = true
 projectile_scene = ExtResource("16_68nx8")
 projectile_config = SubResource("Resource_vqcif")
-action_duration = 6.0
+action_duration = 10.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
