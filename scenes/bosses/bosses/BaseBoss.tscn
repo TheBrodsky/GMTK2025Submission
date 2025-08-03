@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://jur5bey4kc4w"]
+[gd_scene load_steps=14 format=3 uid="uid://jur5bey4kc4w"]
 
 [ext_resource type="Script" uid="uid://cvqpo4dfnk8bt" path="res://scenes/bosses/bosses/boss.gd" id="1_560g0"]
 [ext_resource type="Texture2D" uid="uid://dqgyrgtnefw62" path="res://assets/boss_assets/BossIdle.png" id="2_fylwb"]
+[ext_resource type="AudioStream" uid="uid://bxcq7dgsewvo8" path="res://assets/Sounds/SFX/EnemyHit.mp3" id="2_rb1jn"]
 [ext_resource type="Texture2D" uid="uid://bnestjwd1qo7w" path="res://assets/boss_assets/boss_run_0000.png" id="3_784k0"]
 [ext_resource type="Texture2D" uid="uid://vch14g50j8oy" path="res://assets/boss_assets/boss_run_0001.png" id="4_qfaln"]
 [ext_resource type="Texture2D" uid="uid://bakcakvm5l7q7" path="res://assets/boss_assets/boss_run_0002.png" id="5_as61j"]
@@ -55,6 +56,11 @@ hitbox = NodePath("HitBoxComponent")
 health = NodePath("HealthComponent")
 metadata/_edit_horizontal_guides_ = [-162.0, 162.0]
 metadata/_edit_vertical_guides_ = [288.0, -288.0]
+
+[node name="Damage" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_rb1jn")
+volume_db = 2.0
+attenuation = 1e-05
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.35, 0.35)

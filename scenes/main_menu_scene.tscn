@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://dv2y18ye8j7o0"]
+[gd_scene load_steps=13 format=4 uid="uid://dv2y18ye8j7o0"]
 
 [ext_resource type="Script" uid="uid://k5f271qgai2d" path="res://scenes/main_menu_scene.gd" id="1_1foie"]
 [ext_resource type="PackedScene" uid="uid://bej21vmdia824" path="res://scenes/difficulty_selection_scene.tscn" id="2_diff"]
@@ -7,6 +7,7 @@
 [ext_resource type="Theme" uid="uid://d22mpqutkotsu" path="res://ui/theme.tres" id="4_6ad1t"]
 [ext_resource type="PackedScene" uid="uid://b4blrdjthcxnn" path="res://ui/components/game_logo.tscn" id="4_fnufg"]
 [ext_resource type="PackedScene" uid="uid://wnx76snk3gsv" path="res://scenes/game_credits_scene.tscn" id="4_wbyn4"]
+[ext_resource type="Texture2D" uid="uid://q8fiid6qy1x0" path="res://assets/main_menu.png" id="6_pe0bh"]
 [ext_resource type="PackedScene" uid="uid://bqvg18qq2j1p7" path="res://ui/components/MenuMusicPlayer.tscn" id="8_pw2k5"]
 [ext_resource type="AudioStream" uid="uid://d4k7aggoegl6x" path="res://assets/Sounds/SFX/UIHover.mp3" id="9_pw2k5"]
 [ext_resource type="AudioStream" uid="uid://djbgioq2j2lud" path="res://assets/Sounds/SFX/UIPress.mp3" id="10_pe0bh"]
@@ -31,6 +32,28 @@ offset_right = 577.0
 offset_bottom = 327.476
 theme = ExtResource("4_6ad1t")
 
+[node name="CenterContainer2" type="CenterContainer" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -287.5
+offset_top = -164.5
+offset_right = 287.5
+offset_bottom = 155.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="UI/Control/CenterContainer2"]
+layout_mode = 2
+
+[node name="MainMenu" type="Sprite2D" parent="UI/Control/CenterContainer2/AspectRatioContainer"]
+position = Vector2(1, 1.47594)
+scale = Vector2(0.299479, 0.302778)
+texture = ExtResource("6_pe0bh")
+
 [node name="CenterContainer" type="CenterContainer" parent="UI/Control"]
 layout_mode = 2
 offset_right = 577.0
@@ -42,10 +65,10 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Control"]
 layout_mode = 2
-offset_left = 15.0
-offset_top = 0.475937
-offset_right = 195.0
-offset_bottom = 326.428
+offset_left = 13.0
+offset_top = 6.47594
+offset_right = 193.0
+offset_bottom = 332.428
 pivot_offset = Vector2(-124, -1)
 size_flags_horizontal = 0
 alignment = 2

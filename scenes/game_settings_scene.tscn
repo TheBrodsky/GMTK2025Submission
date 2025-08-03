@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://g4qhvbvdm62w"]
+[gd_scene load_steps=9 format=3 uid="uid://g4qhvbvdm62w"]
 
 [ext_resource type="Script" uid="uid://ckdn2dpa7o7ra" path="res://scenes/game_settings_scene.gd" id="1_3764u"]
 [ext_resource type="PackedScene" uid="uid://bkk87o2ooo6at" path="res://ui/overlays/fade_overlay.tscn" id="1_w6tmj"]
+[ext_resource type="Texture2D" uid="uid://q8fiid6qy1x0" path="res://assets/main_menu.png" id="2_h7ju1"]
 [ext_resource type="PackedScene" uid="uid://nbaodrlopo7y" path="res://ui/components/game_settings.tscn" id="2_qsqie"]
 [ext_resource type="Theme" uid="uid://d22mpqutkotsu" path="res://ui/theme.tres" id="3_unbh4"]
 [ext_resource type="PackedScene" uid="uid://bqvg18qq2j1p7" path="res://ui/components/MenuMusicPlayer.tscn" id="5_3hjmb"]
@@ -12,6 +13,27 @@
 script = ExtResource("1_3764u")
 
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer2" type="CenterContainer" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -287.5
+offset_top = -164.5
+offset_right = 287.5
+offset_bottom = 155.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="UI/CenterContainer2"]
+layout_mode = 2
+
+[node name="MainMenu" type="Sprite2D" parent="UI/CenterContainer2/AspectRatioContainer"]
+position = Vector2(1, 1.47594)
+scale = Vector2(0.299479, 0.302778)
+texture = ExtResource("2_h7ju1")
 
 [node name="CenterContainer" type="CenterContainer" parent="UI"]
 anchors_preset = 15
