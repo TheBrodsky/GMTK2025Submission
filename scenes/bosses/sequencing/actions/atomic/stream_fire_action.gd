@@ -1,4 +1,5 @@
 ## Fires a stream of bullets that oscillates between two angles
+@icon("res://assets/editor_icons/stream_icon.svg")
 class_name StreamFireAction extends AtomicBossAction
 
 @export var projectile_scene: PackedScene

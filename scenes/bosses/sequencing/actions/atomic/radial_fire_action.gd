@@ -1,4 +1,5 @@
 ## Fires N projectiles in an arc at regular intervals
+@icon("res://assets/editor_icons/radial_icon.svg")
 class_name RadialFireAction extends AtomicBossAction
 
 @export_range(2, 50) var projectile_count: int = 8
