@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/Combat.mp3-d4c47d042c829fd3c75b73e7f6043483.m
 [params]
 
 loop=false
-loop_offset=0.12
+loop_offset=12.0
 bpm=0
 beat_count=0
 bar_beats=4
