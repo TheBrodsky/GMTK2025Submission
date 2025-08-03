@@ -13,4 +13,4 @@ volume_db = 4.0
 attenuation = 4.92458e-05
 
 [node name="HealthComponent" parent="." index="7"]
-max_health = 1.0
+max_health = 2200.0
