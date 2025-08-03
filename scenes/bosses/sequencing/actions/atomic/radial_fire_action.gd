@@ -28,7 +28,7 @@ func _fire_radial_burst():
 	
 	if aim_at_screen_center:
 		var camera = get_viewport().get_camera_2d()
-		var screen_center = camera.global_position
+		var screen_center = camera.global_position + Vector2(0, 100)  # Shift down for tilemap asymmetry
 		var direction_to_center = (screen_center - boss_node.global_position).normalized()
 		base_angle_offset = atan2(direction_to_center.y, direction_to_center.x)
 	

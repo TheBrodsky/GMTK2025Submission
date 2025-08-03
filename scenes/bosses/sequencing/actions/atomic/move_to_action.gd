@@ -51,35 +51,35 @@ func _calculate_target_position() -> Vector2:
 	var half_width = camera_size.x / 2.0
 	var half_height = camera_size.y / 2.0
 	
-	# Calculate distances from camera center
-	var horizontal_offset = half_width * 0.75  # 3/4ths to edges
-	var vertical_offset = half_height * (2.0/3.0)  # 2/3rds to edges
+	var horizontal_offset = half_width * 0.85
+	var vertical_offset = half_height * (2.0/3.0)
+	var grid_shift_down = 100.0  # Shift entire grid down due to tilemap asymmetry
 	
 	match target_type:
 		TargetType.TOP_LEFT:
-			return camera_center + Vector2(-horizontal_offset, -vertical_offset)
+			return camera_center + Vector2(-horizontal_offset, -vertical_offset + grid_shift_down)
 		TargetType.TOP_CENTER:
-			return camera_center + Vector2(0, -vertical_offset)
+			return camera_center + Vector2(0, -vertical_offset + grid_shift_down)
 		TargetType.TOP_RIGHT:
-			return camera_center + Vector2(horizontal_offset, -vertical_offset)
+			return camera_center + Vector2(horizontal_offset, -vertical_offset + grid_shift_down)
 		TargetType.CENTER_LEFT:
-			return camera_center + Vector2(-horizontal_offset, 0)
+			return camera_center + Vector2(-horizontal_offset, grid_shift_down)
 		TargetType.CENTER_CENTER:
-			return camera_center
+			return camera_center + Vector2(0, grid_shift_down)
 		TargetType.CENTER_RIGHT:
-			return camera_center + Vector2(horizontal_offset, 0)
+			return camera_center + Vector2(horizontal_offset, grid_shift_down)
 		TargetType.BOTTOM_LEFT:
-			return camera_center + Vector2(-horizontal_offset, vertical_offset)
+			return camera_center + Vector2(-horizontal_offset, vertical_offset + grid_shift_down)
 		TargetType.BOTTOM_CENTER:
-			return camera_center + Vector2(0, vertical_offset)
+			return camera_center + Vector2(0, vertical_offset + grid_shift_down)
 		TargetType.BOTTOM_RIGHT:
-			return camera_center + Vector2(horizontal_offset, vertical_offset)
+			return camera_center + Vector2(horizontal_offset, vertical_offset + grid_shift_down)
 		TargetType.RANDOM:
-			# Boss is 50px wide/tall, add padding to keep it fully visible
-			var padding = 25.0  # Half of boss size
+			var padding = 75.0  # Half of boss size (150px)
+			var top_padding = padding + 200.0  # Regular padding + extra 200px for tilemap asymmetry
 			var min_x = camera_center.x - half_width + padding
 			var max_x = camera_center.x + half_width - padding
-			var min_y = camera_center.y - half_height + padding  
+			var min_y = camera_center.y - half_height + top_padding  
 			var max_y = camera_center.y + half_height - padding
 			return Vector2(
 				Global.SequenceRNG.randf_range(min_x, max_x),

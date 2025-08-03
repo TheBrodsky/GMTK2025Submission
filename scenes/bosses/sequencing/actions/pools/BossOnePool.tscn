@@ -66,7 +66,7 @@ metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 [sub_resource type="Resource" id="Resource_hnfks"]
 resource_local_to_scene = true
 script = ExtResource("15_hnfks")
-angular_speed = -0.5
+angular_speed = 0.5
 speed = 120
 despawn_time = -1
 damage = 10
@@ -174,20 +174,19 @@ projectile_config = SubResource("Resource_an80i")
 action_duration = 5.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
-[node name="ToTopCenter_THEN_CounterOrbitals" type="Node" parent="."]
+[node name="ToCenter_THEN_CounterOrbitals" type="Node" parent="."]
 script = ExtResource("5_pe8fm")
 metadata/_custom_type_script = "uid://c4yeb24boo5pd"
 
-[node name="MoveToAction" type="Node" parent="ToTopCenter_THEN_CounterOrbitals"]
+[node name="MoveToAction" type="Node" parent="ToCenter_THEN_CounterOrbitals"]
 script = ExtResource("7_vduf1")
-target_type = 2
 metadata/_custom_type_script = "uid://cwgd1jyc8xd5i"
 
-[node name="CompositeBossAction" type="Node" parent="ToTopCenter_THEN_CounterOrbitals"]
+[node name="CompositeBossAction" type="Node" parent="ToCenter_THEN_CounterOrbitals"]
 script = ExtResource("2_lqpmn")
 metadata/_custom_type_script = "uid://cmby1448i1rh2"
 
-[node name="RadialFireAction" type="Node" parent="ToTopCenter_THEN_CounterOrbitals/CompositeBossAction"]
+[node name="RadialFireAction" type="Node" parent="ToCenter_THEN_CounterOrbitals/CompositeBossAction"]
 script = ExtResource("4_pe8fm")
 angle_offset_per_burst_degrees = 15.0
 projectile_scene = ExtResource("14_xoy5t")
@@ -195,7 +194,7 @@ projectile_config = SubResource("Resource_hnfks")
 action_duration = 8.0
 metadata/_custom_type_script = "uid://68bxw3r838x7"
 
-[node name="RadialFireAction2" type="Node" parent="ToTopCenter_THEN_CounterOrbitals/CompositeBossAction"]
+[node name="RadialFireAction2" type="Node" parent="ToCenter_THEN_CounterOrbitals/CompositeBossAction"]
 script = ExtResource("4_pe8fm")
 angle_offset_per_burst_degrees = 15.0
 projectile_scene = ExtResource("14_xoy5t")

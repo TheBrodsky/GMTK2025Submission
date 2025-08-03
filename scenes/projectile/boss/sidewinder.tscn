@@ -7,6 +7,12 @@
 [node name="Sidewinder" instance=ExtResource("2_base")]
 script = ExtResource("1_sidewinder")
 
-[node name="BossBulletPink" type="Sprite2D" parent="." index="2"]
-scale = Vector2(0.1, 0.1)
+[node name="BossBulletPink" type="Sprite2D" parent="." index="0"]
+scale = Vector2(0.32, 0.32)
 texture = ExtResource("3_rjcai")
+
+[node name="CollisionShape2D" parent="." index="1"]
+scale = Vector2(1.5, 1.5)
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+scale = Vector2(1.5, 1.5)

@@ -10,6 +10,8 @@ func setup_collision() -> void:
 	
 	# Mask - what we check for
 	set_collision_mask_value(Global.CollisionLayer.ENEMY, true)
+	
+	super.setup_collision()
 
 func get_damage_source() -> Global.ProjectileMode:
 	return Global.ProjectileMode.PLAYER

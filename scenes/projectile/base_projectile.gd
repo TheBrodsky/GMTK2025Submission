@@ -23,7 +23,12 @@ func despawn() -> void:
 
 func setup_collision() -> void:
 	# Override in child classes to set up specific collision layers/masks
-	pass
+	set_collision_mask_value(Global.CollisionLayer.WALL, true)
+	body_entered.connect(_on_wall_collision)
+
+func _on_wall_collision(body: Node2D) -> void:
+	# Default behavior: despawn when hitting walls
+	queue_free()
 
 func _on_area_entered(area: Area2D) -> void:
 	if area is not HitBoxComponent:

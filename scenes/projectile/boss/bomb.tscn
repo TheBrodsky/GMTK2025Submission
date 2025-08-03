@@ -9,6 +9,12 @@
 script = ExtResource("2_bomb")
 explosion_projectile_scene = ExtResource("3_gxqwi")
 
-[node name="BombSprite" type="Sprite2D" parent="." index="1"]
-scale = Vector2(0.2, 0.2)
+[node name="BombSprite" type="Sprite2D" parent="." index="0"]
+scale = Vector2(0.64, 0.64)
 texture = ExtResource("3_texture")
+
+[node name="CollisionShape2D" parent="." index="1"]
+scale = Vector2(3, 3)
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+scale = Vector2(3, 3)
