@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://csx3k2jd8acqe"]
+[gd_scene load_steps=57 format=3 uid="uid://csx3k2jd8acqe"]
 
 [ext_resource type="Script" uid="uid://drm1qvc7cq3ga" path="res://scenes/player/player.gd" id="1_8afob"]
 [ext_resource type="PackedScene" uid="uid://cwddm8s7evxkd" path="res://scenes/player/DashScene.tscn" id="2_iqsei"]
@@ -30,6 +30,10 @@
 [ext_resource type="PackedScene" uid="uid://b2hfrt8qnrixu" path="res://scenes/projectile/clone_projectile.tscn" id="26_28m0y"]
 [ext_resource type="Script" uid="uid://dy7lhpiqyi6pm" path="res://resources/base_projectile_config.gd" id="27_uniwh"]
 [ext_resource type="AudioStream" uid="uid://bvd1ttl1jog2d" path="res://assets/Sounds/SFX/PlayerGunShot.mp3" id="30_iqsei"]
+[ext_resource type="AudioStream" uid="uid://cse78wy446dof" path="res://assets/Sounds/SFX/Death1.mp3" id="31_4hvnv"]
+[ext_resource type="AudioStream" uid="uid://dsdsiesm60o6g" path="res://assets/Sounds/SFX/Death2.mp3" id="32_bbmj2"]
+[ext_resource type="AudioStream" uid="uid://50h7ggm8apw3" path="res://assets/Sounds/SFX/Death3.mp3" id="33_kxw46"]
+[ext_resource type="AudioStream" uid="uid://bqw86aq6cr38f" path="res://assets/Sounds/SFX/Dash.mp3" id="34_8qxvo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bbmj2"]
 atlas = ExtResource("3_007i1")
@@ -247,7 +251,7 @@ clone_overlay = NodePath("../CloneGunOverlay")
 max_health = 1.0
 
 [node name="ShootCooldownTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.3
 
 [node name="Dashing" type="Node" parent="."]
 
@@ -279,7 +283,35 @@ shape = SubResource("CircleShape2D_x7p2l")
 
 [node name="Shooting" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("30_iqsei")
+volume_db = 8.0
+max_distance = 4096.0
+attenuation = 1e-05
+bus = &"Sound"
+
+[node name="Death1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("31_4hvnv")
 volume_db = 10.0
+max_distance = 4096.0
+attenuation = 1e-05
+bus = &"Sound"
+
+[node name="Death2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("32_bbmj2")
+volume_db = 10.0
+max_distance = 4096.0
+attenuation = 1e-05
+bus = &"Sound"
+
+[node name="Death3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("33_kxw46")
+volume_db = 10.0
+max_distance = 4096.0
+attenuation = 1e-05
+bus = &"Sound"
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("34_8qxvo")
+volume_db = 15.0
 max_distance = 4096.0
 attenuation = 1e-05
 bus = &"Sound"

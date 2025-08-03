@@ -24,6 +24,7 @@ func _perform_action(delta: float):
 		_fire_bullet()
 
 func _fire_bullet():
+	$Fire.play()
 	var angle_radians: float
 	
 	if aim_at_screen_center:

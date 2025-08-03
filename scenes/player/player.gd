@@ -158,6 +158,14 @@ func _on_health_component_got_damaged(attack: Attack) -> void:
 	if is_invincible:
 		return;
 	health.health -= attack.attack_damage;
+	var deathSoundToPlay = ceil(randf_range(0.1, 3))
+	match deathSoundToPlay:
+		1:
+			$Death1.play()
+		2:
+			$Death2.play()
+		3:
+			$Death3.play()
 
 	if health.health <= 0:
 		match mode:
@@ -210,6 +218,7 @@ func _on_dash_duration_timer_timeout() -> void:
 	current_dash_effect_creation_frame = 0;
 
 func start_dashing() -> void:
+	$Dash.play()
 	can_dash = false;
 	dash_duration_timer.start();
 	is_dashing = true;

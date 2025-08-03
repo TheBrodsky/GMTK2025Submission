@@ -33,6 +33,7 @@ func _on_soft_reset_timer_timeout() -> void:
 	handle_soft_reset();
 
 func handle_soft_reset() -> void:
+	$"../Spawn".play()
 	cause_soft_reset.emit();
 	# despawn everything in group "SoftReset"
 	for soft_reset in get_tree().get_nodes_in_group("SoftReset"):

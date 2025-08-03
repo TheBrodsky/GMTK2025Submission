@@ -48,10 +48,11 @@ grow_vertical = 2
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="UI/Control/CenterContainer2"]
 layout_mode = 2
+ratio = 1.3191
 
 [node name="MainMenu" type="Sprite2D" parent="UI/Control/CenterContainer2/AspectRatioContainer"]
-position = Vector2(1, 1.47594)
-scale = Vector2(0.299479, 0.302778)
+position = Vector2(4.00002, 1.49999)
+scale = Vector2(0.305208, 0.300926)
 texture = ExtResource("6_pe0bh")
 
 [node name="CenterContainer" type="CenterContainer" parent="UI/Control"]
@@ -66,9 +67,9 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/Control"]
 layout_mode = 2
 offset_left = 13.0
-offset_top = 6.47594
+offset_top = 2.47594
 offset_right = 193.0
-offset_bottom = 332.428
+offset_bottom = 328.428
 pivot_offset = Vector2(-124, -1)
 size_flags_horizontal = 0
 alignment = 2

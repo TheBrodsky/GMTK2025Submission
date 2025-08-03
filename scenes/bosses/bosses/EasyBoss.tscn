@@ -8,5 +8,9 @@ action_pool = NodePath("EasyBossPool")
 
 [node name="EasyBossPool" parent="." index="0" instance=ExtResource("2_rdo3m")]
 
-[node name="HealthComponent" parent="." index="4"]
+[node name="Death" parent="." index="2"]
+volume_db = 4.0
+attenuation = 4.92458e-05
+
+[node name="HealthComponent" parent="." index="6"]
 max_health = 2200.0

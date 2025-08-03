@@ -53,6 +53,8 @@ func toggle_flip_sprite(dir: Vector2) -> void:
 		animated_sprite.flip_h = false
 
 func _on_health_component_got_damaged(attack: Attack) -> void:
-	#$Damage.play()
+	$Damage.play()
 	health.health -= attack.attack_damage;
+	if health.health <= 0:
+		$Death.play()
 	# TODO: Death -> next boss
