@@ -2,7 +2,7 @@ extends EnemyProjectile
 class_name Bomb
 
 @export var explosion_projectile_scene: PackedScene  # What projectile to spawn on explosion
-
+const BOMB_EXPLOSION = preload("res://scenes/projectile/boss/bomb_explosion.tscn")
 var current_speed: float
 var has_exploded: bool = false
 var time_to_explosion: float
@@ -96,8 +96,10 @@ func explode() -> void:
 	has_exploded = true
 	$BombSpriteHighlighted.visible = false
 	$BombSprite.visible = false
-	$AnimatedSprite2D.visible = true
-	$AnimatedSprite2D.play("default")
+	
+	var bomb_explosion := BOMB_EXPLOSION.instantiate();
+	bomb_explosion.global_position = global_position;
+	get_tree().root.add_child(bomb_explosion);
 
 	# Create explosion burst using radial pattern
 	if explosion_projectile_scene:
