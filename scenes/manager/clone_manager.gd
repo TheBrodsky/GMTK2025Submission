@@ -19,6 +19,8 @@ func spawn_normal_player() -> void:
 	new_player_spawned.emit(new_player);
 
 func _on_game_loop_manager_cause_soft_reset() -> void:
+	UserSettings.attempt_counter += 1
+	
 	# Append new recording
 	if active_player:
 		input_recordings.append(active_player.input_recording);

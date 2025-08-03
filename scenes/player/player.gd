@@ -168,7 +168,6 @@ func _on_health_component_got_damaged(attack: Attack) -> void:
 			$Death3.play()
 
 	if health.health <= 0:
-		UserSettings.attempt_counter += 1
 		match mode:
 			Global.PlayerMode.PLAYER:
 				var attack_source := attack.damage_source;
