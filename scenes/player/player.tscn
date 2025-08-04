@@ -191,7 +191,7 @@ size = Vector2(85.5556, 21.5625)
 script = ExtResource("27_uniwh")
 speed = 1600
 despawn_time = -1
-damage = 10
+damage = 15
 metadata/_custom_type_script = "uid://dy7lhpiqyi6pm"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x7p2l"]

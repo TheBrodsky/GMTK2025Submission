@@ -67,12 +67,14 @@ explosion_projectile_scene = ExtResource("3_gxqwi")
 config = SubResource("Resource_vaesp")
 
 [node name="BombSprite" type="Sprite2D" parent="." index="0"]
-scale = Vector2(0.64, 0.64)
+position = Vector2(1, 2)
+scale = Vector2(0.22, 0.22)
 texture = ExtResource("4_fq8b6")
 
 [node name="BombSpriteHighlighted" type="Sprite2D" parent="." index="1"]
 visible = false
-scale = Vector2(0.64, 0.64)
+position = Vector2(1, 2)
+scale = Vector2(0.22, 0.22)
 texture = ExtResource("5_jwr63")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="2"]
