@@ -1,20 +1,27 @@
-extends Area2D
+extends CharacterBody2D
 class_name BaseProjectile
 
 @export var config: BaseProjectileConfig
+@onready var damage_area: Area2D = $DamageArea
 
 var direction: Vector2
-var velocity: Vector2 = Vector2.ZERO
+var projectile_velocity: Vector2 = Vector2.ZERO
 
 func _ready() -> void:
 	# Calculate velocity from direction and speed
-	velocity = direction * config.speed
-	rotation = velocity.angle()
+	projectile_velocity = direction * config.speed
+	rotation = projectile_velocity.angle()
 	setup_collision()
+	damage_area.area_entered.connect(_on_area_entered)
 	despawn()
 
-func _process(delta: float) -> void:
-	global_position += velocity * delta
+func _physics_process(delta: float) -> void:
+	velocity = projectile_velocity
+	move_and_slide()
+	
+	# Check for wall collisions
+	if get_slide_collision_count() > 0:
+		_on_wall_collision()
 
 func despawn() -> void:
 	if config.despawn_time > 0:
@@ -22,12 +29,13 @@ func despawn() -> void:
 		queue_free()
 
 func setup_collision() -> void:
-	# Override in child classes to set up specific collision layers/masks
-	set_collision_mask_value(Global.CollisionLayer.WALL, true)
-	body_entered.connect(_on_wall_collision)
+	# Collision layers are set in scene files
+	# Override in child classes if needed
+	pass
 
-func _on_wall_collision(_body: Node2D) -> void:
+func _on_wall_collision() -> void:
 	# Default behavior: despawn when hitting walls
+	# Override in child classes for different behavior (e.g., bouncing)
 	queue_free()
 
 func _on_area_entered(area: Area2D) -> void:

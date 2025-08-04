@@ -11,8 +11,9 @@ script = ExtResource("2_player")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_texture")
 
-[node name="CollisionShape2D" parent="." index="1"]
-scale = Vector2(2.05747, 0.936839)
+[node name="DamageArea" parent="." index="2"]
+collision_layer = 4
+collision_mask = 16
 
-[node name="VisibleOnScreenNotifier2D" parent="." index="2"]
+[node name="VisibleOnScreenNotifier2D" parent="." index="3"]
 scale = Vector2(2.28264, 1.2303)

@@ -15,42 +15,28 @@ func _ready() -> void:
 	
 	super._ready()
 
-func _process(delta: float) -> void:
-	# Move normally - bouncing is handled by collision signals
-	global_position += current_direction * current_speed * delta
-	rotation = current_direction.angle()
+func _physics_process(delta: float) -> void:
+	# Use CharacterBody2D physics instead of manual movement
+	velocity = current_direction * current_speed
+	move_and_slide()
+	rotation = velocity.angle()
+	
+	# Handle bouncing with proper collision normals
+	if get_slide_collision_count() > 0:
+		_on_wall_collision()
 
-func _on_wall_collision(_body: Node2D) -> void:
+func _on_wall_collision() -> void:
 	# Override parent behavior: bounce instead of despawning
 	if bounces_remaining <= 0:
 		queue_free()
 		return
 	
-	# Determine bounce direction based on wall position
-	# Since walls are only vertical or horizontal, we can use simple position checks
-	var camera = get_viewport().get_camera_2d()
-	var camera_size = get_viewport().get_visible_rect().size / camera.zoom
-	var camera_center = camera.global_position
-	var half_width = camera_size.x / 2.0
-	var half_height = camera_size.y / 2.0
+	# Get the collision normal from the first collision
+	var collision = get_slide_collision(0)
+	var normal = collision.get_normal()
 	
-	var bullet_pos = global_position
-	var left_bound = camera_center.x - half_width
-	var right_bound = camera_center.x + half_width
-	var top_bound = camera_center.y - half_height
-	var bottom_bound = camera_center.y + half_height
-	
-	# Check which wall we're closest to and bounce accordingly
-	# (In a better world, bullets would be CharacterBody2D and we'd use collision normals)
-	if abs(bullet_pos.x - left_bound) < 50 or abs(bullet_pos.x - right_bound) < 50:
-		# Hit left or right wall - reflect X
-		current_direction.x = -current_direction.x
-	elif abs(bullet_pos.y - top_bound) < 50 or abs(bullet_pos.y - bottom_bound) < 50:
-		# Hit top or bottom wall - reflect Y
-		current_direction.y = -current_direction.y
-	else:
-		# Fallback: reverse both components
-		current_direction = -current_direction
+	# Reflect the direction using the collision normal
+	current_direction = current_direction.bounce(normal)
 	
 	# Apply bounce effects
 	var bouncer_config = config as BouncerConfig

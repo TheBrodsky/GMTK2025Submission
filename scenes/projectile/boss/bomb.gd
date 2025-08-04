@@ -25,7 +25,7 @@ func _ready() -> void:
 		time_to_explosion = bomb_config.time_limit
 	
 	# Find the sprite node for blinking effect
-	sprite_node = get_node("BombSprite")
+	sprite_node = get_node("Sprite2D")
 	super._ready()
 
 func _process(delta: float) -> void:
@@ -66,11 +66,11 @@ func _process(delta: float) -> void:
 		# Flash between bright white and dimmed gray
 		if is_flash_on:
 			$BombSpriteHighlighted.visible = true
-			$BombSprite.visible = false
+			$Sprite2D.visible = false
 			#sprite_node.modulate = Color(2.0, 2.0, 2.0, 1.0)  # Bright flash
 		else:
 			$BombSpriteHighlighted.visible = false
-			$BombSprite.visible = true
+			$Sprite2D.visible = true
 			#sprite_node.modulate = Color(0.7, 0.7, 0.7, 1.0)  # Dimmed gray
 	
 	# Check detonation conditions based on mode
@@ -83,7 +83,7 @@ func _process(delta: float) -> void:
 		# Check if time limit reached
 		if time_alive >= bomb_config.time_limit:
 			$BombSpriteHighlighted.visible = false
-			$BombSprite.visible = false
+			$Sprite2D.visible = false
 			$AnimatedSprite2D.visible = true
 			$AnimatedSprite2D.play("default")
 			explode()
@@ -95,7 +95,7 @@ func explode() -> void:
 	
 	has_exploded = true
 	$BombSpriteHighlighted.visible = false
-	$BombSprite.visible = false
+	$Sprite2D.visible = false
 	
 	var bomb_explosion := BOMB_EXPLOSION.instantiate();
 	bomb_explosion.global_position = global_position;

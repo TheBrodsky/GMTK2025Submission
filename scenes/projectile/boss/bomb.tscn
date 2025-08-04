@@ -1,6 +1,5 @@
-[gd_scene load_steps=17 format=3 uid="uid://vluucpq4qfov"]
+[gd_scene load_steps=16 format=3 uid="uid://vluucpq4qfov"]
 
-[ext_resource type="PackedScene" uid="uid://bfc0xm65wxuol" path="res://scenes/projectile/base_projectile.tscn" id="1_base"]
 [ext_resource type="Script" uid="uid://bj7hgwpqduix3" path="res://scenes/projectile/boss/bomb.gd" id="2_bomb"]
 [ext_resource type="PackedScene" uid="uid://dqh3tanlfpbkc" path="res://scenes/projectile/boss/enemy_projectile.tscn" id="3_gxqwi"]
 [ext_resource type="Texture2D" uid="uid://bremux13s1bru" path="res://assets/bomb/bomb.png" id="4_fq8b6"]
@@ -61,23 +60,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Bomb" instance=ExtResource("1_base")]
+[node name="Bomb" instance=ExtResource("3_gxqwi")]
 script = ExtResource("2_bomb")
 explosion_projectile_scene = ExtResource("3_gxqwi")
 config = SubResource("Resource_vaesp")
 
-[node name="BombSprite" type="Sprite2D" parent="." index="0"]
-position = Vector2(1, 2)
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("4_fq8b6")
-
-[node name="BombSpriteHighlighted" type="Sprite2D" parent="." index="1"]
-visible = false
-position = Vector2(1, 2)
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("5_jwr63")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="2"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 visible = false
 scale = Vector2(0.64, 0.64)
 sprite_frames = SubResource("SpriteFrames_48mer")
@@ -85,8 +73,22 @@ frame = 5
 frame_progress = 0.983159
 speed_scale = 2.0
 
-[node name="CollisionShape2D" parent="." index="3"]
-scale = Vector2(3, 3)
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(1, 2)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("4_fq8b6")
 
-[node name="VisibleOnScreenNotifier2D" parent="." index="4"]
+[node name="BombSpriteHighlighted" type="Sprite2D" parent="." index="2"]
+visible = false
+position = Vector2(1, 2)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("5_jwr63")
+
+[node name="PhysicsCollision" parent="." index="3"]
+scale = Vector2(1, 1)
+
+[node name="DamageCollision" parent="DamageArea" index="0"]
+scale = Vector2(1, 1)
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="5"]
 scale = Vector2(3, 3)
