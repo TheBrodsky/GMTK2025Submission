@@ -2,14 +2,14 @@
 
 [ext_resource type="PackedScene" uid="uid://bfc0xm65wxuol" path="res://scenes/projectile/base_projectile.tscn" id="1_base"]
 [ext_resource type="Script" uid="uid://rutbmiuxqqq7" path="res://scenes/projectile/boss/enemy_projectile.gd" id="2_enemy"]
-[ext_resource type="Texture2D" uid="uid://cbgdenklkimqf" path="res://assets/boss_assets/boss_bullet_red.png" id="3_texture"]
+[ext_resource type="Texture2D" uid="uid://omy15uk4bfgn" path="res://assets/boss_assets/boss_bullet.png" id="3_nq7ks"]
 
 [node name="EnemyProjectile" instance=ExtResource("1_base")]
 script = ExtResource("2_enemy")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 scale = Vector2(0.32, 0.32)
-texture = ExtResource("3_texture")
+texture = ExtResource("3_nq7ks")
 
 [node name="DamageArea" parent="." index="2"]
 collision_layer = 64

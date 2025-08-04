@@ -27,6 +27,9 @@ func _ready() -> void:
 	# Find the sprite node for blinking effect
 	sprite_node = get_node("Sprite2D")
 	super._ready()
+	
+	# Override rotation - bombs should not rotate based on movement direction
+	rotation = 0.0
 
 func _process(delta: float) -> void:
 	if has_exploded:

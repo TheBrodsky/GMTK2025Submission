@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cnkov7t4hwm64" path="res://scenes/projectile/boss/sidewinder.gd" id="1_sidewinder"]
 [ext_resource type="PackedScene" uid="uid://dqh3tanlfpbkc" path="res://scenes/projectile/boss/enemy_projectile.tscn" id="2_base"]
-[ext_resource type="Texture2D" uid="uid://bg1m3vvk5cx5k" path="res://assets/boss_assets/boss_bullet_pink.png" id="3_rjcai"]
+[ext_resource type="Texture2D" uid="uid://i0alj3g6is3s" path="res://assets/boss_assets/boss_bullet_purple.png" id="3_rjcai"]
 
 [node name="Sidewinder" instance=ExtResource("2_base")]
 script = ExtResource("1_sidewinder")
