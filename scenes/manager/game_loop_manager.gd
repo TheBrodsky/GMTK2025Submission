@@ -74,6 +74,12 @@ func handle_victory() -> void:
 func handle_hard_reset() -> void:
 	UserSettings.hard_resets += 1;
 	cause_hard_reset.emit();
+	
+	# Generate new seed for different boss patterns on hard reset
+	if Global.use_random_seed:
+		Global.global_seed = randi()
+		Global.SequenceRNG.seed = Global.global_seed
+	
 	# despawn everything in group "HardReset"
 	for hard_reset in get_tree().get_nodes_in_group("HardReset"):
 		hard_reset.queue_free();
