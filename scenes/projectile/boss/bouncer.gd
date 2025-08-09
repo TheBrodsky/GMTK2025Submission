@@ -15,7 +15,7 @@ func _ready() -> void:
 	
 	super._ready()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Use CharacterBody2D physics instead of manual movement
 	velocity = current_direction * current_speed
 	move_and_slide()

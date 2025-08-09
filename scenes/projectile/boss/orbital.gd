@@ -14,7 +14,7 @@ func _ready() -> void:
 	orbital_center = global_position
 	super._ready()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# Override BaseProjectile's _physics_process to prevent it from setting rotation
 	# Orbitals handle their own movement and rotation in _process()
 	pass

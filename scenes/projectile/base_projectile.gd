@@ -15,7 +15,7 @@ func _ready() -> void:
 	damage_area.area_entered.connect(_on_area_entered)
 	despawn()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	velocity = projectile_velocity
 	move_and_slide()
 	
